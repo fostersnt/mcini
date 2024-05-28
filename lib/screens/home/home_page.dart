@@ -5,9 +5,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home page screen'),
+    return Container(
+      child: const Center(
+        child: Text(
+          'Mcini Mobile App',
+          style: TextStyle(),
+        ),
       ),
     );
   }
