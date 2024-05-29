@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/home/hero_section.dart';
+import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class HomePage extends StatelessWidget {
@@ -25,19 +27,19 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(10),
             child: Container(
-              color: AppColors.whiteColor,
-              // width: 100,
-              height: 100,
+              height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      color: AppColors.blueColor,
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: SingleMovieThumbnail(
+                      deviceSize: screenSize,
+                      movieData: MovieModel(
+                          name: 'Lilwayne De Drunk',
+                          title: 'Ghana Best',
+                          category: 'Local Movie'),
                     ),
                   );
                 },

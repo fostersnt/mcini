@@ -1,0 +1,64 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:mcini/data/model/movie_model.dart';
+
+import 'package:mcini/utilities/app_colors.dart';
+
+class SingleMovieThumbnail extends StatelessWidget {
+  const SingleMovieThumbnail(
+      {super.key, required this.deviceSize, required this.movieData});
+  final Size deviceSize;
+  final MovieModel movieData;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              'lib/images/banner.png',
+              width: 150,
+              height: 150,
+              fit: BoxFit.fill,
+            ),
+            // Container(
+            Stack(
+              children: [
+                ClipOval(
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    // color: AppColors.whiteColor,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(width: 2, color: AppColors.whiteColor),
+                    ),
+                    child: Icon(
+                      CupertinoIcons.play,
+                      color: AppColors.whiteColor,
+                      weight: 0.1,
+                      size: 25,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+          child: Text(
+            movieData.name,
+            style: TextStyle(
+                color: AppColors.whiteColor, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
+  }
+}
