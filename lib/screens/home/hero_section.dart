@@ -46,26 +46,33 @@ class HeroSection extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(10, 100, 0, 0),
-          child: SizedBox(
+          padding: EdgeInsets.fromLTRB(10, deviceSize.height * 0.1, 0, 0),
+          child: Container(
             width: deviceSize.width * 0.5,
             // height: heroImageHeight * 0.3,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Lorem Ipsum",
-                    style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Text(
+                      "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   Text(
                     "Extra text Extra text Extra text Extra Extra text Extra text Extra text Extra text Extra text Extra text text Extra text Extra text Extra text text Extra text Extra text Extra text",
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: AppColors.whiteColor,
-                      fontSize: 12,
+                      fontSize: 14,
                     ),
                   ),
                   const SizedBox(

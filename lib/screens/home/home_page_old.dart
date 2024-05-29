@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: heroImageHeight * 0.33, horizontal: 10),
-                child: SizedBox(
+                child: Container(
                   width: screenSize.width * 0.5,
                   height: heroImageHeight * 0.6,
                   child: SingleChildScrollView(
@@ -59,7 +59,8 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Lorem Ipsum",
+                          "Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: AppColors.whiteColor,
                               fontSize: 20,
