@@ -18,38 +18,44 @@ class SingleMovieThumbnail extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              'lib/images/banner.png',
-              width: customWidth,
-              height: customHeight,
-              fit: BoxFit.fill,
-            ),
-            // Container(
-            Stack(
-              children: [
-                ClipOval(
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    // color: AppColors.whiteColor,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(width: 2, color: AppColors.whiteColor),
-                    ),
-                    child: Icon(
-                      CupertinoIcons.play,
-                      color: AppColors.whiteColor,
-                      size: 25,
+        InkWell(
+          onTap: () {
+            print("VIDEO THUMBNAIL HAS BEEN CLICKED");
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'lib/images/banner.png',
+                width: customWidth,
+                height: customHeight,
+                fit: BoxFit.fill,
+              ),
+              // Container(
+              Stack(
+                children: [
+                  ClipOval(
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      // color: AppColors.whiteColor,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border:
+                            Border.all(width: 2, color: AppColors.whiteColor),
+                      ),
+                      child: Icon(
+                        CupertinoIcons.play,
+                        color: AppColors.whiteColor,
+                        size: 25,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            // ),
-          ],
+                ],
+              ),
+              // ),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
