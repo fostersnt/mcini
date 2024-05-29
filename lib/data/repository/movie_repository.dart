@@ -1,30 +1,17 @@
+import 'dart:convert';
+
 import 'package:mcini/data/interface/i_repository.dart';
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:http/http.dart' as http;
+import 'package:mcini/data/provider/movies_provider.dart';
 
-class MovieRepository extends IRepository {
-  final _movidModel = MovieModel();
+class MovieRepository {
+  final MoviesProvider movieProvider;
 
-  @override
-  Future<bool> deleteData() async {
-    String url = IRepository.apiBaseURL;
-    return true;
-  }
+  MovieRepository(this.movieProvider);
 
-  @override
-  Future<List<Object>> getAllData() async {
-    // TODO: implement getAllData
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Object> getSingleData() async {
-    // TODO: implement getSingleData
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> updateData() async {
-    // TODO: implement updateData
-    throw UnimplementedError();
+  Future<List<MovieModel>> getMovies() async {
+    final movies = await movieProvider.getAllData();
+    return movies;
   }
 }

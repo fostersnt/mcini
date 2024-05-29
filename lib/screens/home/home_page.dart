@@ -19,11 +19,25 @@ class HomePage extends StatelessWidget {
         children: [
           //Image and top text
           Padding(
-              padding: const EdgeInsets.all(0),
-              child: HeroSection(
-                deviceSize: screenSize,
-              )),
+            padding: const EdgeInsets.all(0),
+            child: HeroSection(
+              deviceSize: screenSize,
+            ),
+          ),
           //First category
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: Text(
+                "Latest Movies",
+                style: TextStyle(
+                  color: AppColors.blueColor,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: EdgeInsets.all(10),
             child: Container(
@@ -33,7 +47,7 @@ class HomePage extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                     child: SingleMovieThumbnail(
                       deviceSize: screenSize,
                       movieData: MovieModel(

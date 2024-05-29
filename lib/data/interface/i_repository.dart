@@ -1,8 +1,8 @@
-abstract class IRepository {
-  static const String apiBaseURL = 'https://mcini.com/api';
+abstract class IRepository<GWOSEVO> {
+  static const String apiBaseURL = 'https://jsonplaceholder.typicode.com';
 
-  Future<Object> getSingleData();
-  Future<List<Object>> getAllData();
-  Future<bool> deleteData();
+  Future<List<GWOSEVO>> getAllData();
+  Future<GWOSEVO> getSingleData();
   Future<bool> updateData();
+  Future<bool> deleteData();
 }

@@ -23,4 +23,21 @@ class MovieModel {
   final String title;
   final String category;
   final String thumbnail;
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
+        name: json['title'],
+        title: json['title'],
+        category: json['title'],
+        thumbnail: json['title']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'title': title,
+      'title': title,
+      'title': title,
+    };
+  }
 }
