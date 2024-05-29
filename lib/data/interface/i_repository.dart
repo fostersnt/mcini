@@ -3,6 +3,6 @@ abstract class IRepository<GWOSEVO> {
 
   Future<List<GWOSEVO>> getAllData();
   Future<GWOSEVO> getSingleData();
-  Future<bool> updateData();
+  Future<GWOSEVO> updateData();
   Future<bool> deleteData();
 }

@@ -34,7 +34,7 @@ class MoviesProvider extends IRepository {
   }
 
   @override
-  Future<bool> updateData() async {
+  Future<MovieModel> updateData() async {
     // TODO: implement updateData
     throw UnimplementedError();
   }

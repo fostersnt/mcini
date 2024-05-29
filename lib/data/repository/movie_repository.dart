@@ -1,4 +1,3 @@
-
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/data/provider/movies_provider.dart';
 
