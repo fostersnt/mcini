@@ -37,9 +37,11 @@ class HomePage extends StatelessWidget {
                     child: SingleMovieThumbnail(
                       deviceSize: screenSize,
                       movieData: MovieModel(
-                          name: 'Lilwayne De Drunk',
-                          title: 'Ghana Best',
-                          category: 'Local Movie'),
+                        name: 'Lilwayne De Drunk Lilwayne De Drunk',
+                        title: 'Ghana Best',
+                        category: 'Local Movie',
+                        thumbnail: 'https://mcini.com/image/1.jpg',
+                      ),
                     ),
                   );
                 },

@@ -11,6 +11,8 @@ class SingleMovieThumbnail extends StatelessWidget {
       {super.key, required this.deviceSize, required this.movieData});
   final Size deviceSize;
   final MovieModel movieData;
+  final double customHeight = 150;
+  final double customWidth = 150;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,8 +23,8 @@ class SingleMovieThumbnail extends StatelessWidget {
           children: [
             Image.asset(
               'lib/images/banner.png',
-              width: 150,
-              height: 150,
+              width: customWidth,
+              height: customHeight,
               fit: BoxFit.fill,
             ),
             // Container(
@@ -40,7 +42,6 @@ class SingleMovieThumbnail extends StatelessWidget {
                     child: Icon(
                       CupertinoIcons.play,
                       color: AppColors.whiteColor,
-                      weight: 0.1,
                       size: 25,
                     ),
                   ),
@@ -52,10 +53,15 @@ class SingleMovieThumbnail extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Text(
-            movieData.name,
-            style: TextStyle(
-                color: AppColors.whiteColor, fontWeight: FontWeight.bold),
+          child: Container(
+            width: customWidth,
+            child: Text(
+              movieData.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: AppColors.whiteColor, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ],

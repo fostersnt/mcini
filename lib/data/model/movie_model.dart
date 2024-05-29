@@ -1,7 +1,11 @@
 class MovieModel {
   final String allMoviesEndpoint = '/movies';
 
-  MovieModel({required this.name, required this.title, required this.category});
+  MovieModel(
+      {required this.name,
+      required this.title,
+      required this.category,
+      required this.thumbnail});
 
   String singleMovieEndpoint(int movieId) {
     return "$allMoviesEndpoint/$movieId";
@@ -18,4 +22,5 @@ class MovieModel {
   final String name;
   final String title;
   final String category;
+  final String thumbnail;
 }
