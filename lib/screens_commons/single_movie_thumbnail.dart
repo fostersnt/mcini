@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mcini/data/model/movie_model.dart';
 
 import 'package:mcini/utilities/app_colors.dart';
@@ -59,7 +58,7 @@ class SingleMovieThumbnail extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Container(
+          child: SizedBox(
             width: customWidth,
             child: Text(
               movieData.name,

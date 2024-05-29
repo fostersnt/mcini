@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/screens_commons/movie_categories_grouping.dart';
 
 void main() {

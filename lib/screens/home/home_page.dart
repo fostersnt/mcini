@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/home/hero_section.dart';
 import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
@@ -39,15 +38,15 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
-            child: Container(
+            padding: const EdgeInsets.all(10),
+            child: SizedBox(
               height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                     child: SingleMovieThumbnail(
                       deviceSize: screenSize,
                       movieData: MovieModel(

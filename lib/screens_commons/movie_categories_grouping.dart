@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/data/provider/movies_provider.dart';
-import 'package:mcini/data/repository/movie_repository.dart';
-import 'package:mcini/screens/home/hero_section.dart';
-import 'package:mcini/screens/home/home_page.dart';
-import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:collection/collection.dart';
 
 class MovieCategoriesGroup extends StatelessWidget {
-  const MovieCategoriesGroup({Key? key}) : super(key: key);
+  const MovieCategoriesGroup({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final MoviesProvider _mr = MoviesProvider();
+    final MoviesProvider mr = MoviesProvider();
     final screenSize = MediaQuery.of(context).size;
     List<Map<String, dynamic>> movies = [
       {
@@ -46,7 +41,7 @@ class MovieCategoriesGroup extends StatelessWidget {
     final groupedMovies = groupBy(movies, (movie) => movie['category']);
     print(groupedMovies.keys.toList());
 
-    final data = _mr.getAllData();
+    final data = mr.getAllData();
     // print(data);
     return Scaffold(
       body: GroupedListView(

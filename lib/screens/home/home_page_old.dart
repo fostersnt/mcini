@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: heroImageHeight * 0.33, horizontal: 10),
-                child: Container(
+                child: SizedBox(
                   width: screenSize.width * 0.5,
                   height: heroImageHeight * 0.6,
                   child: SingleChildScrollView(

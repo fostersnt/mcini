@@ -47,7 +47,7 @@ class HeroSection extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(10, deviceSize.height * 0.1, 0, 0),
-          child: Container(
+          child: SizedBox(
             width: deviceSize.width * 0.5,
             // height: heroImageHeight * 0.3,
             child: SingleChildScrollView(
