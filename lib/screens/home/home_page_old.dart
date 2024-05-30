@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
           Stack(
             children: [
               Image.asset(
-                'lib/images/banner.png',
+                'lib/assets/images/banner.png',
                 width: screenSize.width,
                 height: heroImageHeight,
                 fit: BoxFit.cover,

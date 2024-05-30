@@ -16,25 +16,25 @@ class MovieCategoriesGroup extends StatelessWidget {
         'name': 'movie first',
         'title': 'Ghanaian movie',
         'category': 'Latest Movies',
-        'thumbnail': 'lib/images/banner.png'
+        'thumbnail': 'lib/assets/images/banner.png'
       },
       {
         'name': 'movie 1',
         'title': 'Ghanaian movie',
         'category': 'Ghana Girls',
-        'thumbnail': 'lib/images/banner.png'
+        'thumbnail': 'lib/assets/images/banner.png'
       },
       {
         'name': 'movie new',
         'title': 'Af movie',
         'category': 'Latest Movies',
-        'thumbnail': 'lib/images/banner.png'
+        'thumbnail': 'lib/assets/images/banner.png'
       },
       {
         'name': 'movie main',
         'title': 'Pp movie',
         'category': 'Latest Movies',
-        'thumbnail': 'lib/images/banner.png'
+        'thumbnail': 'lib/assets/images/banner.png'
       },
     ];
 

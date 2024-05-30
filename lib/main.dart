@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mcini/screens/movie/movie_player_page.dart';
 import 'package:mcini/screens_commons/movie_categories_grouping.dart';
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         // useMaterial3: true,
       ),
-      home: const MovieCategoriesGroup(),
+      home: MoviePlayerPage(),
+      // home: const MovieCategoriesGroup(),
       // home: const HomePage(),
     );
   }

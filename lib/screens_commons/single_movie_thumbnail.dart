@@ -25,7 +25,7 @@ class SingleMovieThumbnail extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Image.asset(
-                'lib/images/banner.png',
+                'lib/assets/images/banner.png',
                 width: customWidth,
                 height: customHeight,
                 fit: BoxFit.fill,

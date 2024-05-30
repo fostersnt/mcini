@@ -12,7 +12,7 @@ class HeroSection extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(
-          'lib/images/banner.png',
+          'lib/assets/images/banner.png',
           width: deviceSize.width,
           height: heroImageHeight,
           fit: BoxFit.cover,
