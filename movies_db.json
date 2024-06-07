@@ -1,0 +1,28 @@
+{
+    "movies": [
+        {
+            "id": 1,
+            "title": "Lilwin the Comediam",
+            "category": "Ghanaian Movie",
+            "thumbnail": "lib/assets/images/banner.png",
+            "description": "Lilwin in China is a Ghanaian movie that was released in 2018. It is a comedy movie that tells the story of a man who is in love with a girl.",
+            "movie_path": "lib/assets/videos/crabs.mp4"
+        },
+        {
+            "id": 2,
+            "title": "God of War",
+            "category": "Ghanaian Movie",
+            "thumbnail": "lib/assets/images/banner.png",
+            "description": "God of War is a Ghanaian movie that was released in 2018. It is a comedy movie that tells the story of a man who is in love with a girl.",
+            "movie_path": "lib/assets/videos/crabs.mp4"
+        },
+        {
+            "id": 3,
+            "title": "London in Ghana",
+            "category": "Ghanaian Movie",
+            "thumbnail": "lib/assets/images/banner.png",
+            "description": "London in Ghana is a Ghanaian movie that was released in 2018. It is a comedy movie that tells the story of a man who is in love with a girl.",
+            "movie_path": "lib/assets/videos/crabs.mp4"
+        }
+    ]
+}
