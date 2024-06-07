@@ -27,13 +27,13 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
   }
 
   void initializaVideoPlayer() {
-    CachedVideoPlayerController _cachedVideoPlayerController;
-    _cachedVideoPlayerController =
+    CachedVideoPlayerController cachedVideoPlayerController;
+    cachedVideoPlayerController =
         CachedVideoPlayerController.asset('lib/assets/videos/crabs.mp4')
           ..initialize().then((value) => setState(() {}));
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,
-      videoPlayerController: _cachedVideoPlayerController,
+      videoPlayerController: cachedVideoPlayerController,
       customVideoPlayerSettings: CustomVideoPlayerSettings(
         thumbnailWidget: Image.asset('lib/assets/images/banner.png'),
       ),
