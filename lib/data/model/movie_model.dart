@@ -1,11 +1,7 @@
 class MovieModel {
   final String allMoviesEndpoint = '/movies';
 
-  MovieModel(
-      {required this.name,
-      required this.title,
-      required this.category,
-      required this.thumbnail});
+  MovieModel({required this.title});
 
   String singleMovieEndpoint(int movieId) {
     return "$allMoviesEndpoint/$movieId";
@@ -19,24 +15,17 @@ class MovieModel {
     return "$allMoviesEndpoint/update/$movieId";
   }
 
-  final String name;
+  // final String name;
   final String title;
-  final String category;
-  final String thumbnail;
+  // final String category;
+  // final String thumbnail;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
-    return MovieModel(
-        name: json['title'],
-        title: json['title'],
-        category: json['title'],
-        thumbnail: json['title']);
+    return MovieModel(title: json['title']);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'title': title,
-      'title': title,
-      'title': title,
       'title': title,
     };
   }

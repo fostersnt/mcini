@@ -61,7 +61,7 @@ class SingleMovieThumbnail extends StatelessWidget {
           child: SizedBox(
             width: customWidth,
             child: Text(
-              movieData.name,
+              movieData.title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
