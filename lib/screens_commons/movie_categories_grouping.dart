@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:mcini/data/provider/movies_provider.dart';
+import 'package:mcini/data/provider/movie_provider.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:collection/collection.dart';
 
@@ -9,7 +9,7 @@ class MovieCategoriesGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MoviesProvider mr = MoviesProvider();
+    final MovieProvider mr = MovieProvider();
     final screenSize = MediaQuery.of(context).size;
     List<Map<String, dynamic>> movies = [
       {

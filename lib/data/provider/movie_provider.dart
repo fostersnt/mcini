@@ -4,7 +4,7 @@ import 'package:mcini/data/interface/i_repository.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:http/http.dart' as http;
 
-class MoviesProvider extends IRepository {
+class MovieProvider extends IRepository {
   @override
   Future<bool> deleteData() async {
     return true;

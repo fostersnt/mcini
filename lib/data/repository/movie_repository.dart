@@ -1,8 +1,8 @@
 import 'package:mcini/data/model/movie_model.dart';
-import 'package:mcini/data/provider/movies_provider.dart';
+import 'package:mcini/data/provider/movie_provider.dart';
 
 class MovieRepository {
-  final MoviesProvider movieProvider;
+  final MovieProvider movieProvider;
 
   MovieRepository(this.movieProvider);
 
