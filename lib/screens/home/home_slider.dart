@@ -10,7 +10,7 @@ class HomeSlider extends StatelessWidget {
       body: Container(
         width: deviceSize.width,
         height: deviceSize.height,
-        color: Colors.black87,
+        color: Colors.yellowAccent,
       ),
     );
   }

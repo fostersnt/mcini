@@ -1,30 +1,41 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:mcini/screens/home_slider/home_slider.dart';
+import 'package:mcini/screens/home/home_page.dart';
+import 'package:mcini/screens/home/home_slider.dart';
 import 'package:mcini/screens/movie/movie_player_page.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mcini/screens_commons/movie_categories_grouping.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() {
-  runApp(const MyApp());
+  ;
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      //Device preview settings
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       title: 'Mcini',
       theme: ThemeData(
         primarySwatch: Colors.amber,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         // useMaterial3: true,
       ),
-      home: const HomeSlider(),
+      // home: const HomeSlider(),
       // home: const MoviePlayerPage(),
       // home: const MovieCategoriesGroup(),
-      // home: const HomePage(),
+      home: const HomePage(),
     );
   }
 }
