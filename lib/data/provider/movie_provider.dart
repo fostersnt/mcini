@@ -15,15 +15,17 @@ class MovieProvider extends IRepository {
     List<MovieModel> movies = [];
     String url = IRepository.apiBaseURL;
     final response = await http.get(Uri.parse("$url/posts"));
-    final Map<String, dynamic> jsonData = jsonDecode(response.body);
+    final jsonData = jsonDecode(response.body);
     if (response.statusCode == 200) {
       if (jsonData.isNotEmpty) {
+        print("MY MOVIES DATA RECENT: $jsonData");
         for (var i = 0; i < jsonData.length; i++) {
-          movies.add(jsonData[i]);
+          MovieModel myCurrentMovie = MovieModel(title: jsonData[i]['title']);
+          movies.add(myCurrentMovie);
         }
       }
     }
-    // print(jsonData.);
+    print("MY MOVIES DATA: $jsonData");
     return movies;
   }
 

@@ -4,7 +4,7 @@ import 'package:mcini/data/provider/movie_provider.dart';
 class MovieRepository {
   final MovieProvider movieProvider;
 
-  MovieRepository(this.movieProvider);
+  MovieRepository({required this.movieProvider});
 
   Future<List<MovieModel>> getMovies() async {
     final movies = await movieProvider.getAllData();

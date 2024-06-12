@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mcini/routes/app_routes.dart';
 import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/screens/home/home_slider.dart';
 import 'package:mcini/screens/movie/movie_player_page.dart';
@@ -23,10 +24,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes: getRoutes(),
       //Device preview settings
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      title: 'Mcini',
+      title: 'Mcini Mobile',
       theme: ThemeData(
         primarySwatch: Colors.amber,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -35,7 +37,8 @@ class MyApp extends StatelessWidget {
       // home: const HomeSlider(),
       // home: const MoviePlayerPage(),
       // home: const MovieCategoriesGroup(),
-      home: const HomePage(),
+      home: null,
+      initialRoute: '/',
     );
   }
 }
