@@ -24,11 +24,13 @@ class SingleMovieThumbnail extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(
-                'lib/assets/images/banner.png',
-                width: customWidth,
-                height: customHeight,
-                fit: BoxFit.fill,
+              Container(
+                width: deviceSize.width * 0.35,
+                height: deviceSize.width * 0.35,
+                child: Image.asset(
+                  'lib/assets/images/banner.png',
+                  fit: BoxFit.fill,
+                ),
               ),
               // Container(
               Stack(

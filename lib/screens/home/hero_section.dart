@@ -18,8 +18,7 @@ class HeroSection extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: heroImageHeight * 0.16, horizontal: 10),
+          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -46,9 +45,9 @@ class HeroSection extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(10, deviceSize.height * 0.1, 0, 0),
+          padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
           child: SizedBox(
-            width: deviceSize.width * 0.5,
+            width: deviceSize.width * 0.8,
             // height: heroImageHeight * 0.3,
             child: SingleChildScrollView(
               child: Column(
@@ -62,17 +61,17 @@ class HeroSection extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: AppColors.whiteColor,
-                          fontSize: 20,
+                          fontSize: deviceSize.width * 0.05,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                   Text(
                     "Extra text Extra text Extra text Extra Extra text Extra text Extra text Extra text Extra text Extra text text Extra text Extra text Extra text text Extra text Extra text Extra text",
-                    maxLines: 4,
+                    maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: AppColors.whiteColor,
-                      fontSize: 14,
+                      fontSize: deviceSize.width * 0.04,
                     ),
                   ),
                   const SizedBox(
@@ -81,8 +80,8 @@ class HeroSection extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: Container(
-                      width: 60,
-                      height: 25,
+                      width: deviceSize.width * 0.2,
+                      height: deviceSize.width * 0.08,
                       padding: const EdgeInsets.only(left: 5),
                       color: AppColors.blueColor,
                       child: InkWell(
@@ -94,11 +93,15 @@ class HeroSection extends StatelessWidget {
                           children: [
                             Text(
                               "Play",
-                              style: TextStyle(color: AppColors.whiteColor),
+                              style: TextStyle(
+                                color: AppColors.whiteColor,
+                                fontSize: deviceSize.width * 0.04,
+                              ),
                             ),
                             Icon(
                               Icons.play_arrow_rounded,
                               color: AppColors.whiteColor,
+                              size: deviceSize.width * 0.08,
                             ),
                           ],
                         ),
