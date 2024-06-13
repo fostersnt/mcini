@@ -24,15 +24,12 @@ class SingleMovieThumbnail extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Container(
-                width: deviceSize.width * 0.35,
-                height: deviceSize.width * 0.35,
-                child: Image.asset(
-                  'lib/assets/images/banner.png',
-                  fit: BoxFit.fill,
-                ),
+              Image.asset(
+                'lib/assets/images/banner.png',
+                fit: BoxFit.fill,
+                width: deviceSize.width * 0.4,
+                height: deviceSize.width * 0.3,
               ),
-              // Container(
               Stack(
                 children: [
                   ClipOval(
@@ -64,7 +61,7 @@ class SingleMovieThumbnail extends StatelessWidget {
             width: customWidth,
             child: Text(
               movieData.title,
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   color: AppColors.whiteColor, fontWeight: FontWeight.bold),

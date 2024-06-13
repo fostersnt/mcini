@@ -75,15 +75,16 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       child: SizedBox(
-                        height: 200,
+                        height: screenSize.width * 0.5,
+                        // width: screenSize.width * 0.35,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: movieData.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
                               child: SingleMovieThumbnail(
                                 deviceSize: screenSize,
                                 movieData: MovieModel(
