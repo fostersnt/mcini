@@ -8,7 +8,7 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final screenSize = MediaQuery.of(context).size;
-    final double heroImageHeight = deviceSize.height * 0.35;
+    final double heroImageHeight = deviceSize.height * 0.37;
     return Stack(
       children: [
         Image.asset(
@@ -26,6 +26,7 @@ class HeroSection extends StatelessWidget {
                 child: Icon(
                   Icons.arrow_back,
                   color: AppColors.whiteColor,
+                  size: deviceSize.width * 0.05,
                 ),
                 onTap: () {
                   print("Mcini logo is clicked");
@@ -35,7 +36,7 @@ class HeroSection extends StatelessWidget {
                 child: Icon(
                   Icons.search,
                   color: AppColors.whiteColor,
-                  size: 35,
+                  size: deviceSize.width * 0.05,
                 ),
                 onTap: () {
                   print("Search icon is clicked");
@@ -54,7 +55,7 @@ class HeroSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5),
+                    padding: const EdgeInsets.only(top: 10, bottom: 5),
                     child: Text(
                       "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
                       maxLines: 2,
