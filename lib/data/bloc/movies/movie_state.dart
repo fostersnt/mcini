@@ -21,6 +21,22 @@ class MovieSuccessfulState extends MovieState {
   List<Object?> get props => movies;
 }
 
+class LatestMovieState extends MovieState {
+  final List<MovieModel> latestMovies;
+
+  LatestMovieState({required this.latestMovies});
+  @override
+  List<Object?> get props => latestMovies;
+}
+
+class OtherMoviesState extends MovieState {
+  final List<MovieModel> otherMovies;
+
+  OtherMoviesState({required this.otherMovies});
+  @override
+  List<Object?> get props => otherMovies;
+}
+
 class MovieErrorState extends MovieState {
   final String errorMessage;
 
