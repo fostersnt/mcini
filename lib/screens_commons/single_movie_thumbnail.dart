@@ -64,7 +64,9 @@ class SingleMovieThumbnail extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  color: AppColors.whiteColor, fontWeight: FontWeight.bold),
+                  color: AppColors.whiteColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: deviceSize.width * 0.04),
             ),
           ),
         ),
