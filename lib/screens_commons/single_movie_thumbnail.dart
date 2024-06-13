@@ -27,6 +27,7 @@ class SingleMovieThumbnail extends StatelessWidget {
             children: [
               Image.asset(
                 'lib/assets/images/banner.png',
+                // movieData.thumbnail,
                 fit: BoxFit.fill,
                 width: thumbnailWidth,
                 height: deviceSize.width * 0.3,
