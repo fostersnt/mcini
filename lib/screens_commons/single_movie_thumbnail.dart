@@ -14,6 +14,7 @@ class SingleMovieThumbnail extends StatelessWidget {
   final double customWidth = 150;
   @override
   Widget build(BuildContext context) {
+    final thumbnailWidth = deviceSize.width * 0.4;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,7 +28,7 @@ class SingleMovieThumbnail extends StatelessWidget {
               Image.asset(
                 'lib/assets/images/banner.png',
                 fit: BoxFit.fill,
-                width: deviceSize.width * 0.4,
+                width: thumbnailWidth,
                 height: deviceSize.width * 0.3,
               ),
               Stack(
@@ -58,7 +59,7 @@ class SingleMovieThumbnail extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: SizedBox(
-            width: customWidth,
+            width: thumbnailWidth,
             child: Text(
               movieData.title,
               maxLines: 2,
