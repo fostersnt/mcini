@@ -6,9 +6,11 @@ import 'package:mcini/data/bloc/movies/movie_state.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/data/provider/movie_provider.dart';
 import 'package:mcini/data/repository/movie_repository.dart';
+import 'package:mcini/screens/home/custom_padding.dart';
 import 'package:mcini/screens/home/hero_section.dart';
 import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
+import 'package:collection/collection.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -48,8 +50,17 @@ class HomeView extends StatelessWidget {
                     color: AppColors.whiteColor,
                   ),
                 );
-              } else if (state is MovieSuccessfulState) {
+              }
+              if (state is MovieSuccessfulState) {
                 final movieData = state.movies;
+                List<MovieModel> latestMovies =
+                    movieData.sublist(movieData.length - 10);
+
+                if (movieData.length > 100) {
+                  latestMovies = movieData.sublist(movieData.length - 20);
+                }
+                final otherMovies = groupBy(movieData, (movie) => movie.title);
+
                 return ListView(
                   padding: const EdgeInsets.all(0),
                   children: [
@@ -60,36 +71,22 @@ class HomeView extends StatelessWidget {
                         deviceSize: screenSize,
                       ),
                     ),
-                    //First category
+                    //Latest Movie category
+                    CustomPadding(
+                        screenSize: screenSize, category: 'Latest Movies'),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        child: Text(
-                          "Latest Movies",
-                          style: TextStyle(
-                            color: AppColors.blueColor,
-                            fontSize: screenSize.width * 0.05,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: SizedBox(
                         height: screenSize.width * 0.5,
-                        // width: screenSize.width * 0.35,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: movieData.length,
+                          itemCount: latestMovies.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
                               child: SingleMovieThumbnail(
                                 deviceSize: screenSize,
-                                movieData: MovieModel(
-                                  title: movieData[index].title,
-                                ),
+                                movieData: latestMovies[index],
                               ),
                             );
                           },

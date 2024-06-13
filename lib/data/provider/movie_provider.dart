@@ -14,18 +14,27 @@ class MovieProvider extends IRepository {
   Future<List<MovieModel>> getAllData() async {
     List<MovieModel> movies = [];
     String url = IRepository.apiBaseURL;
-    final response = await http.get(Uri.parse("$url/posts"));
+    final response = await http.post(Uri.parse("$url/movies/list"));
     final jsonData = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      if (jsonData.isNotEmpty) {
-        print("MY MOVIES DATA RECENT: $jsonData");
-        for (var i = 0; i < jsonData.length; i++) {
-          MovieModel myCurrentMovie = MovieModel(title: jsonData[i]['title']);
+    if (response.statusCode == 200 && jsonData['success'] == 'true') {
+      final mainData = jsonData['data'];
+      print(mainData);
+      if (mainData.isNotEmpty) {
+        // print("MY MOVIES DATA RECENT: $jsonData");
+        for (var i = 0; i < mainData.length; i++) {
+          MovieModel myCurrentMovie = MovieModel(
+            id: mainData[i]['id'],
+            title: mainData[i]['title'] ?? '',
+            description: mainData[i]['description'] ?? '',
+            thumbnail: mainData[i]['default_thumbnail_filename'] ?? '',
+            videoUrl: mainData[i]['video_url'] ?? '',
+            collectionName: mainData[i]['collection_name'] ?? '',
+          );
           movies.add(myCurrentMovie);
         }
       }
     }
-    print("MY MOVIES DATA: $jsonData");
+    print("MY MOVIES DATA: ${movies[0].id}");
     return movies;
   }
 
