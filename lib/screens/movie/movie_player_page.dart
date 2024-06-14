@@ -39,7 +39,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
         elevation: 1,
       ),
       backgroundColor: AppColors.blackColor,
-      bottomNavigationBar: CustomNavigationBar(),
+      // bottomNavigationBar: CustomNavigationBar(),
       body: isVideoLoading
           ? Center(
               child: CircularProgressIndicator(
@@ -61,7 +61,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                       widget.movie.videoUrl,
                       style: TextStyle(
                         color: AppColors.whiteColor,
-                        fontSize: deviceScreen.width * 0.04,
+                        fontSize: deviceScreen.width * 0.05,
                       ),
                     ),
                   ),
