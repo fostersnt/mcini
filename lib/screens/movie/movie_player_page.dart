@@ -33,6 +33,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
   @override
   Widget build(BuildContext context) {
     final Size deviceScreen = MediaQuery.of(context).size;
+    final myMovieData = widget.movie;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.blackColor,
@@ -55,38 +56,56 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                     )
                   ],
                 )
-              : Column(
-                  children: [
-                    Image.asset(
-                      'lib/assets/images/banner.png',
-                      width: deviceScreen.width,
-                      height: deviceScreen.height * 0.3,
-                      fit: BoxFit.fill,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        'Unable to play video. An ERROR has occurred',
-                        // errorMessage,
-                        // widget.movie.videoUrl,
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: deviceScreen.width * 0.05,
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'lib/assets/images/banner.png',
+                        width: deviceScreen.width,
+                        height: deviceScreen.height * 0.3,
+                        fit: BoxFit.fill,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'Unable to play video. An ERROR has occurred',
+                          // errorMessage,
+                          // widget.movie.videoUrl,
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: deviceScreen.width * 0.05,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      child: Container(
-                        width: deviceScreen.width,
-                        color: AppColors.blueColor,
-                        child: TextButton(
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Container(
+                          child: Text(
+                            myMovieData.description != ''
+                                ? myMovieData.description
+                                : 'No Description Available',
+                            style: TextStyle(
+                              color: AppColors.whiteColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          width: deviceScreen.width,
+                          color: AppColors.blueColor,
+                          child: TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -95,10 +114,12 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                               style: TextStyle(
                                   fontSize: deviceScreen.width * 0.05,
                                   color: AppColors.whiteColor),
-                            )),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
     );
   }
