@@ -38,85 +38,84 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<MovieBloc>().add(AllMoviesEvent());
     final screenSize = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-          // appBar: AppBar(),
-          backgroundColor: AppColors.blackColor,
-          body: BlocBuilder<MovieBloc, MovieState>(
-            builder: (context, state) {
-              if (state is MovieLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.whiteColor,
-                  ),
-                );
-              }
-              if (state is MovieSuccessfulState) {
-                final movieData = state.movies;
-                List<MovieModel> latestMovies =
-                    movieData.sublist(movieData.length - 10);
+    return Scaffold(
+      // appBar: AppBar(),
+      backgroundColor: AppColors.blackColor,
+      body: BlocBuilder<MovieBloc, MovieState>(
+        builder: (context, state) {
+          if (state is MovieLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: AppColors.whiteColor,
+              ),
+            );
+          }
+          if (state is MovieSuccessfulState) {
+            final movieData = state.movies;
+            List<MovieModel> latestMovies =
+                movieData.sublist(movieData.length - 10);
 
-                if (movieData.length > 100) {
-                  latestMovies = movieData.sublist(movieData.length - 20);
-                }
-                final otherMovies = groupBy(movieData, (movie) => movie.title);
+            if (movieData.length > 100) {
+              latestMovies = movieData.sublist(movieData.length - 20);
+            }
+            final otherMovies = groupBy(movieData, (movie) => movie.title);
 
-                return ListView(
+            return ListView(
+              padding: const EdgeInsets.all(0),
+              children: [
+                //Image and top text
+                Padding(
                   padding: const EdgeInsets.all(0),
-                  children: [
-                    //Image and top text
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: HeroSection(
-                        deviceSize: screenSize,
-                      ),
-                    ),
-                    //Latest Movie category
-                    CustomPadding(
-                        screenSize: screenSize, category: 'Latest Movies'),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: SizedBox(
-                        height: screenSize.width * 0.5,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: latestMovies.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
-                              child: SingleMovieThumbnail(
-                                deviceSize: screenSize,
-                                movieData: latestMovies[index],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              } else if (state is MovieErrorState) {
-                final error = state.errorMessage;
-                return Scaffold(
-                  body: Center(
-                    child: Text(
-                      error,
-                      style: TextStyle(fontSize: 30),
+                  child: HeroSection(
+                    deviceSize: screenSize,
+                  ),
+                ),
+                //Latest Movie category
+                CustomPadding(
+                    screenSize: screenSize, category: 'Latest Movies'),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: SizedBox(
+                    height: screenSize.width * 0.5,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: latestMovies.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                          child: SingleMovieThumbnail(
+                            deviceSize: screenSize,
+                            movieData: latestMovies[index],
+                          ),
+                        );
+                      },
                     ),
                   ),
-                );
-              } else {
-                return const Scaffold(
-                  body: Center(
-                    child: Text(
-                      'Unknown error just occurred',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                  ),
-                );
-              }
-            },
-          )),
+                ),
+              ],
+            );
+          } else if (state is MovieErrorState) {
+            final error = state.errorMessage;
+            return Scaffold(
+              body: Center(
+                child: Text(
+                  error,
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+            );
+          } else {
+            return const Scaffold(
+              body: Center(
+                child: Text(
+                  'Unknown error just occurred',
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

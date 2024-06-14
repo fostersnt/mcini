@@ -21,6 +21,7 @@ class SingleMovieThumbnail extends StatelessWidget {
         InkWell(
           onTap: () {
             print("VIDEO THUMBNAIL HAS BEEN CLICKED");
+            Navigator.of(context).pushNamed('movie_player');
           },
           child: Stack(
             alignment: Alignment.center,
