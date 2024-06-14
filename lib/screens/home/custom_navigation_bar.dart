@@ -15,8 +15,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   final List<Widget> _pages = [
     const HomePage(),
     // Center(child: Text('Home')),
+    Center(child: Text('Favorites')),
     Center(child: Text('Search')),
-    Center(child: Text('Notifications')),
     Center(child: Text('Profile')),
   ];
 
