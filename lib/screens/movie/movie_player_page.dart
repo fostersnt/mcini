@@ -93,7 +93,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                             child: Text(
                               'Go Back',
                               style: TextStyle(
-                                  fontSize: deviceScreen.width * 0.06,
+                                  fontSize: deviceScreen.width * 0.05,
                                   color: AppColors.whiteColor),
                             )),
                       ),
