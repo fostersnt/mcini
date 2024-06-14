@@ -4,6 +4,7 @@ import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:mcini/screens/home/custom_navigation_bar.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class MoviePlayerPage extends StatefulWidget {
@@ -38,6 +39,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
         elevation: 1,
       ),
       backgroundColor: AppColors.blackColor,
+      bottomNavigationBar: CustomNavigationBar(),
       body: isVideoLoading
           ? Center(
               child: CircularProgressIndicator(
@@ -58,8 +60,9 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                     child: Text(
                       widget.movie.videoUrl,
                       style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: deviceScreen.width * 0.04),
+                        color: AppColors.whiteColor,
+                        fontSize: deviceScreen.width * 0.04,
+                      ),
                     ),
                   ),
                 ),

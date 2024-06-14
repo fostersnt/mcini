@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/routes/app_routes.dart';
+import 'package:mcini/screens/home/custom_navigation_bar.dart';
 import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/screens/home/home_slider.dart';
 import 'package:mcini/screens/movie/movie_player_page.dart';
 import 'package:mcini/screens_commons/movie_categories_grouping.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:mcini/utilities/app_colors.dart';
 
 void main() {
   ;
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: getRoutes(),
+      // routes: getRoutes(),
       //Device preview settings
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
@@ -37,8 +40,8 @@ class MyApp extends StatelessWidget {
       // home: const HomeSlider(),
       // home: const MoviePlayerPage(),
       // home: const MovieCategoriesGroup(),
-      home: null,
-      initialRoute: '/',
+      home: Scaffold(body: null, bottomNavigationBar: CustomNavigationBar()),
+      // initialRoute: '/',
     );
   }
 }
