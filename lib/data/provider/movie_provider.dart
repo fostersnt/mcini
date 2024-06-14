@@ -18,7 +18,7 @@ class MovieProvider extends IRepository {
     final jsonData = jsonDecode(response.body);
     if (response.statusCode == 200 && jsonData['success'] == 'true') {
       final mainData = jsonData['data'];
-      print(mainData);
+      // print(mainData);
       if (mainData.isNotEmpty) {
         // print("MY MOVIES DATA RECENT: $jsonData");
         for (var i = 0; i < mainData.length; i++) {
@@ -34,7 +34,7 @@ class MovieProvider extends IRepository {
         }
       }
     }
-    print("MY MOVIES DATA: ${movies[0].id}");
+    // print("MY MOVIES DATA: ${movies[0].id}");
     return movies;
   }
 

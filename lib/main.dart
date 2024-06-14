@@ -40,7 +40,11 @@ class MyApp extends StatelessWidget {
       // home: const HomeSlider(),
       // home: const MoviePlayerPage(),
       // home: const MovieCategoriesGroup(),
-      home: Scaffold(body: null, bottomNavigationBar: CustomNavigationBar()),
+      home: Scaffold(
+        backgroundColor: AppColors.blackColor,
+        body: null,
+        bottomNavigationBar: CustomNavigationBar(),
+      ),
       // initialRoute: '/',
     );
   }
