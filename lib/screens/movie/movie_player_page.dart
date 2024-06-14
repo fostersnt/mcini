@@ -1,10 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+
+import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class MoviePlayerPage extends StatefulWidget {
-  const MoviePlayerPage({super.key});
+  final MovieModel movie;
+  const MoviePlayerPage({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
 
   @override
   State<MoviePlayerPage> createState() => _MoviePlayerPageState();
@@ -13,6 +20,8 @@ class MoviePlayerPage extends StatefulWidget {
 class _MoviePlayerPageState extends State<MoviePlayerPage> {
   late CustomVideoPlayerController _customVideoPlayerController;
   bool isVideoLoading = true;
+  bool isError = false;
+  String errorMessage = '';
   @override
   void initState() {
     super.initState();
@@ -21,6 +30,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size deviceScreen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.blackColor,
@@ -34,13 +44,25 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                 color: AppColors.whiteColor,
               ),
             )
-          : Column(
-              children: [
-                CustomVideoPlayer(
-                  customVideoPlayerController: _customVideoPlayerController,
+          : !isError
+              ? Column(
+                  children: [
+                    CustomVideoPlayer(
+                      customVideoPlayerController: _customVideoPlayerController,
+                    )
+                  ],
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Center(
+                    child: Text(
+                      errorMessage,
+                      style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: deviceScreen.width * 0.04),
+                    ),
+                  ),
                 ),
-              ],
-            ),
     );
   }
 
@@ -48,15 +70,26 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
     CachedVideoPlayerController cachedVideoPlayerController;
     cachedVideoPlayerController =
         CachedVideoPlayerController.asset('lib/assets/videos/crabs.mp4')
-          ..initialize().then((value) => setState(() {
-                isVideoLoading = false;
-              }));
+          // CachedVideoPlayerController.network(widget.movie.videoUrl)
+          ..initialize()
+              .then((value) => setState(() {
+                    isVideoLoading = false;
+                  }))
+              .catchError((error) {
+            // Handle the error here
+            setState(() {
+              isVideoLoading = false;
+              isError = true;
+              errorMessage = error.toString();
+            });
+            print('Error initializing video player: $error');
+          });
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,
       videoPlayerController: cachedVideoPlayerController,
-      customVideoPlayerSettings: CustomVideoPlayerSettings(
-        thumbnailWidget: Image.asset('lib/assets/images/banner.png'),
-      ),
+      customVideoPlayerSettings: const CustomVideoPlayerSettings(
+          // thumbnailWidget: Image.asset('lib/assets/images/banner.png'),
+          ),
     );
   }
 }

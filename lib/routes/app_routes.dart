@@ -5,6 +5,6 @@ import 'package:mcini/screens/movie/movie_player_page.dart';
 Map<String, WidgetBuilder> getRoutes() {
   return {
     '/': (context) => const HomePage(),
-    'movie_player': (context) => const MoviePlayerPage(),
+    // 'movie_player': (context) => const MoviePlayerPage(),
   };
 }

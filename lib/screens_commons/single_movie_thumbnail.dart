@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:mcini/screens/movie/movie_player_page.dart';
 
 import 'package:mcini/utilities/app_colors.dart';
 
@@ -21,7 +22,14 @@ class SingleMovieThumbnail extends StatelessWidget {
         InkWell(
           onTap: () {
             print("VIDEO THUMBNAIL HAS BEEN CLICKED");
-            Navigator.of(context).pushNamed('movie_player');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MoviePlayerPage(
+                  movie: movieData,
+                ),
+              ),
+            );
           },
           child: Stack(
             alignment: Alignment.center,
