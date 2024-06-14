@@ -56,7 +56,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Center(
                     child: Text(
-                      errorMessage,
+                      widget.movie.videoUrl,
                       style: TextStyle(
                           color: AppColors.whiteColor,
                           fontSize: deviceScreen.width * 0.04),
@@ -69,8 +69,8 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
   void initializaVideoPlayer() {
     CachedVideoPlayerController cachedVideoPlayerController;
     cachedVideoPlayerController =
-        CachedVideoPlayerController.asset('lib/assets/videos/crabs.mp4')
-          // CachedVideoPlayerController.network(widget.movie.videoUrl)
+        // CachedVideoPlayerController.asset('lib/assets/videos/crabs.mp4')
+        CachedVideoPlayerController.network(widget.movie.videoUrl)
           ..initialize()
               .then((value) => setState(() {
                     isVideoLoading = false;
@@ -83,6 +83,7 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
               errorMessage = error.toString();
             });
             print('Error initializing video player: $error');
+            print('VIDEO URL: ${widget.movie.videoUrl}');
           });
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,
