@@ -36,7 +36,7 @@ class HeroSection extends StatelessWidget {
                 child: Icon(
                   Icons.search,
                   color: AppColors.whiteColor,
-                  size: deviceSize.width * 0.05,
+                  size: deviceSize.width * 0.08,
                 ),
                 onTap: () {
                   print("Search icon is clicked");

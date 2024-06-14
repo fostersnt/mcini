@@ -2,6 +2,7 @@
 // import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/home/custom_navigation_bar.dart';
@@ -54,17 +55,50 @@ class _MoviePlayerPageState extends State<MoviePlayerPage> {
                     )
                   ],
                 )
-              : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Center(
-                    child: Text(
-                      widget.movie.videoUrl,
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontSize: deviceScreen.width * 0.05,
+              : Column(
+                  children: [
+                    Image.asset(
+                      'lib/assets/images/banner.png',
+                      width: deviceScreen.width,
+                      height: deviceScreen.height * 0.3,
+                      fit: BoxFit.fill,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        'Unable to play video. An ERROR has occurred',
+                        // errorMessage,
+                        // widget.movie.videoUrl,
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: deviceScreen.width * 0.05,
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                      child: Container(
+                        width: deviceScreen.width,
+                        color: AppColors.blueColor,
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Go Back',
+                              style: TextStyle(
+                                  fontSize: deviceScreen.width * 0.06,
+                                  color: AppColors.whiteColor),
+                            )),
+                      ),
+                    ),
+                  ],
                 ),
     );
   }
