@@ -6,4 +6,5 @@ class AppColors {
       const Color(0xFF010101); //Color(int.parse('xff010101'));
   static Color blueColor = const Color(0xFF00ccff);
   static Color whiteColor = const Color(0xFFffffff);
+  static Color bottomNavColor = const Color(0xff031419);
 }

@@ -53,17 +53,20 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
     return Scaffold(
       body: _pages[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: deviceSize.width * 0.08,
-        elevation: 1,
-        backgroundColor: AppColors.blackColor,
-        onTap: (value) {
-          setState(() {
-            selectedIndex = value;
-          });
-          print('CURRENT INDEX: $value');
-        },
-        items: _bottomNavBarItems,
+      bottomNavigationBar: Container(
+        height: 70,
+        child: BottomNavigationBar(
+          iconSize: deviceSize.width * 0.08,
+          elevation: 1,
+          backgroundColor: AppColors.bottomNavColor,
+          onTap: (value) {
+            setState(() {
+              selectedIndex = value;
+            });
+            print('CURRENT INDEX: $value');
+          },
+          items: _bottomNavBarItems,
+        ),
       ),
     );
   }
