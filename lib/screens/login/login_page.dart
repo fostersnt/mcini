@@ -10,20 +10,38 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      // appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              child: Text(
+                'Login',
+                style: TextStyle(
+                  color: AppColors.blueColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: deviceSize.width * 0.08,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               child: TextField(
                 controller: phoneNumberController,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                  labelText: 'Phone Number',
+                  fillColor: AppColors.txtFieldBgColor,
+                  filled: true,
+                  // labelText: 'Phone Number',
                   hintText: 'Enter your phone number',
+                  hintStyle: TextStyle(color: AppColors.whiteColor),
                   border: OutlineInputBorder(
+                    // borderRadius: BorderRadius.circular(20),
                     borderSide: BorderSide(
                       color: AppColors.blueColor,
                       width: 2,
@@ -52,6 +70,12 @@ class LoginPage extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all<Color>(
                     AppColors.blueColor, // Button background color
                   ),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(5), // No rounded corners
+                    ),
+                  ),
                 ),
                 onPressed: () => {},
                 child: Text(
@@ -59,6 +83,7 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors.whiteColor,
                     fontWeight: FontWeight.bold,
+                    fontSize: deviceSize.width * 0.05,
                   ),
                 ),
               ),

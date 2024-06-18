@@ -7,4 +7,5 @@ class AppColors {
   static Color blueColor = const Color(0xFF00ccff);
   static Color whiteColor = const Color(0xFFffffff);
   static Color bottomNavColor = const Color(0xff031419);
+  static Color txtFieldBgColor = const Color(0xff454545);
 }
