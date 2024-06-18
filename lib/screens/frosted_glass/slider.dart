@@ -63,7 +63,7 @@ class UserProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('User Profile'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('This is the user profile page'),
       ),
     );

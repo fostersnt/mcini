@@ -6,6 +6,7 @@ import 'package:mcini/screens/frosted_glass/blur_effect.dart';
 import 'package:mcini/screens/home/custom_navigation_bar.dart';
 import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/screens/home/home_slider.dart';
+import 'package:mcini/screens/login/login_page.dart';
 import 'package:mcini/screens/movie/movie_player_page.dart';
 import 'package:mcini/screens_commons/movie_categories_grouping.dart';
 import 'package:device_preview/device_preview.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
       // home: const MovieCategoriesGroup(),
       home: Scaffold(
         backgroundColor: AppColors.blackColor,
-        body: const BlurEffectPage(),
+        body: LoginPage(),
         // body: null,
         // bottomNavigationBar: CustomNavigationBar(),
       ),
