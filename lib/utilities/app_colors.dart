@@ -8,4 +8,23 @@ class AppColors {
   static Color whiteColor = const Color(0xFFffffff);
   static Color bottomNavColor = const Color(0xff031419);
   static Color txtFieldBgColor = const Color(0xff454545);
+  static Color redColor = const Color(0xffe84c1f);
+
+  static customSnackBar(String errorMessage, Size deviceSize) {
+    return SnackBar(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: AppColors.whiteColor,
+      margin: EdgeInsets.only(top: 0),
+      content: Container(
+        child: Text(
+          errorMessage,
+          style: TextStyle(
+            color: redColor,
+            fontWeight: FontWeight.bold,
+            fontSize: deviceSize.width * 0.04,
+          ),
+        ),
+      ),
+    );
+  }
 }

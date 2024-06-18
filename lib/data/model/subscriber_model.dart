@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:mcini/data/interface/i_repository.dart';
+import 'package:http/http.dart' as http;
+
 class SubscriberModel {
   final int id;
   final String name;
@@ -37,5 +40,34 @@ class SubscriberModel {
       'subscription_status': subscription_status,
       'subscription_id': subscription_id,
     };
+  }
+
+  static Future<Map<String, dynamic>> getSubscriber(String msisdn) async {
+    String base_url = IRepository.apiBaseURL;
+    String endpoint = 'user/login';
+    String url = "$base_url/$endpoint";
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {'msisdn': msisdn},
+      );
+      final jsonData = jsonDecode(response.body);
+      final subscriberData = jsonData['data'];
+      if (jsonData['success'] == 'true') {
+        subscriberData['response_status'] = 'success';
+        subscriberData['response_message'] = 'Data fetched successfully';
+      } else {
+        return {
+          'response_status': 'failed',
+          'response_message': jsonData['message']
+        };
+      }
+      return subscriberData;
+    } catch (e) {
+      return {
+        'response_status': 'failed',
+        'response_message': e.toString(),
+      };
+    }
   }
 }

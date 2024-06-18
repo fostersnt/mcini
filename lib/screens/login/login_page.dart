@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mcini/data/model/subscriber_model.dart';
+import 'package:mcini/screens/home/custom_navigation_bar.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController phoneNumberController = TextEditingController();
+  bool flag = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +37,18 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Center(
+                      child: flag
+                          ? Container(
+                              child: CircularProgressIndicator(
+                                color: AppColors.blueColor,
+                              ),
+                            )
+                          : null,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       child: Text(
                         'Login',
@@ -46,6 +66,7 @@ class LoginPage extends StatelessWidget {
                       child: TextField(
                         controller: phoneNumberController,
                         keyboardType: TextInputType.phone,
+                        style: TextStyle(color: AppColors.whiteColor),
                         decoration: InputDecoration(
                           fillColor: AppColors.txtFieldBgColor,
                           filled: true,
@@ -89,7 +110,31 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () => {},
+                        onPressed: () async {
+                          setState(() {
+                            flag = true;
+                          });
+                          String msisdn = phoneNumberController.text.trim();
+                          final data =
+                              await SubscriberModel.getSubscriber(msisdn);
+                          print(data);
+                          setState(() {
+                            flag = false;
+                          });
+                          if (data['response_status'] == 'success') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CustomNavigationBar(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              AppColors.customSnackBar(
+                                  data['response_message'], deviceSize),
+                            );
+                          }
+                        },
                         child: Text(
                           'Submit',
                           style: TextStyle(
