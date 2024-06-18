@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/routes/app_routes.dart';
+import 'package:mcini/screens/frosted_glass/blur_effect.dart';
 import 'package:mcini/screens/home/custom_navigation_bar.dart';
 import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/screens/home/home_slider.dart';
@@ -42,8 +43,9 @@ class MyApp extends StatelessWidget {
       // home: const MovieCategoriesGroup(),
       home: Scaffold(
         backgroundColor: AppColors.blackColor,
-        body: null,
-        bottomNavigationBar: CustomNavigationBar(),
+        body: const BlurEffectPage(),
+        // body: null,
+        // bottomNavigationBar: CustomNavigationBar(),
       ),
       // initialRoute: '/',
     );
