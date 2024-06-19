@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:mcini/data/interface/i_repository.dart';
 import 'package:http/http.dart' as http;
+import 'package:mcini/utilities/app_colors.dart';
 import 'package:mcini/utilities/shared_preferences.dart';
 
 class SubscriberModel {
@@ -47,6 +48,7 @@ class SubscriberModel {
     String base_url = IRepository.apiBaseURL;
     String endpoint = 'user/login';
     String url = "$base_url/$endpoint";
+    bool isValidPhoneNumber = AppColors.validatePhoneNumber(msisdn);
 
     try {
       if (msisdn == '') {
@@ -55,6 +57,14 @@ class SubscriberModel {
           'response_message': 'Phone number should not be empty',
         };
       }
+
+      if (!isValidPhoneNumber) {
+        return {
+          'response_status': 'failed',
+          'response_message': 'Invalid phone number',
+        };
+      }
+
       final response = await http.post(
         Uri.parse(url),
         body: {'msisdn': msisdn},

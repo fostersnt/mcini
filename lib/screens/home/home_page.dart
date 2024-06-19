@@ -12,24 +12,24 @@ import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:collection/collection.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+// class HomePage extends StatelessWidget {
+//   const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => MovieRepository(movieProvider: MovieProvider()),
-      child: BlocProvider(
-        create: (context) => MovieBloc(
-          movieRepository: MovieRepository(
-            movieProvider: MovieProvider(),
-          ),
-        ),
-        child: const HomeView(),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return RepositoryProvider(
+//       create: (context) => MovieRepository(movieProvider: MovieProvider()),
+//       child: BlocProvider(
+//         create: (context) => MovieBloc(
+//           movieRepository: MovieRepository(
+//             movieProvider: MovieProvider(),
+//           ),
+//         ),
+//         child: const HomeView(),
+//       ),
+//     );
+//   }
+// }
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

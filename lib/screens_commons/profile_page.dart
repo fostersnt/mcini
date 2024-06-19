@@ -71,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                     child: Column(
                       children: [
                         ProfilePartials.secttion(deviceSize, 'Full Name',
-                            subscriberData['name'], thumbIcon),
+                            subscriberData['name'] ?? 'N/A', thumbIcon),
                         ProfilePartials.secttion(deviceSize, 'Phone Number',
                             subscriberData['msisdn'], phoneIcon),
                         ProfilePartials.secttion(deviceSize, 'E-Mail',

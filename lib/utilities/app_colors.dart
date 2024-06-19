@@ -56,4 +56,38 @@ class AppColors {
       ),
     );
   }
+
+  static bool validatePhoneNumber(String msisdn) {
+    bool finalOutcome = true;
+    if (msisdn.length == 12) {
+      String prefix = msisdn.substring(0, 3); //233
+      String mainPrefix = msisdn.substring(3, 4);
+      if (prefix == '233' && mainPrefix == '2') {
+        RegExp regex = RegExp(r'^2332[04567]\d{7}$');
+        finalOutcome = regex.hasMatch(msisdn);
+      } else if (prefix == '233' && mainPrefix == '5') {
+        RegExp regex = RegExp(r'^2335[034567]\d{7}$');
+        finalOutcome = regex.hasMatch(msisdn);
+      } else {
+        finalOutcome = false;
+      }
+    } else if (msisdn.length == 10) {
+      String prefix = msisdn.substring(0, 1); //0
+      String mainPrefix = msisdn.substring(1, 2);
+      if (prefix == '0' && mainPrefix == '2') {
+        RegExp regex = RegExp(r'^02[04567]\d{7}$');
+        finalOutcome = regex.hasMatch(msisdn);
+      } else if (prefix == '0' && mainPrefix == '5') {
+        RegExp regex = RegExp(r'^05[034567]\d{7}$');
+        finalOutcome = regex.hasMatch(msisdn);
+      } else {
+        finalOutcome = false;
+      }
+    } else {
+      finalOutcome = false;
+    }
+    // RegExp regex = RegExp(r'^0[25][34567]\d{7}$');
+    // msisdn.substring(0, 1);
+    return finalOutcome;
+  }
 }

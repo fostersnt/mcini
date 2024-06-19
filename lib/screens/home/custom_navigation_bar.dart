@@ -18,10 +18,11 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _pages = [
-      const HomePage(),
+      // const HomePage(),
+      const HomeView(),
       // Center(child: Text('Home')),
-      Center(child: Text('Favorites')),
-      Center(child: Text('Search')),
+      const Center(child: Text('Favorites')),
+      const Center(child: Text('Search')),
       ProfilePage(subscriberData: widget.subscriberModel),
     ];
 

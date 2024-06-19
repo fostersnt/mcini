@@ -34,7 +34,7 @@ class ProfilePartials {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Text(
-                      labelValue ?? 'N/A',
+                      labelValue,
                       maxLines: 2,
                       overflow: TextOverflow.fade,
                       style: TextStyle(
