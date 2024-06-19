@@ -52,7 +52,7 @@ class SubscriberModel {
       if (msisdn == '') {
         return {
           'response_status': 'failed',
-          'response_message': 'Phone number cannot be empty',
+          'response_message': 'Phone number should not be empty',
         };
       }
       final response = await http.post(

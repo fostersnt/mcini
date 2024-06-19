@@ -18,12 +18,14 @@ class AppColors {
       backgroundColor: AppColors.whiteColor,
       margin: EdgeInsets.only(bottom: deviceSize.height - 150),
       content: Container(
-        child: Text(
-          errorMessage,
-          style: TextStyle(
-            color: isError ? redColor : blueColor,
-            fontWeight: FontWeight.bold,
-            fontSize: deviceSize.width * 0.04,
+        child: Center(
+          child: Text(
+            errorMessage,
+            style: TextStyle(
+              color: isError ? redColor : blueColor,
+              fontWeight: FontWeight.bold,
+              fontSize: deviceSize.width * 0.04,
+            ),
           ),
         ),
       ),
