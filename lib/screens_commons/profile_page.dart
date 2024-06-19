@@ -42,17 +42,8 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // leading: InkWell(
-        //   onTap: () {
-        //     Navigator.of(context).pop();
-        //   },
-        //   child: Icon(
-        //     Icons.arrow_back,
-        //     color: AppColors.whiteColor,
-        //   ),
-        // ),
         backgroundColor: AppColors.blackColor,
-        // automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
           'Account Management',
