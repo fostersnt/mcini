@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mcini/data/model/subscriber_model.dart';
 import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class CustomNavigationBar extends StatefulWidget {
-  CustomNavigationBar({super.key});
+  final SubscriberModel subscriberModel;
+  CustomNavigationBar({super.key, required this.subscriberModel});
 
   @override
   State<CustomNavigationBar> createState() => _CustomNavigationBarState();

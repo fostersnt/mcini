@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mcini/data/model/subscriber_model.dart';
 import 'package:mcini/screens/home/custom_navigation_bar.dart';
 import 'package:mcini/utilities/app_colors.dart';
+import 'package:mcini/utilities/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -122,12 +123,24 @@ class _LoginPageState extends State<LoginPage> {
                             flag = false;
                           });
                           if (data['response_status'] == 'success') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CustomNavigationBar(),
-                              ),
-                            );
+                            final subscriber =
+                                await LocalStorage.getStoredSubscriber();
+                            if (subscriber != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CustomNavigationBar(
+                                      subscriberModel: subscriber),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                AppColors.customSnackBar(
+                                    'Unable to retrieve subscriber data',
+                                    deviceSize,
+                                    true),
+                              );
+                            }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               AppColors.customSnackBar(

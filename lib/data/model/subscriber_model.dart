@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:mcini/data/interface/i_repository.dart';
 import 'package:http/http.dart' as http;
+import 'package:mcini/utilities/shared_preferences.dart';
 
 class SubscriberModel {
   final int id;
@@ -53,6 +54,8 @@ class SubscriberModel {
       );
       final jsonData = jsonDecode(response.body);
       final subscriberData = jsonData['data'];
+      //Storing the subscriber data in local storage
+      await LocalStorage.storeSubscriberLocally(subscriberData);
       if (jsonData['success'] == 'true') {
         subscriberData['response_status'] = 'success';
         subscriberData['response_message'] = 'Data fetched successfully';
