@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               AppColors.customSnackBar(
-                                  data['response_message'], deviceSize),
+                                  data['response_message'], deviceSize, true),
                             );
                           }
                         },

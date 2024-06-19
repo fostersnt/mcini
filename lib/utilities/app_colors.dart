@@ -10,7 +10,7 @@ class AppColors {
   static Color txtFieldBgColor = const Color(0xff454545);
   static Color redColor = const Color(0xffe84c1f);
 
-  static customSnackBar(String errorMessage, Size deviceSize) {
+  static customSnackBar(String errorMessage, Size deviceSize, bool isError) {
     return SnackBar(
       behavior: SnackBarBehavior.floating,
       backgroundColor: AppColors.whiteColor,
@@ -19,7 +19,7 @@ class AppColors {
         child: Text(
           errorMessage,
           style: TextStyle(
-            color: redColor,
+            color: isError ? redColor : blueColor,
             fontWeight: FontWeight.bold,
             fontSize: deviceSize.width * 0.04,
           ),
