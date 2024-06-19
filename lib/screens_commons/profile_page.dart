@@ -21,21 +21,21 @@ class ProfilePage extends StatelessWidget {
 
 //PHONE ICON
     final Icon phoneIcon = Icon(
-      Icons.phone,
+      Icons.phone_outlined,
       color: AppColors.whiteColor,
       size: iconSize,
     );
 
     //EMAIL ICON
     final Icon emailIcon = Icon(
-      Icons.email,
+      Icons.email_outlined,
       color: AppColors.whiteColor,
       size: iconSize,
     );
 
     //PHONE ICON
     final Icon thumbIcon = Icon(
-      Icons.thumb_up,
+      Icons.thumb_up_outlined,
       color: AppColors.whiteColor,
       size: iconSize,
     );
