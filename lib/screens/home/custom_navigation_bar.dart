@@ -72,130 +72,133 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         //   },
         //   items: _bottomNavBarItems,
         // ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            //Home icon
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedIndex = 0;
-                });
-              },
-              child: Container(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.home_filled,
-                      color: selectedIndex == 0
-                          ? AppColors.blueColor
-                          : AppColors.whiteColor,
-                      size: iconSize,
-                    ),
-                    Text(
-                      'Home',
-                      style: TextStyle(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              //Home icon
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                },
+                child: Container(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.home_filled,
                         color: selectedIndex == 0
                             ? AppColors.blueColor
                             : AppColors.whiteColor,
-                        fontWeight: FontWeight.bold,
+                        size: iconSize,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Home',
+                        style: TextStyle(
+                          color: selectedIndex == 0
+                              ? AppColors.blueColor
+                              : AppColors.whiteColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            //Favorite icon
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedIndex = 1;
-                });
-              },
-              child: Container(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.favorite,
-                      color: selectedIndex == 1
-                          ? AppColors.blueColor
-                          : AppColors.whiteColor,
-                      size: iconSize,
-                    ),
-                    Text(
-                      'Favorite',
-                      style: TextStyle(
+              //Favorite icon
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 1;
+                  });
+                },
+                child: Container(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.favorite,
                         color: selectedIndex == 1
                             ? AppColors.blueColor
                             : AppColors.whiteColor,
-                        fontWeight: FontWeight.bold,
+                        size: iconSize,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Favorite',
+                        style: TextStyle(
+                          color: selectedIndex == 1
+                              ? AppColors.blueColor
+                              : AppColors.whiteColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            //Search icon
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedIndex = 2;
-                });
-              },
-              child: Container(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.search_outlined,
-                      color: selectedIndex == 2
-                          ? AppColors.blueColor
-                          : AppColors.whiteColor,
-                      size: iconSize,
-                    ),
-                    Text(
-                      'Search',
-                      style: TextStyle(
+              //Search icon
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 2;
+                  });
+                },
+                child: Container(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.search_outlined,
                         color: selectedIndex == 2
                             ? AppColors.blueColor
                             : AppColors.whiteColor,
-                        fontWeight: FontWeight.bold,
+                        size: iconSize,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Search',
+                        style: TextStyle(
+                          color: selectedIndex == 2
+                              ? AppColors.blueColor
+                              : AppColors.whiteColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            //Profile icon
-            InkWell(
-              onTap: () {
-                setState(() {
-                  selectedIndex = 3;
-                });
-              },
-              child: Container(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: selectedIndex == 3
-                          ? AppColors.blueColor
-                          : AppColors.whiteColor,
-                      size: iconSize,
-                    ),
-                    Text(
-                      'Account',
-                      style: TextStyle(
+              //Profile icon
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedIndex = 3;
+                  });
+                },
+                child: Container(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.person,
                         color: selectedIndex == 3
                             ? AppColors.blueColor
                             : AppColors.whiteColor,
-                        fontWeight: FontWeight.bold,
+                        size: iconSize,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Account',
+                        style: TextStyle(
+                          color: selectedIndex == 3
+                              ? AppColors.blueColor
+                              : AppColors.whiteColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
