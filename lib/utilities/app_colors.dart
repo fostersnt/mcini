@@ -9,6 +9,8 @@ class AppColors {
   static Color bottomNavColor = const Color(0xff031419);
   static Color txtFieldBgColor = const Color(0xff454545);
   static Color redColor = const Color(0xffe84c1f);
+  static Color greyMain = const Color(0xff414141);
+  static Color greySub = const Color(0xff4b4b4b);
 
   static customSnackBar(String errorMessage, Size deviceSize, bool isError) {
     return SnackBar(

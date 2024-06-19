@@ -22,7 +22,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       // Center(child: Text('Home')),
       Center(child: Text('Favorites')),
       Center(child: Text('Search')),
-      ProfilePage(subscriberModel: widget.subscriberModel),
+      ProfilePage(subscriberData: widget.subscriberModel),
     ];
 
     final Size deviceSize = MediaQuery.of(context).size;
