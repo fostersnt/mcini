@@ -82,12 +82,25 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 });
               },
               child: Container(
-                child: Icon(
-                  Icons.home_filled,
-                  color: selectedIndex == 0
-                      ? AppColors.blueColor
-                      : AppColors.whiteColor,
-                  size: iconSize,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.home_filled,
+                      color: selectedIndex == 0
+                          ? AppColors.blueColor
+                          : AppColors.whiteColor,
+                      size: iconSize,
+                    ),
+                    Text(
+                      'Home',
+                      style: TextStyle(
+                        color: selectedIndex == 0
+                            ? AppColors.blueColor
+                            : AppColors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -99,12 +112,25 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 });
               },
               child: Container(
-                child: Icon(
-                  Icons.favorite,
-                  color: selectedIndex == 1
-                      ? AppColors.blueColor
-                      : AppColors.whiteColor,
-                  size: iconSize,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.favorite,
+                      color: selectedIndex == 1
+                          ? AppColors.blueColor
+                          : AppColors.whiteColor,
+                      size: iconSize,
+                    ),
+                    Text(
+                      'Favorite',
+                      style: TextStyle(
+                        color: selectedIndex == 1
+                            ? AppColors.blueColor
+                            : AppColors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -116,12 +142,25 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 });
               },
               child: Container(
-                child: Icon(
-                  Icons.search_outlined,
-                  color: selectedIndex == 2
-                      ? AppColors.blueColor
-                      : AppColors.whiteColor,
-                  size: iconSize,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.search_outlined,
+                      color: selectedIndex == 2
+                          ? AppColors.blueColor
+                          : AppColors.whiteColor,
+                      size: iconSize,
+                    ),
+                    Text(
+                      'Search',
+                      style: TextStyle(
+                        color: selectedIndex == 2
+                            ? AppColors.blueColor
+                            : AppColors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -133,12 +172,25 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 });
               },
               child: Container(
-                child: Icon(
-                  Icons.person,
-                  color: selectedIndex == 3
-                      ? AppColors.blueColor
-                      : AppColors.whiteColor,
-                  size: iconSize,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: selectedIndex == 3
+                          ? AppColors.blueColor
+                          : AppColors.whiteColor,
+                      size: iconSize,
+                    ),
+                    Text(
+                      'Account',
+                      style: TextStyle(
+                        color: selectedIndex == 3
+                            ? AppColors.blueColor
+                            : AppColors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
