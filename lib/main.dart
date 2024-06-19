@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       title: 'Mcini Mobile',
       theme: ThemeData(
+        fontFamily: 'Poppins',
         primarySwatch: Colors.amber,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         // useMaterial3: true,
