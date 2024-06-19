@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mcini/data/model/subscriber_model.dart';
+import 'package:mcini/utilities/app_colors.dart';
 
 class ProfilePage extends StatelessWidget {
   final Map<String, dynamic> subscriberModel;
@@ -14,9 +15,26 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Profile'),
+        // leading: InkWell(
+        //   onTap: () {
+        //     Navigator.of(context).pop();
+        //   },
+        //   child: Icon(
+        //     Icons.arrow_back,
+        //     color: AppColors.whiteColor,
+        //   ),
+        // ),
+        backgroundColor: AppColors.blackColor,
+        // automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Account Management',
+          style: TextStyle(
+            color: AppColors.blueColor,
+          ),
+        ),
       ),
+      backgroundColor: AppColors.blackColor,
       body: Column(
         children: [
           Padding(

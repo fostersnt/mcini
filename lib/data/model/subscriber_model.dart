@@ -47,7 +47,14 @@ class SubscriberModel {
     String base_url = IRepository.apiBaseURL;
     String endpoint = 'user/login';
     String url = "$base_url/$endpoint";
+
     try {
+      if (msisdn == '') {
+        return {
+          'response_status': 'failed',
+          'response_message': 'Phone number cannot be empty',
+        };
+      }
       final response = await http.post(
         Uri.parse(url),
         body: {'msisdn': msisdn},

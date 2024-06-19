@@ -14,7 +14,7 @@ class AppColors {
     return SnackBar(
       behavior: SnackBarBehavior.floating,
       backgroundColor: AppColors.whiteColor,
-      margin: EdgeInsets.only(top: 0),
+      margin: EdgeInsets.only(bottom: deviceSize.height - 150),
       content: Container(
         child: Text(
           errorMessage,
