@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/subscriber_model.dart';
 import 'package:mcini/screens/home/home_page.dart';
+import 'package:mcini/screens_commons/profile_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class CustomNavigationBar extends StatefulWidget {
-  final SubscriberModel subscriberModel;
+  final Map<String, dynamic> subscriberModel;
   CustomNavigationBar({super.key, required this.subscriberModel});
 
   @override
@@ -14,16 +15,16 @@ class CustomNavigationBar extends StatefulWidget {
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   int selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomePage(),
-    // Center(child: Text('Home')),
-    Center(child: Text('Favorites')),
-    Center(child: Text('Search')),
-    Center(child: Text('Profile')),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _pages = [
+      const HomePage(),
+      // Center(child: Text('Home')),
+      Center(child: Text('Favorites')),
+      Center(child: Text('Search')),
+      ProfilePage(subscriberModel: widget.subscriberModel),
+    ];
+
     final Size deviceSize = MediaQuery.of(context).size;
     double iconSize = deviceSize.width * 0.08;
     final List<BottomNavigationBarItem> _bottomNavBarItems = [
