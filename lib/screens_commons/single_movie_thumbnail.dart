@@ -17,6 +17,7 @@ class SingleMovieThumbnail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final thumbnailWidth = deviceSize.width * 0.4;
+    final thumbnailHeight = deviceSize.width * 0.5;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,7 +28,7 @@ class SingleMovieThumbnail extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => MoviePlayerPage(
-                  controller: WebViewController(),
+                  // controller: WebViewController(),
                   movie: movieData,
                 ),
               ),
@@ -40,8 +41,8 @@ class SingleMovieThumbnail extends StatelessWidget {
                 'lib/assets/images/banner.png',
                 // movieData.thumbnail,
                 fit: BoxFit.fill,
-                width: thumbnailWidth,
-                height: deviceSize.width * 0.3,
+                width: 160,
+                height: 200,
               ),
               Stack(
                 children: [

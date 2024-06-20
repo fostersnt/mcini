@@ -1,18 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+// import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:mcini/utilities/app_colors.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:mcini/utilities/app_colors.dart';
 
 class MoviePlayerPage extends StatefulWidget {
-  final WebViewController controller;
   final MovieModel movie;
   const MoviePlayerPage({
     super.key,
     required this.movie,
-    required this.controller,
   });
 
   @override
@@ -20,70 +18,136 @@ class MoviePlayerPage extends StatefulWidget {
 }
 
 class _MoviePlayerPageState extends State<MoviePlayerPage> {
-  final cookieManager = WebViewCookieManager();
-  var loadingPercentage = 0;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Modify from here...
-  //   widget.controller.setNavigationDelegate(
-  //     NavigationDelegate(
-  //       onPageStarted: (url) {
-  //         setState(() {
-  //           loadingPercentage = 0;
-  //         });
-  //       },
-  //       onProgress: (progress) {
-  //         setState(() {
-  //           loadingPercentage = progress;
-  //         });
-  //       },
-  //       onPageFinished: (url) {
-  //         setState(() {
-  //           loadingPercentage = 100;
-  //         });
-  //       },
-  //     ),
-  //   );
-  //   // ...to here.
-  // }
+  late CustomVideoPlayerController _customVideoPlayerController;
+  bool isVideoLoading = true;
+  bool isError = false;
+  String errorMessage = '';
+  @override
+  void initState() {
+    super.initState();
+    initializaVideoPlayer();
+  }
 
   @override
   Widget build(BuildContext context) {
-    String videoUrl =
-        // 'https://www.youtube.com/shorts/NsMKvVdEPkw';
-        'https://iframe.mediadelivery.net/embed/182548/e941715e-7de1-4875-a42b-c52a982fa72c?autoplay=false';
-
-    String kExamplePage = '''
-
-<iframe src="$videoUrl"
-                        loading="mcini" style="border: none; position: absolute; top: 0; height: 50%; width: 100%;"
-                        allow="" allowfullscreen="true">
-                    </iframe>
-
-''';
-    // widget.controller.loadRequest(Uri.parse(widget.movie.videoUrl));
-    widget.controller.loadHtmlString(kExamplePage);
-    // widget.controller.loadRequest(
-    //   Uri.parse(videoUrl),
-    //   method: LoadRequestMethod.get,
-    // );
+    final Size deviceScreen = MediaQuery.of(context).size;
+    final myMovieData = widget.movie;
     return Scaffold(
-      appBar: AppBar(),
-      // body: Html(data: kExamplePage),
-      // body: WebViewWidget(controller: widget.controller),
-      body: Stack(
-        children: [
-          WebViewWidget(
-            controller: widget.controller, // MODIFY
-          ),
-          if (loadingPercentage < 100)
-            LinearProgressIndicator(
-              value: loadingPercentage / 100.0,
-            ),
-        ],
+      appBar: AppBar(
+        backgroundColor: AppColors.blackColor,
+        foregroundColor: AppColors.whiteColor,
+        elevation: 1,
       ),
+      backgroundColor: AppColors.blackColor,
+      // bottomNavigationBar: CustomNavigationBar(),
+      body: isVideoLoading
+          ? Center(
+              child: CircularProgressIndicator(
+                color: AppColors.whiteColor,
+              ),
+            )
+          : !isError
+              ? Column(
+                  children: [
+                    CustomVideoPlayer(
+                      customVideoPlayerController: _customVideoPlayerController,
+                    )
+                  ],
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'lib/assets/images/banner.png',
+                        width: deviceScreen.width,
+                        height: deviceScreen.height * 0.3,
+                        fit: BoxFit.fill,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'Unable to play video. An ERROR has occurred',
+                          // errorMessage,
+                          // widget.movie.videoUrl,
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: deviceScreen.width * 0.05,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Container(
+                          child: Text(
+                            myMovieData.description != ''
+                                ? myMovieData.description
+                                : 'No Description Available',
+                            style: TextStyle(
+                              color: AppColors.whiteColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          width: deviceScreen.width,
+                          color: AppColors.blueColor,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Go Back',
+                              style: TextStyle(
+                                  fontSize: deviceScreen.width * 0.05,
+                                  color: AppColors.whiteColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+    );
+  }
+
+  void initializaVideoPlayer() {
+    CachedVideoPlayerController cachedVideoPlayerController;
+    cachedVideoPlayerController =
+        // CachedVideoPlayerController.asset('lib/assets/videos/crabs.mp4')
+        CachedVideoPlayerController.network(
+            'https://iframe.mediadelivery.net/embed/182548/e941715e-7de1-4875-a42b-c52a982fa72c')
+          ..initialize()
+              .then((value) => setState(() {
+                    isVideoLoading = false;
+                  }))
+              .catchError((error) {
+            // Handle the error here
+            setState(() {
+              isVideoLoading = false;
+              isError = true;
+              errorMessage = error.toString();
+            });
+            print('Error initializing video player: $error');
+            print('VIDEO URL: ${widget.movie.videoUrl}');
+          });
+    _customVideoPlayerController = CustomVideoPlayerController(
+      context: context,
+      videoPlayerController: cachedVideoPlayerController,
+      customVideoPlayerSettings: const CustomVideoPlayerSettings(
+          // thumbnailWidget: Image.asset('lib/assets/images/banner.png'),
+          ),
     );
   }
 }

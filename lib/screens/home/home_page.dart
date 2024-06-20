@@ -74,7 +74,7 @@ class HomeView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(
-                    height: screenSize.width * 0.5,
+                    height: 300,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: latestMovies.length,
