@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:mcini/data/model/subscriber_model.dart';
-import 'package:mcini/screens_commons/profile_partials.dart';
+import 'package:mcini/screens/profile/profile_partials.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class ProfilePage extends StatelessWidget {
