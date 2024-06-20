@@ -16,6 +16,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool initialSwitchValue = false;
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
@@ -67,19 +68,22 @@ class _ProfilePageState extends State<ProfilePage> {
       size: iconSize,
     );
 
-    bool initialSwitchValue = false;
-
-    switchFunction() {
-      setState(() {
-        initialSwitchValue = !initialSwitchValue;
-      });
-      print('THE SWITCH BUTTON HAS BEEN CLICKED');
-    }
+    // switchFunction(bool newValue) {
+    //   setState(() {
+    //     initialSwitchValue = !newValue;
+    //   });
+    //   print('THE SWITCH BUTTON HAS BEEN CLICKED: $initialSwitchValue');
+    // }
 
     final switchToggle = Switch(
       value: initialSwitchValue,
-      onChanged: switchFunction(),
-      // activeColor: AppColors.blueColor,
+      onChanged: (value) {
+        setState(() {
+          initialSwitchValue = value;
+        });
+        print("INITIAL SWITCH VALUE: $value");
+      },
+      activeColor: AppColors.blueColor,
       thumbColor: initialSwitchValue
           ? MaterialStateProperty.all(AppColors.blueColor)
           : MaterialStateProperty.all(AppColors.whiteColor),
@@ -163,19 +167,19 @@ class _ProfilePageState extends State<ProfilePage> {
                             'Subscription status',
                             subscriptionIcon,
                             caretIcon,
-                            switchFunction),
+                            () => null),
                         ProfilePartials.subscriptionWidget(
                             deviceSize,
                             'Unsubscription',
                             unSubscriptionIcon,
                             switchToggle,
-                            switchFunction),
+                            () => null),
                         ProfilePartials.subscriptionWidget(
                             deviceSize,
                             'Watch History',
                             watchHistoryIcon,
                             caretIcon,
-                            switchFunction),
+                            () => null),
                       ],
                     ),
                   ),
