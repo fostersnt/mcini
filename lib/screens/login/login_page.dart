@@ -5,7 +5,7 @@ import 'package:mcini/utilities/app_colors.dart';
 import 'package:mcini/utilities/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.all(0),
           child: Stack(
             children: [
-              Container(
+              SizedBox(
                 width: deviceSize.width,
                 height: deviceSize.height,
                 child: Image.asset(
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Container(
+                    SizedBox(
                       width: deviceSize.width,
                       child: ElevatedButton(
                         style: ButtonStyle(

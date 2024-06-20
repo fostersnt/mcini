@@ -14,7 +14,7 @@ class ProfilePartials {
         children: [
           //PHONE NUMBER SECTION
           Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Text(
               label,
               style: TextStyle(
@@ -24,7 +24,7 @@ class ProfilePartials {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             color: AppColors.greySub,
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,6 +45,49 @@ class ProfilePartials {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget subscriptionWidget(Size screenSize, String label,
+      Widget leftWidget, Widget rightWidget, Function() myFunc) {
+    final double myFontSize = screenSize.width * 0.05;
+    const double myWidgetSize = 25.0;
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //PHONE NUMBER SECTION
+          Container(
+            padding: const EdgeInsets.all(10),
+            color: AppColors.greySub,
+            child: InkWell(
+              onTap: myFunc,
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  leftWidget,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        label,
+                        maxLines: 2,
+                        overflow: TextOverflow.fade,
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: myFontSize,
+                        ),
+                      ),
+                    ),
+                  ),
+                  rightWidget,
+                ],
+              ),
             ),
           ),
         ],

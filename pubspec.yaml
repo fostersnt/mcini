@@ -51,6 +51,9 @@ dependencies:
   webview_flutter: ^4.8.0
 
 
+  collection: any
+  webview_flutter_android: any
+  webview_flutter_wkwebview: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

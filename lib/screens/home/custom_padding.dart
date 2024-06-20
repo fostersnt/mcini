@@ -7,10 +7,10 @@ class CustomPadding extends StatelessWidget {
   final Size screenSize;
   final String category;
   const CustomPadding({
-    Key? key,
+    super.key,
     required this.screenSize,
     required this.category,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

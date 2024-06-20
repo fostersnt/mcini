@@ -4,8 +4,6 @@ import 'package:mcini/data/bloc/movies/movie_bloc.dart';
 import 'package:mcini/data/bloc/movies/movie_event.dart';
 import 'package:mcini/data/bloc/movies/movie_state.dart';
 import 'package:mcini/data/model/movie_model.dart';
-import 'package:mcini/data/provider/movie_provider.dart';
-import 'package:mcini/data/repository/movie_repository.dart';
 import 'package:mcini/screens/home/custom_padding.dart';
 import 'package:mcini/screens/home/hero_section.dart';
 import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
@@ -100,7 +98,7 @@ class HomeView extends StatelessWidget {
               body: Center(
                 child: Text(
                   error,
-                  style: TextStyle(fontSize: 30),
+                  style: const TextStyle(fontSize: 30),
                 ),
               ),
             );

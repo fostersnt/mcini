@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AppColors {
   //This class is purposely for defining the colors that would be used throughout the application

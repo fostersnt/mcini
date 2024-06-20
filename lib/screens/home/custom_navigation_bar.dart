@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mcini/data/model/subscriber_model.dart';
 import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/screens/profile/profile_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final Map<String, dynamic> subscriberModel;
-  CustomNavigationBar({super.key, required this.subscriberModel});
+  const CustomNavigationBar({super.key, required this.subscriberModel});
 
   @override
   State<CustomNavigationBar> createState() => _CustomNavigationBarState();
@@ -17,7 +16,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _pages = [
+    final List<Widget> pages = [
       // const HomePage(),
       const HomeView(),
       // Center(child: Text('Home')),
@@ -28,7 +27,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
     final Size deviceSize = MediaQuery.of(context).size;
     double iconSize = deviceSize.width * 0.08;
-    final List<BottomNavigationBarItem> _bottomNavBarItems = [
+    final List<BottomNavigationBarItem> bottomNavBarItems = [
       BottomNavigationBarItem(
         icon: Icon(
           Icons.home,
@@ -56,7 +55,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     ];
 
     return Scaffold(
-      body: _pages[selectedIndex],
+      body: pages[selectedIndex],
       bottomNavigationBar: Container(
         color: AppColors.bottomNavColor,
         height: 70,

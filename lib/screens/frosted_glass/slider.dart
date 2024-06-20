@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ImageSliderPage(),
+      home: const ImageSliderPage(),
       routes: {
-        '/profile': (context) => UserProfilePage(),
+        '/profile': (context) => const UserProfilePage(),
       },
     );
   }
 }
 
 class ImageSliderPage extends StatefulWidget {
+  const ImageSliderPage({super.key});
+
   @override
   _ImageSliderPageState createState() => _ImageSliderPageState();
 }
@@ -41,7 +45,7 @@ class _ImageSliderPageState extends State<ImageSliderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Slider'),
+        title: const Text('Image Slider'),
       ),
       body: PageView(
         controller: _pageController,
@@ -57,11 +61,13 @@ class _ImageSliderPageState extends State<ImageSliderPage> {
 }
 
 class UserProfilePage extends StatelessWidget {
+  const UserProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Profile'),
+        title: const Text('User Profile'),
       ),
       body: const Center(
         child: Text('This is the user profile page'),

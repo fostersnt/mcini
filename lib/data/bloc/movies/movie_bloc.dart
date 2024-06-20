@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mcini/data/bloc/movies/movie_event.dart';
 import 'package:mcini/data/bloc/movies/movie_state.dart';
-import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/data/repository/movie_repository.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {

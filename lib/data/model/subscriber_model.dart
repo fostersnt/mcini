@@ -45,9 +45,9 @@ class SubscriberModel {
   }
 
   static Future<Map<String, dynamic>> getSubscriber(String msisdn) async {
-    String base_url = IRepository.apiBaseURL;
+    String baseUrl = IRepository.apiBaseURL;
     String endpoint = 'user/login';
-    String url = "$base_url/$endpoint";
+    String url = "$baseUrl/$endpoint";
     bool isValidPhoneNumber = AppColors.validatePhoneNumber(msisdn);
 
     try {

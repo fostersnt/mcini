@@ -18,7 +18,7 @@ class HeroSection extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -46,7 +46,7 @@ class HeroSection extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
+          padding: const EdgeInsets.fromLTRB(10, 50, 0, 0),
           child: SizedBox(
             width: deviceSize.width * 0.8,
             // height: heroImageHeight * 0.3,
