@@ -1,12 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-// import 'package:appinio_video_player/appinio_video_player.dart';
-import 'package:appinio_video_player/appinio_video_player.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
-import 'package:mcini/screens/home/custom_navigation_bar.dart';
-import 'package:mcini/utilities/app_colors.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 class MoviePlayerPage extends StatefulWidget {
   final MovieModel movie;
@@ -20,135 +22,79 @@ class MoviePlayerPage extends StatefulWidget {
 }
 
 class _MoviePlayerPageState extends State<MoviePlayerPage> {
-  late CustomVideoPlayerController _customVideoPlayerController;
-  bool isVideoLoading = true;
-  bool isError = false;
-  String errorMessage = '';
+  late final WebViewController _controller;
+
   @override
   void initState() {
     super.initState();
-    initializaVideoPlayer();
+
+    late final PlatformWebViewControllerCreationParams params;
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      params = WebKitWebViewControllerCreationParams(
+        allowsInlineMediaPlayback: true,
+        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
+      );
+    } else {
+      params = const PlatformWebViewControllerCreationParams();
+    }
+
+    final WebViewController controller =
+        WebViewController.fromPlatformCreationParams(params);
+
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            debugPrint('WebView is loading (progress : $progress%)');
+          },
+          onPageStarted: (String url) {
+            debugPrint('Page started loading: $url');
+          },
+          onPageFinished: (String url) {
+            debugPrint('Page finished loading: $url');
+          },
+          onWebResourceError: (WebResourceError error) {
+            debugPrint('''
+Page resource error:
+  code: ${error.errorCode}
+  description: ${error.description}
+  errorType: ${error.errorType}
+  isForMainFrame: ${error.isForMainFrame}
+          ''');
+          },
+        ),
+      )
+      ..addJavaScriptChannel(
+        'Toaster',
+        onMessageReceived: (JavaScriptMessage message) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message.message)),
+          );
+        },
+      )
+      ..loadRequest(
+        Uri.parse('https://www.youtube.com/shorts/NsMKvVdEPkw'),
+      );
+
+    if (controller.platform is AndroidWebViewController) {
+      AndroidWebViewController.enableDebugging(true);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
+    }
+
+    _controller = controller;
   }
 
   @override
   Widget build(BuildContext context) {
-    final Size deviceScreen = MediaQuery.of(context).size;
-    final myMovieData = widget.movie;
     return Scaffold(
+      backgroundColor: Colors.green,
       appBar: AppBar(
-        backgroundColor: AppColors.blackColor,
-        foregroundColor: AppColors.whiteColor,
-        elevation: 1,
+        title: const Text('Flutter WebView example'),
       ),
-      backgroundColor: AppColors.blackColor,
-      // bottomNavigationBar: CustomNavigationBar(),
-      body: isVideoLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: AppColors.whiteColor,
-              ),
-            )
-          : !isError
-              ? Column(
-                  children: [
-                    CustomVideoPlayer(
-                      customVideoPlayerController: _customVideoPlayerController,
-                    )
-                  ],
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'lib/assets/images/banner.png',
-                        width: deviceScreen.width,
-                        height: deviceScreen.height * 0.3,
-                        fit: BoxFit.fill,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'Unable to play video. An ERROR has occurred',
-                          // errorMessage,
-                          // widget.movie.videoUrl,
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontSize: deviceScreen.width * 0.05,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: Container(
-                          child: Text(
-                            myMovieData.description != ''
-                                ? myMovieData.description
-                                : 'No Description Available',
-                            style: TextStyle(
-                              color: AppColors.whiteColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          width: deviceScreen.width,
-                          color: AppColors.blueColor,
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              'Go Back',
-                              style: TextStyle(
-                                  fontSize: deviceScreen.width * 0.05,
-                                  color: AppColors.whiteColor),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-    );
-  }
-
-  void initializaVideoPlayer() {
-    CachedVideoPlayerController cachedVideoPlayerController;
-    cachedVideoPlayerController =
-        // CachedVideoPlayerController.asset('lib/assets/videos/crabs.mp4')
-        CachedVideoPlayerController.network(widget.movie.videoUrl)
-          ..initialize()
-              .then((value) => setState(() {
-                    isVideoLoading = false;
-                  }))
-              .catchError((error) {
-            // Handle the error here
-            setState(() {
-              isVideoLoading = false;
-              isError = true;
-              errorMessage = error.toString();
-            });
-            print('Error initializing video player: $error');
-            print('VIDEO URL: ${widget.movie.videoUrl}');
-          });
-    _customVideoPlayerController = CustomVideoPlayerController(
-      context: context,
-      videoPlayerController: cachedVideoPlayerController,
-      customVideoPlayerSettings: const CustomVideoPlayerSettings(
-          // thumbnailWidget: Image.asset('lib/assets/images/banner.png'),
-          ),
+      body: WebViewWidget(controller: _controller),
     );
   }
 }
