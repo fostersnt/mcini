@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:mcini/screens/login/login_page.dart';
 
 import 'package:mcini/screens/profile/profile_partials.dart';
 import 'package:mcini/utilities/app_colors.dart';
@@ -193,6 +194,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: InkWell(
                     onTap: () {
                       print('YOU HAVE LOGGED OUT SUCCESSFULLY');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                      );
                     },
                     child: Row(
                       children: [
