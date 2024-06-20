@@ -83,10 +83,13 @@ class _ProfilePageState extends State<ProfilePage> {
         });
         print("INITIAL SWITCH VALUE: $value");
       },
-      activeColor: AppColors.blueColor,
-      thumbColor: initialSwitchValue
+      // activeColor: AppColors.blueColor,
+      trackColor: initialSwitchValue
           ? MaterialStateProperty.all(AppColors.blueColor)
-          : MaterialStateProperty.all(AppColors.whiteColor),
+          : MaterialStateProperty.all(AppColors.switchOffColor),
+      // trackOutlineColor: MaterialStateProperty.all(AppColors.blueColor),
+      thumbColor: MaterialStateProperty.all(AppColors.whiteColor),
+      // trackOutlineWidth: MaterialStateProperty.all(1),
     );
 
     return Scaffold(
