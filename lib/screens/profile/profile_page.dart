@@ -187,6 +187,33 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
+                //LOGOUT SECTION
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                  child: InkWell(
+                    onTap: () {
+                      print('YOU HAVE LOGGED OUT SUCCESSFULLY');
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.logout,
+                          color: AppColors.blueColor,
+                          size: 30,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Sign out',
+                            style: TextStyle(
+                                color: AppColors.whiteColor,
+                                fontSize: myFontSize),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
