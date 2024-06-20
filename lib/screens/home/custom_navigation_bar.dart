@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/subscriber_model.dart';
 import 'package:mcini/screens/home/home_page.dart';
-import 'package:mcini/screens_commons/profile_page.dart';
+import 'package:mcini/screens/profile/profile_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class CustomNavigationBar extends StatefulWidget {
