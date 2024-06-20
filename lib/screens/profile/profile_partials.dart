@@ -5,7 +5,7 @@ import 'package:mcini/utilities/app_colors.dart';
 class ProfilePartials {
   static Widget secttion(
       Size screenSize, String label, String labelValue, Widget myWidget) {
-    final double myFontSize = screenSize.width * 0.05;
+    final double myFontSize = screenSize.width * 0.045;
     const double myWidgetSize = 25.0;
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -54,7 +54,7 @@ class ProfilePartials {
 
   static Widget subscriptionWidget(Size screenSize, String label,
       Widget leftWidget, Widget rightWidget, Function() myFunc) {
-    final double myFontSize = screenSize.width * 0.05;
+    final double myFontSize = screenSize.width * 0.045;
     const double myWidgetSize = 25.0;
     return Padding(
       padding: const EdgeInsets.all(10),
