@@ -9,6 +9,7 @@ import 'package:mcini/utilities/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,

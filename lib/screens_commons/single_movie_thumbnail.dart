@@ -5,6 +5,7 @@ import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/movie/movie_player_page.dart';
 
 import 'package:mcini/utilities/app_colors.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class SingleMovieThumbnail extends StatelessWidget {
   const SingleMovieThumbnail(
@@ -26,6 +27,7 @@ class SingleMovieThumbnail extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => MoviePlayerPage(
+                  controller: WebViewController(),
                   movie: movieData,
                 ),
               ),
