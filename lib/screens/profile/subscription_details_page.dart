@@ -23,9 +23,16 @@ class SubscriptionDetailsPage extends StatelessWidget {
     );
 
     //DIVIDER
-    final Divider customDivider = Divider(
-      color: AppColors.greySub,
-      thickness: 2.2,
+    final Padding customDivider = Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+      child: Divider(
+        color: AppColors.greySub,
+        thickness: 2.2,
+      ),
+    );
+
+    const SizedBox customSizedBox = SizedBox(
+      width: 20,
     );
 
     return Scaffold(
@@ -62,9 +69,7 @@ class SubscriptionDetailsPage extends StatelessWidget {
                       Row(
                         children: [
                           subscriptionPlanIcon,
-                          const SizedBox(
-                            width: 20,
-                          ),
+                          customSizedBox,
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -112,7 +117,44 @@ class SubscriptionDetailsPage extends StatelessWidget {
                 //SUBSCRIPTION PLAN ENDS HERE
                 //DIVIDER
                 customDivider,
-                // Container(child: ,),
+
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.circle_outlined,
+                              color: AppColors.whiteColor,
+                            ),
+                            customSizedBox,
+                            Text(
+                              'Status',
+                              style: TextStyle(color: AppColors.whiteColor),
+                            ),
+                          ],
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: AppColors.blueColor,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: Text(
+                              'Active',
+                              style: TextStyle(color: AppColors.whiteColor),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                customDivider,
+                customSizedBox,
                 // Container(child: ,),
                 // Container(child: ,),
               ],
