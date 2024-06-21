@@ -22,8 +22,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       const HomeView(),
       // Center(child: Text('Home')),
       const Center(child: Text('Favorites')),
-      const Center(child: Text('Search')),
-      // const HomePageShimmerEffect(),
+      // const Center(child: Text('Search')),
+      const HomePageShimmerEffect(),
       ProfilePage(subscriberData: widget.subscriberModel),
     ];
 

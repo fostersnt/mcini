@@ -28,14 +28,37 @@ class HomePageShimmerEffect extends StatelessWidget {
               return Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildShimmerContainer(deviceSize),
-                    // SizedBox(width: deviceSize.width * 0.1),
-                    _buildShimmerContainer(deviceSize),
-                    // SizedBox(width: deviceSize.width * 0.1),
-                    // _buildShimmerContainer(deviceSize),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: deviceSize.width * 0.35,
+                            height: 20,
+                            color: AppColors.shimmerColor,
+                          ),
+                          Container(
+                            width: deviceSize.width * 0.3,
+                            height: 20,
+                            color: AppColors.shimmerColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildShimmerContainer(deviceSize),
+                        // SizedBox(width: deviceSize.width * 0.1),
+                        _buildShimmerContainer(deviceSize),
+                        // SizedBox(width: deviceSize.width * 0.1),
+                        // _buildShimmerContainer(deviceSize),
+                      ],
+                    ),
                   ],
                 ),
               );
