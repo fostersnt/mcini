@@ -28,96 +28,94 @@ class SubscriptionDetailsPage extends StatelessWidget {
       thickness: 2.2,
     );
 
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: AppColors.miniBlueColor,
+      appBar: AppBar(
         backgroundColor: AppColors.miniBlueColor,
-        appBar: AppBar(
-          backgroundColor: AppColors.miniBlueColor,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.whiteColor,
-            ),
-          ),
-          title: Text(
-            'Subscription Status',
-            style: TextStyle(
-              color: AppColors.blueColor,
-            ),
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.whiteColor,
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-          child: Container(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  //SUBSCRIPTION PLAN STARTS
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            subscriptionPlanIcon,
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Subscription Plan',
-                                  style: TextStyle(
-                                    color: AppColors.whiteColor,
-                                    fontSize: defaultFontSize,
-                                  ),
-                                ),
-                                Text(
-                                  'Daily',
-                                  style: TextStyle(
-                                    color: AppColors.blueColor,
-                                    fontSize: defaultFontSize,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print('DO YOU WANT TO CHANGE SUBSCRIPTION PLAN?');
-                          },
-                          child: Row(
+        title: Text(
+          'Subscription Status',
+          style: TextStyle(
+            color: AppColors.blueColor,
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+        child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                //SUBSCRIPTION PLAN STARTS
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          subscriptionPlanIcon,
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Change',
+                                'Subscription Plan',
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontSize: defaultFontSize,
+                                ),
+                              ),
+                              Text(
+                                'Daily',
                                 style: TextStyle(
                                   color: AppColors.blueColor,
                                   fontSize: defaultFontSize,
                                 ),
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              changeSubscriptionIcon,
                             ],
                           ),
+                        ],
+                      ),
+                      InkWell(
+                        onTap: () {
+                          print('DO YOU WANT TO CHANGE SUBSCRIPTION PLAN?');
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              'Change',
+                              style: TextStyle(
+                                color: AppColors.blueColor,
+                                fontSize: defaultFontSize,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            changeSubscriptionIcon,
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  //SUBSCRIPTION PLAN ENDS HERE
-                  //DIVIDER
-                  customDivider,
-                  // Container(child: ,),
-                  // Container(child: ,),
-                  // Container(child: ,),
-                ],
-              ),
+                ),
+                //SUBSCRIPTION PLAN ENDS HERE
+                //DIVIDER
+                customDivider,
+                // Container(child: ,),
+                // Container(child: ,),
+                // Container(child: ,),
+              ],
             ),
           ),
         ),

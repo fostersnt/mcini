@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mcini/data/bloc/movies/movie_bloc.dart';
 import 'package:mcini/data/provider/movie_provider.dart';
 import 'package:mcini/data/repository/movie_repository.dart';
+import 'package:mcini/screens/home/home_swipper.dart';
 import 'package:mcini/screens/login/login_page.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:mcini/utilities/app_colors.dart';
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> myImages = [
+      'lib/assets/images/banner.png',
+      'lib/assets/images/banner.png',
+      'lib/assets/images/banner.png',
+    ];
     return RepositoryProvider(
       create: (context) => MovieRepository(movieProvider: MovieProvider()),
       child: BlocProvider(
@@ -46,13 +52,13 @@ class MyApp extends StatelessWidget {
           // home: const MoviePlayerPage(),
           // home: const MovieCategoriesGroup(),
           home: Scaffold(
-            backgroundColor: AppColors.blackColor,
-            body: const LoginPage(),
-            // body: null,
-            // bottomNavigationBar: CustomNavigationBar(),
-          ),
-          // initialRoute: '/',
+              backgroundColor: AppColors.blackColor,
+              body: HomeSwipper(images: myImages)),
+          // body: const LoginPage(),
+          // body: null,
+          // bottomNavigationBar: CustomNavigationBar(),
         ),
+        // initialRoute: '/',
       ),
     );
   }
