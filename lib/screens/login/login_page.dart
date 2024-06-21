@@ -18,151 +18,151 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(0),
-          child: Stack(
-            children: [
-              SizedBox(
-                width: deviceSize.width,
-                height: deviceSize.height,
-                child: Image.asset(
-                  'lib/assets/images/banner.png',
-                  fit: BoxFit.cover,
-                ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(0),
+        child: Stack(
+          children: [
+            SizedBox(
+              width: deviceSize.width,
+              height: deviceSize.height,
+              child: Image.asset(
+                'lib/assets/images/banner.png',
+                fit: BoxFit.cover,
               ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: flag
-                          ? Container(
-                              child: CircularProgressIndicator(
-                                color: AppColors.blueColor,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: flag
+                        ? Container(
+                            child: CircularProgressIndicator(
+                              color: AppColors.blueColor,
+                            ),
+                          )
+                        : null,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: AppColors.blueColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: deviceSize.width * 0.08,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: TextField(
+                      controller: phoneNumberController,
+                      cursorColor: AppColors.blueColor,
+                      cursorWidth: 2,
+                      keyboardType: TextInputType.phone,
+                      style: TextStyle(color: AppColors.whiteColor),
+                      decoration: InputDecoration(
+                        fillColor: AppColors.txtFieldBgColor,
+                        filled: true,
+                        // labelText: 'Phone Number',
+                        hintText: 'Enter phone number',
+                        hintStyle: TextStyle(color: AppColors.whiteColor),
+                        border: OutlineInputBorder(
+                          // borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            color: AppColors.blueColor,
+                            width: 2,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.blueColor,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.blueColor,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: deviceSize.width,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          AppColors.blueColor, // Button background color
+                        ),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(5), // No rounded corners
+                          ),
+                        ),
+                      ),
+                      onPressed: () async {
+                        setState(() {
+                          flag = true;
+                        });
+                        String msisdn = phoneNumberController.text.trim();
+                        final data =
+                            await SubscriberModel.getSubscriber(msisdn);
+                        print(data);
+                        setState(() {
+                          flag = false;
+                        });
+                        if (data['response_status'] == 'success') {
+                          final subscriber =
+                              await LocalStorage.getStoredSubscriber();
+                          if (subscriber != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CustomNavigationBar(
+                                    subscriberModel: subscriber),
                               ),
-                            )
-                          : null,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: AppColors.blueColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: deviceSize.width * 0.08,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      child: TextField(
-                        controller: phoneNumberController,
-                        keyboardType: TextInputType.phone,
-                        style: TextStyle(color: AppColors.whiteColor),
-                        decoration: InputDecoration(
-                          fillColor: AppColors.txtFieldBgColor,
-                          filled: true,
-                          // labelText: 'Phone Number',
-                          hintText: 'Enter phone number',
-                          hintStyle: TextStyle(color: AppColors.whiteColor),
-                          border: OutlineInputBorder(
-                            // borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color: AppColors.blueColor,
-                              width: 2,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColors.blueColor,
-                              width: 1,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppColors.blueColor,
-                              width: 2,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: deviceSize.width,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            AppColors.blueColor, // Button background color
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  5), // No rounded corners
-                            ),
-                          ),
-                        ),
-                        onPressed: () async {
-                          setState(() {
-                            flag = true;
-                          });
-                          String msisdn = phoneNumberController.text.trim();
-                          final data =
-                              await SubscriberModel.getSubscriber(msisdn);
-                          print(data);
-                          setState(() {
-                            flag = false;
-                          });
-                          if (data['response_status'] == 'success') {
-                            final subscriber =
-                                await LocalStorage.getStoredSubscriber();
-                            if (subscriber != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CustomNavigationBar(
-                                      subscriberModel: subscriber),
-                                ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                AppColors.customSnackBar(
-                                    'Unable to retrieve subscriber data',
-                                    deviceSize,
-                                    true),
-                              );
-                            }
+                            );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               AppColors.customSnackBar(
-                                  data['response_message'], deviceSize, true),
+                                  'Unable to retrieve subscriber data',
+                                  deviceSize,
+                                  true),
                             );
                           }
-                        },
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: AppColors.whiteColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: deviceSize.width * 0.05,
-                          ),
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            AppColors.customSnackBar(
+                                data['response_message'], deviceSize, true),
+                          );
+                        }
+                      },
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: deviceSize.width * 0.05,
                         ),
                       ),
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
