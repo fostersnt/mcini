@@ -42,7 +42,7 @@ class SingleMovieThumbnail extends StatelessWidget {
                 // movieData.thumbnail,
                 fit: BoxFit.fill,
                 width: 160,
-                height: 200,
+                height: 180,
               ),
               Stack(
                 children: [
@@ -70,7 +70,7 @@ class SingleMovieThumbnail extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+          padding: const EdgeInsets.fromLTRB(3, 5, 0, 0),
           child: SizedBox(
             width: thumbnailWidth,
             child: Text(
@@ -80,7 +80,7 @@ class SingleMovieThumbnail extends StatelessWidget {
               style: TextStyle(
                   color: AppColors.whiteColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: deviceSize.width * 0.04),
+                  fontSize: deviceSize.width * 0.03),
             ),
           ),
         ),
