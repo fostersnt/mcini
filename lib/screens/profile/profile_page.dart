@@ -150,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 //SUBSCRIPTIONS SECTION
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 10),
                   child: Text(
                     'Subscriptions',
                     style: TextStyle(
@@ -208,23 +208,27 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.logout,
-                          color: AppColors.blueColor,
-                          size: 30,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 40, 10, 20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.logout,
+                            color: AppColors.blueColor,
+                            size: 30,
+                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(left: 10),
+                          // child:
+                          Text(
                             'Sign out',
                             style: TextStyle(
                                 color: AppColors.whiteColor,
                                 fontSize: myFontSize),
                           ),
-                        ),
-                      ],
+                          // ),
+                        ],
+                      ),
                     ),
                   ),
                 )
