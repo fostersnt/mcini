@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mcini/screens/login/login_page.dart';
 
 import 'package:mcini/screens/profile/profile_partials.dart';
+import 'package:mcini/screens/profile/subscription_details_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -170,8 +171,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             deviceSize,
                             'Subscription status',
                             subscriptionIcon,
-                            caretIcon,
-                            () => null),
+                            caretIcon, () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SubscriptionDetailsPage(),
+                            ),
+                          );
+                        }),
                         ProfilePartials.subscriptionWidget(
                             deviceSize,
                             'Unsubscription',
