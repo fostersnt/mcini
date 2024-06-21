@@ -61,6 +61,18 @@ class SubscriptionDetailsPage extends StatelessWidget {
       style: TextStyle(color: AppColors.whiteColor),
     );
 
+    final Icon unSubLeftWidget = Icon(
+      Icons.toggle_off_outlined,
+      color: AppColors.whiteColor,
+      size: 30,
+    );
+
+    final Icon unSubRightWidget = Icon(
+      Icons.toggle_off_outlined,
+      color: AppColors.whiteColor,
+      size: 30,
+    );
+
     return Scaffold(
       backgroundColor: AppColors.miniBlueColor,
       appBar: AppBar(
@@ -148,6 +160,9 @@ class SubscriptionDetailsPage extends StatelessWidget {
                 customRowWidget(
                     expiryDateLeftWidget, 'Expiry Date', expiryDateRightWidget),
                 customDivider,
+                customRowWidget(
+                    unSubLeftWidget, 'Unsubscription', unSubRightWidget),
+                customDivider,
               ],
             ),
           ),
@@ -170,7 +185,7 @@ class SubscriptionDetailsPage extends StatelessWidget {
                   width: 20,
                 ),
                 Text(
-                  'Status',
+                  label,
                   style: TextStyle(color: AppColors.whiteColor),
                 ),
               ],
