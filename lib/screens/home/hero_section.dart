@@ -48,7 +48,7 @@ class HeroSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(10, 50, 0, 0),
           child: SizedBox(
-            width: deviceSize.width * 0.8,
+            width: deviceSize.width * 0.5,
             // height: heroImageHeight * 0.3,
             child: SingleChildScrollView(
               child: Column(
@@ -61,9 +61,10 @@ class HeroSection extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: deviceSize.width * 0.05,
-                          fontWeight: FontWeight.bold),
+                        color: AppColors.whiteColor,
+                        fontSize: deviceSize.width * 0.06,
+                        // fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   Text(
@@ -72,7 +73,7 @@ class HeroSection extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: AppColors.whiteColor,
-                      fontSize: deviceSize.width * 0.04,
+                      fontSize: deviceSize.width * 0.03,
                     ),
                   ),
                   const SizedBox(
