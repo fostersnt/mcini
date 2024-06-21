@@ -30,8 +30,9 @@ class SubscriptionDetailsPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.blackColor,
+        backgroundColor: AppColors.miniBlueColor,
         appBar: AppBar(
+          backgroundColor: AppColors.miniBlueColor,
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -47,7 +48,6 @@ class SubscriptionDetailsPage extends StatelessWidget {
               color: AppColors.blueColor,
             ),
           ),
-          backgroundColor: AppColors.blackColor,
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),

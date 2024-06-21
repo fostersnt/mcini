@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.blackColor,
+        backgroundColor: AppColors.miniBlueColor,
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
@@ -106,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      backgroundColor: AppColors.blackColor,
+      backgroundColor: AppColors.miniBlueColor,
       body: SizedBox(
         width: deviceSize.width,
         height: deviceSize.height,

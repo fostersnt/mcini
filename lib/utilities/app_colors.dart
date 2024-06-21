@@ -12,6 +12,7 @@ class AppColors {
   static Color greyMain = const Color(0xff414141);
   static Color greySub = const Color(0xff4b4b4b);
   static Color switchOffColor = const Color(0xffdadada);
+  static Color miniBlueColor = const Color(0xff031115);
 
   static customSnackBar(String errorMessage, Size deviceSize, bool isError) {
     //SUCCESS ICON

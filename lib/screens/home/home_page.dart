@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       // appBar: AppBar(),
-      backgroundColor: AppColors.blackColor,
+      backgroundColor: AppColors.miniBlueColor,
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           if (state is MovieLoadingState) {
