@@ -84,6 +84,7 @@ class SubscriberModel {
       }
       return subscriberData;
     } catch (e) {
+      print('ERROR RESPONSE DATA: ${e.toString()}');
       return {
         'response_status': 'failed',
         'response_message': e.toString(),
