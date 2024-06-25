@@ -92,4 +92,26 @@ class AppColors {
     // msisdn.substring(0, 1);
     return finalOutcome;
   }
+
+  void showCustomModal(BuildContext context, String message, bool flag) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // title: Text('Modal Title'),
+          content: Text(message),
+          actions: <Widget>[
+            flag
+                ? TextButton(
+                    child: Text('Close'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                : const Text(''),
+          ],
+        );
+      },
+    );
+  }
 }
