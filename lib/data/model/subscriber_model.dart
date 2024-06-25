@@ -91,4 +91,37 @@ class SubscriberModel {
       };
     }
   }
+
+  String subscriptionPlanId(String msisdn, String plan) {
+    Map<String, dynamic> subscriptionPlans = {
+      "mtn_daily": "hjjh",
+      "mtn_weekly": "hjjh",
+      "at_daily": "hjjh",
+      "at_daily": "hjjh",
+    };
+    List<String> mtnPrefixes = ['024', '025', '054', '055'];
+    List<String> atPrefixes = ['026', '027', '056', '057'];
+
+    String network = '';
+    String prefix = msisdn.substring(3, 5);
+
+    if (mtnPrefixes.contains(prefix)) {
+      network = 'MTN';
+    } else if (atPrefixes.contains(prefix)) {}
+
+    return subscriptionPlans[plan];
+  }
+
+  // Future<bool> mtnSubscription() async {
+  //   String baseURL = IRepository.apiBaseURL;
+  //   String endpoint = '';
+  //   final data =
+  //   final requestBody = {
+  //     'msisdn': '',
+  //     'network': '',
+  //     'plan_id': '',
+  //   };
+  //   final data = await http.get(Uri.parse('$baseURL/$endpoint'));
+  //   return true;
+  // }
 }

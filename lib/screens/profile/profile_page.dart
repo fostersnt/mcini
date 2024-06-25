@@ -87,14 +87,15 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = await LocalStorage.getStoredSubscriber();
         if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'active') {
-          AppColors.showCustomModal(
-              context, unsubscriptionModalText, closeModalFlag);
+          AppColors.showCustomModal(context, unsubscriptionModalText);
           /*String? result = await AppColors.showsubscriptionPlanModal(context);
           if (result != null) {
             print('SUBSCRIPTION PLAN: $result');
           }*/
           print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
           setState(() {
+            Future.delayed(Duration(seconds: 3));
+            closeModalFlag = true;
             initialSwitchValue = value;
           });
         }

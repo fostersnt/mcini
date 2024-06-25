@@ -93,7 +93,7 @@ class AppColors {
     return finalOutcome;
   }
 
-  static void showCustomModal(BuildContext context, String message, bool flag) {
+  static void showCustomModal(BuildContext context, String message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -115,23 +115,19 @@ class AppColors {
                 const SizedBox(
                   height: 20,
                 ),
-                !flag
-                    ? CircularProgressIndicator(
-                        color: AppColors.blueColor,
-                      )
-                    : Container(),
+                CircularProgressIndicator(
+                  color: AppColors.blueColor,
+                ),
               ],
             ),
           ),
           actions: <Widget>[
-            flag
-                ? TextButton(
-                    child: const Text('Close'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                : const Text(''),
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ],
         );
       },
