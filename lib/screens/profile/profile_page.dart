@@ -21,6 +21,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   bool initialSwitchValue = false;
   bool closeModalFlag = false;
+  String unsubscriptionModalText = 'Please wait...';
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +87,13 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = await LocalStorage.getStoredSubscriber();
         if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'active') {
-          // AppColors.showCustomModal(context, 'Please wait...', closeModalFlag);
-          String? result = await AppColors.showsubscriptionPlanModal(context);
+          AppColors.showCustomModal(
+              context, unsubscriptionModalText, closeModalFlag);
+          /*String? result = await AppColors.showsubscriptionPlanModal(context);
           if (result != null) {
             print('SUBSCRIPTION PLAN: $result');
-          }
+          }*/
+          print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
           setState(() {
             initialSwitchValue = value;
           });
