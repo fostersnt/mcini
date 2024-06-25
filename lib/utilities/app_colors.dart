@@ -148,7 +148,8 @@ class AppColors {
           ),
           title: const Text('Subscription Plan'),
           content: Container(
-            height: MediaQuery.of(context).size.width * 0.2,
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -157,14 +158,33 @@ class AppColors {
                     Navigator.of(context).pop('daily');
                   },
                   child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: AppColors.blueColor,
+                      ),
+                    ),
                     child: const Text("Daily Plan"),
                   ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.of(context).pop('weekly');
                   },
                   child: Container(
+                    padding: const EdgeInsets.all(20),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 1,
+                        color: AppColors.blueColor,
+                      ),
+                    ),
                     child: const Text("Weekly Plan"),
                   ),
                 ),
