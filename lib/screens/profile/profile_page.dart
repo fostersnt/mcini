@@ -86,7 +86,11 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = await LocalStorage.getStoredSubscriber();
         if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'active') {
-          AppColors.showCustomModal(context, 'Please wait...', closeModalFlag);
+          // AppColors.showCustomModal(context, 'Please wait...', closeModalFlag);
+          String? result = await AppColors.showsubscriptionPlanModal(context);
+          if (result != null) {
+            print('SUBSCRIPTION PLAN: $result');
+          }
           setState(() {
             initialSwitchValue = value;
           });

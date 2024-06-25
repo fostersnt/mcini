@@ -137,4 +137,65 @@ class AppColors {
       },
     );
   }
+
+  static Future<String?> showsubscriptionPlanModal(BuildContext context) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+          title: const Text('Subscription Plan'),
+          content: Container(
+            height: MediaQuery.of(context).size.width * 0.2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop('daily');
+                  },
+                  child: Container(
+                    child: const Text("Daily Plan"),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop('weekly');
+                  },
+                  child: Container(
+                    child: const Text("Weekly Plan"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // actions: <Widget>[
+          //   Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       InkWell(
+          //         onTap: () {
+          //           Navigator.of(context).pop('Daily Plan');
+          //         },
+          //         child: Container(
+          //           child: const Text("Daily Plan"),
+          //         ),
+          //       ),
+          //       InkWell(
+          //         onTap: () {
+          //           Navigator.of(context).pop('Weekly Plan');
+          //         },
+          //         child: Container(
+          //           child: const Text("Weekly Plan"),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ],
+        );
+      },
+    );
+  }
 }
