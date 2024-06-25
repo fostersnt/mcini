@@ -5,6 +5,7 @@ import 'package:mcini/screens/login/login_page.dart';
 import 'package:mcini/screens/profile/profile_partials.dart';
 import 'package:mcini/screens/profile/subscription_details_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
+import 'package:mcini/utilities/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   final Map<String, dynamic> subscriberData;
@@ -19,6 +20,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool initialSwitchValue = false;
+  bool closeModalFlag = false;
+
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
@@ -79,10 +82,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
     final switchToggle = Switch(
       value: initialSwitchValue,
-      onChanged: (value) {
-        setState(() {
-          initialSwitchValue = value;
-        });
+      onChanged: (value) async {
+        final subscriberData = await LocalStorage.getStoredSubscriber();
+        if (subscriberData != null &&
+            subscriberData['subscription_status'].toLowerCase() == 'active') {
+          AppColors.showCustomModal(context, 'Please wait...', closeModalFlag);
+          setState(() {
+            initialSwitchValue = value;
+          });
+        }
         print("INITIAL SWITCH VALUE: $value");
       },
       // activeColor: AppColors.blueColor,

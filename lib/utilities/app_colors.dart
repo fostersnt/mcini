@@ -93,17 +93,40 @@ class AppColors {
     return finalOutcome;
   }
 
-  void showCustomModal(BuildContext context, String message, bool flag) {
+  static void showCustomModal(BuildContext context, String message, bool flag) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           // title: Text('Modal Title'),
-          content: Text(message),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+          backgroundColor: AppColors.whiteColor,
+          content: Container(
+            height: MediaQuery.of(context).size.height * 0.2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  message,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                !flag
+                    ? CircularProgressIndicator(
+                        color: AppColors.blueColor,
+                      )
+                    : Container(),
+              ],
+            ),
+          ),
           actions: <Widget>[
             flag
                 ? TextButton(
-                    child: Text('Close'),
+                    child: const Text('Close'),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
