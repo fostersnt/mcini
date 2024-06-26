@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:mcini/utilities/app_colors.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MoviePlayerPage extends StatefulWidget {
@@ -27,38 +28,37 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: AppColors.blackColor,
       appBar: AppBar(
         title: Text('Video Player'),
+        backgroundColor: AppColors.blackColor,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: AppColors.whiteColor,
+          ),
+        ),
       ),
       body: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                height: deviceSize.width + 10,
-                child: Card(
-                  elevation: 4.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: SizedBox(
-                    width: deviceSize.width,
-                    height: 300,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: WebViewWidget(
-                        controller: _controller,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              if (loadingPercentage < 100)
-                LinearProgressIndicator(
-                  value: loadingPercentage / 100.0,
-                ),
-            ],
+          // Stack(
+          //   children: [
+          Container(
+            height: deviceSize.width,
+            width: deviceSize.width,
+            child: WebViewWidget(
+              controller: _controller,
+            ),
           ),
+          if (loadingPercentage < 100)
+            LinearProgressIndicator(
+              value: loadingPercentage / 100.0,
+            ),
+          // ],
+          // ),
         ],
       ),
     );

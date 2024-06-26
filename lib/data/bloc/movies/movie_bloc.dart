@@ -12,14 +12,16 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       emit(MovieLoadingState());
       String error = '';
       try {
-        final myMovies = await movieRepository.getMovies();
-        // print('HAHAHAHA ${myMovies}');
+        if (state is! MovieSuccessfulState) {
+          final myMovies = await movieRepository.getMovies();
+          // print('HAHAHAHA ${myMovies}');
 
-        if (myMovies.isNotEmpty) {
-          emit(MovieSuccessfulState(movies: myMovies));
-        } else {
-          error = "No movies available";
-          emit(MovieErrorState(errorMessage: error));
+          if (myMovies.isNotEmpty) {
+            emit(MovieSuccessfulState(movies: myMovies));
+          } else {
+            error = "No movies available";
+            emit(MovieErrorState(errorMessage: error));
+          }
         }
       } catch (e) {
         // error = e.toString();
