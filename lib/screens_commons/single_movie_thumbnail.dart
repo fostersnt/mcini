@@ -31,16 +31,6 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse(widget.movieData.thumbnail ?? ''));
-
-    // if (widget.movieData.thumbnail != null) {
-    //   _controller = WebViewController()
-    //     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    //     ..loadRequest(Uri.parse(widget.movieData.thumbnail ?? ''));
-    // } else {
-    //   _controller = WebViewController()
-    //     ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    //     ..loadFlutterAsset('lib/assets/images/banner.png');
-    // }
   }
 
   @override
