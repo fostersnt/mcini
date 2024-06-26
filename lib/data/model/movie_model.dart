@@ -3,12 +3,47 @@ class MovieModel {
 
   MovieModel({
     required this.id,
-    required this.title,
-    required this.description,
-    required this.thumbnail,
-    required this.videoUrl,
-    required this.collectionName,
+    this.title,
+    this.description,
+    this.thumbnail,
+    this.videoUrl,
+    this.collectionName,
   });
+
+  // final List<MovieModel> movies = [
+  //   MovieModel(
+  //     id: 1,
+  //     title: 'title',
+  //     description: 'description',
+  //     thumbnail: 'thumbnail',
+  //     videoUrl: 'videoUrl',
+  //     collectionName: 'c1',
+  //   ),
+  //   MovieModel(
+  //     id: 2,
+  //     title: 'title',
+  //     description: 'description',
+  //     thumbnail: 'thumbnail',
+  //     videoUrl: 'videoUrl',
+  //     collectionName: 'c4',
+  //   ),
+  //   MovieModel(
+  //     id: 3,
+  //     title: 'title',
+  //     description: 'description',
+  //     thumbnail: 'thumbnail',
+  //     videoUrl: 'videoUrl',
+  //     collectionName: 'c2',
+  //   ),
+  //   MovieModel(
+  //     id: 4,
+  //     title: 'title',
+  //     description: 'description',
+  //     thumbnail: 'thumbnail',
+  //     videoUrl: 'videoUrl',
+  //     collectionName: 'c4',
+  //   ),
+  // ];
 
   String singleMovieEndpoint(int movieId) {
     return "$allMoviesEndpoint/$movieId";
@@ -23,11 +58,11 @@ class MovieModel {
   }
 
   final int id;
-  final String title;
-  final String description;
-  final String thumbnail;
-  final String videoUrl;
-  final String collectionName;
+  final String? title;
+  final String? description;
+  final String? thumbnail;
+  final String? videoUrl;
+  final String? collectionName;
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(

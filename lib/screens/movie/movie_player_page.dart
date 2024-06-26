@@ -20,7 +20,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
     // Initialize the WebViewController
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(widget.movie.videoUrl));
+      ..loadRequest(Uri.parse(widget.movie.videoUrl ?? ''));
   }
 
   @override

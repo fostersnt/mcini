@@ -20,17 +20,18 @@ class MovieProvider extends IRepository {
       final mainData = jsonData['data'];
       // print(mainData);
       if (mainData.isNotEmpty) {
-        // print("MY MOVIES DATA RECENT: $jsonData");
         for (var i = 0; i < mainData.length; i++) {
+          print("MY MOVIES DATA RECENT ==== ${mainData[9]}");
           MovieModel myCurrentMovie = MovieModel(
             id: mainData[i]['id'],
-            title: mainData[i]['title'] ?? '',
-            description: mainData[i]['description'] ?? '',
-            thumbnail: mainData[i]['default_thumbnail_filename'] ?? '',
-            videoUrl: mainData[i]['video_url'] ?? '',
-            collectionName: mainData[i]['collection_name'] ?? '',
+            title: mainData[i]['title'],
+            description: mainData[i]['description'],
+            thumbnail: mainData[i]['default_thumbnail_filename'],
+            videoUrl: mainData[i]['video_url'],
+            collectionName: mainData[i]['collection_name'],
           );
           movies.add(myCurrentMovie);
+          // break;
         }
       }
     }

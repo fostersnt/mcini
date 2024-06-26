@@ -8,6 +8,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   MovieBloc({required this.movieRepository}) : super(MovieInitialState()) {
     //FETCHING ALL MOVIES
     on<MovieEvent>((event, emit) async {
+      // print('CURRENT STATE IS: $state');
       emit(MovieLoadingState());
       String error = '';
       try {
@@ -21,8 +22,8 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
           emit(MovieErrorState(errorMessage: error));
         }
       } catch (e) {
-        error = e.toString();
-        emit(MovieErrorState(errorMessage: error));
+        // error = e.toString();
+        emit(MovieErrorState(errorMessage: 'SORRY'));
         print('ERROR MESSAGE === $error');
         //Make an implementation to send error message to API
       }
