@@ -83,13 +83,13 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
                 child: Card(
                   elevation: 4.0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   child: SizedBox(
                     // width: deviceSize.width,
                     height: 100,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(0),
+                      borderRadius: BorderRadius.circular(5),
                       child: WebViewWidget(
                         controller: _controller,
                       ),
