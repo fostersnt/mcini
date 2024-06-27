@@ -92,36 +92,80 @@ class SubscriberModel {
     }
   }
 
-  String subscriptionPlanId(String msisdn, String plan) {
-    Map<String, dynamic> subscriptionPlans = {
-      "mtn_daily": "hjjh",
-      "mtn_weekly": "hjjh",
-      "at_daily": "hjjh",
-      "at_weekly": "hjjh",
-    };
+  static String networkType(String msisdn) {
     List<String> mtnPrefixes = ['024', '025', '054', '055'];
     List<String> atPrefixes = ['026', '027', '056', '057'];
 
     String network = '';
     String prefix = msisdn.substring(3, 5);
 
-    if (mtnPrefixes.contains(prefix)) {
-      network = 'MTN';
-    } else if (atPrefixes.contains(prefix)) {}
-
-    return subscriptionPlans[plan];
+    if (mtnPrefixes.contains('0$prefix')) {
+      network = 'mtn';
+    } else if (atPrefixes.contains('0$prefix')) {
+      network = 'at';
+    } else {
+      network = '';
+    }
+    return network;
   }
 
-  // Future<bool> mtnSubscription() async {
-  //   String baseURL = IRepository.apiBaseURL;
-  //   String endpoint = '';
-  //   final data =
-  //   final requestBody = {
-  //     'msisdn': '',
-  //     'network': '',
-  //     'plan_id': '',
-  //   };
-  //   final data = await http.get(Uri.parse('$baseURL/$endpoint'));
-  //   return true;
-  // }
+  static Future<bool> subscriptionPlanId(
+      String msisdn, String subscription_plan_name) async {
+    Map<String, dynamic> subscriptionPlans = {
+      "mtn_daily": "hjjh",
+      "mtn_weekly": "hjjh",
+      "at_daily": "hjjh",
+      "at_weekly": "hjjh",
+    };
+
+    String main_subscription_plan_id = '';
+    String main_subscription_plan_type = subscription_plan_name.toLowerCase();
+    bool susbcriptionApiResult = false;
+
+    String plan = '';
+
+    String network = networkType(msisdn).toLowerCase();
+
+    if (network != '') {
+      main_subscription_plan_id =
+          subscriptionPlans['${network}_${main_subscription_plan_type}'];
+      if (network == 'mtn' && main_subscription_plan_type == 'daily') {
+        mtnSubscription(msisdn, true);
+      } else if (network == 'mtn' && main_subscription_plan_type == 'weekly') {
+        mtnSubscription(msisdn, false);
+      } else if (network == 'at' && main_subscription_plan_type == 'daily') {
+        atSubscription(msisdn, true);
+      } else if (network == 'at' && main_subscription_plan_type == 'weekly') {
+        atSubscription(msisdn, false);
+      } else {}
+    }
+
+    return susbcriptionApiResult;
+  }
+
+  static mtnSubscription(String msisdn, bool isDailyPlan) async {
+    String baseURL = IRepository.apiBaseURL;
+    String endpoint = '';
+    // final data =
+    // final requestBody = {
+    //   'msisdn': '',
+    //   'network': '',
+    //   'plan_id': '',
+    // };
+    // final data = await http.get(Uri.parse('$baseURL/$endpoint'));
+    return true;
+  }
+
+  static atSubscription(String msisdn, bool isDailyPlan) async {
+    String baseURL = IRepository.apiBaseURL;
+    String endpoint = '';
+    // final data =
+    // final requestBody = {
+    //   'msisdn': '',
+    //   'network': '',
+    //   'plan_id': '',
+    // };
+    // final data = await http.get(Uri.parse('$baseURL/$endpoint'));
+    return true;
+  }
 }
