@@ -20,12 +20,28 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool initialSwitchValue = false;
   bool closeModalFlag = false;
   String subscriptionModalText = 'Please wait...';
+  Map<String, dynamic> userData = {};
+
+  // void init() {
+  //   super.initState();
+  //   fetchData();
+  // }
+
+  // fetchData() async {
+  //   final data = await LocalStorage.getStoredSubscriber();
+  //   if (data != null) {
+  //     userData = data;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    bool initialSwitchValue = widget.subscriberData.isNotEmpty &&
+            widget.subscriberData['subscription_status'] == 'active'
+        ? true
+        : false;
     final Size deviceSize = MediaQuery.of(context).size;
     final double myFontSize = deviceSize.width * 0.05;
     const double iconSize = 25.0;
@@ -81,13 +97,23 @@ class _ProfilePageState extends State<ProfilePage> {
     //   });
     //   print('THE SWITCH BUTTON HAS BEEN CLICKED: $initialSwitchValue');
     // }
+    data() async {
+      await LocalStorage.getStoredSubscriber();
+    }
 
     final switchToggle = Switch(
       value: initialSwitchValue,
       onChanged: (value) async {
         final subscriberData = await LocalStorage.getStoredSubscriber();
-        if (subscriberData != null &&
-            subscriberData['subscription_status'].toLowerCase() == 'inactive') {
+        print('SSSSSSSS ===== $subscriberData');
+        if (initialSwitchValue == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            AppColors.customSnackBar(
+                'Do you want to unsubscribe?', deviceSize, false),
+          );
+        } else if (subscriberData != null &&
+            subscriberData['subscription_status'].toLowerCase() == 'inactive' &&
+            initialSwitchValue == false) {
           String? planName = await AppColors.showsubscriptionPlanModal(context);
           if (planName != null) {
             print('SUBSCRIPTION PLAN: $planName');
@@ -132,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         subscriberData['msisdn']);
                 Navigator.of(context).pop();
 
-                if (subscriptionStatus.toLowerCase() == 'active') {
+                if (subscriptionStatus.toLowerCase() == 'inactive') {
                   setState(() {
                     initialSwitchValue = true;
                   });
@@ -162,7 +188,6 @@ class _ProfilePageState extends State<ProfilePage> {
           }
           print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
         } else {
-          print("INITIAL SWITCH VALUE: $value");
           ScaffoldMessenger.of(context).showSnackBar(
             AppColors.customSnackBar(
                 'You have no active subscription', deviceSize, true),
