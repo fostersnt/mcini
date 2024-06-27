@@ -158,9 +158,9 @@ class SubscriptionDetailsPage extends StatelessWidget {
                 customRowWidget(
                     expiryDateLeftWidget, 'Expiry Date', expiryDateRightWidget),
                 customDivider,
-                customRowWidget(
-                    unSubLeftWidget, 'Unsubscription', unSubRightWidget),
-                customDivider,
+                // customRowWidget(
+                //     unSubLeftWidget, 'Unsubscription', unSubRightWidget),
+                // customDivider,
               ],
             ),
           ),
