@@ -93,8 +93,10 @@ class AppColors {
     return finalOutcome;
   }
 
-  static void showCustomModal(BuildContext context, String message) {
+  static void showCustomModal(BuildContext context, String message,
+      {bool isDismissible = false}) {
     showDialog(
+      barrierDismissible: isDismissible,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -145,8 +147,10 @@ class AppColors {
     );
   }
 
-  static Future<String?> showsubscriptionPlanModal(BuildContext context) {
+  static Future<String?> showsubscriptionPlanModal(BuildContext context,
+      {bool isDismissible = true}) {
     return showDialog<String>(
+      barrierDismissible: isDismissible,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(

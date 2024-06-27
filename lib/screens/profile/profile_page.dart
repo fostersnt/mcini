@@ -88,13 +88,13 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = await LocalStorage.getStoredSubscriber();
         if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'inactive') {
-          String? plan_name =
+          String? planName =
               await AppColors.showsubscriptionPlanModal(context);
-          if (plan_name != null) {
-            print('SUBSCRIPTION PLAN: $plan_name');
+          if (planName != null) {
+            print('SUBSCRIPTION PLAN: $planName');
             AppColors.showCustomModal(context, subscriptionModalText);
             final subscriptionCall = await SubscriberModel.initiateSubscription(
-                subscriberData['msisdn'], plan_name);
+                subscriberData['msisdn'], planName);
             if (subscriptionCall) {
               //   setState(() {
               //   Future.delayed(const Duration(seconds: 3));

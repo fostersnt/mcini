@@ -110,8 +110,8 @@ class SubscriberModel {
   }
 
   static Future<bool> initiateSubscription(
-      String msisdn, String subscription_plan_name) async {
-    String main_subscription_plan_type = subscription_plan_name.toLowerCase();
+      String msisdn, String subscriptionPlanName) async {
+    String mainSubscriptionPlanType = subscriptionPlanName.toLowerCase();
 
     bool susbcriptionApiResult = false;
 
@@ -121,13 +121,13 @@ class SubscriberModel {
 
     if (network != '') {
       if (network == 'mtn' &&
-          (main_subscription_plan_type == 'daily' ||
-              main_subscription_plan_type == 'weekly')) {
+          (mainSubscriptionPlanType == 'daily' ||
+              mainSubscriptionPlanType == 'weekly')) {
         susbcriptionApiResult =
             await mtnSubscription(msisdn, isDailyPlan: true);
       } else if (network == 'at' &&
-          (main_subscription_plan_type == 'daily' ||
-              main_subscription_plan_type == 'weekly')) {
+          (mainSubscriptionPlanType == 'daily' ||
+              mainSubscriptionPlanType == 'weekly')) {
         susbcriptionApiResult = await atSubscription(msisdn, true);
       } else {
         susbcriptionApiResult = false;
@@ -141,7 +141,7 @@ class SubscriberModel {
       {bool isDailyPlan = true}) async {
     String dailyPlanId = '9915310034';
     String weeklyPlanId = '9915310035';
-    bool final_result = false;
+    bool finalResult = false;
 
     String baseURL = IRepository.apiBaseURL;
     String endpoint = 'mtn/subscription';
@@ -164,21 +164,26 @@ class SubscriberModel {
         final jsonResponse = jsonDecode(response.body);
         if (jsonResponse['success'] == 'true') {
           final mainData = jsonResponse['data'];
-          final_result = true;
-          print('SUBSCRIPTION DATA FROM API: $mainData');
+          if (mainData != null) {
+            finalResult = true;
+            print('SUBSCRIPTION DATA FROM API: $mainData');
+          } else {
+            finalResult = false;
+            print('SUBSCRIPTION RESPONSE BODY: $jsonResponse');
+          }
         } else {
-          final_result = false;
+          finalResult = false;
           print('SUBSCRIPTION REQUEST FAILED');
         }
       } else {
-        final_result = false;
+        finalResult = false;
         print('FAILED TO REACH SUBSCRIPTION API ==== ${response.statusCode}');
       }
     } catch (e) {
-      final_result = false;
+      finalResult = false;
       print('SUBSCRIPTION REQUEST ERROR: ${e.toString()}');
     }
-    return final_result;
+    return finalResult;
   }
 
   static Future<bool> atSubscription(String msisdn, bool isDailyPlan) async {
@@ -197,5 +202,26 @@ class SubscriberModel {
   static Future<Map<String, dynamic>> subscriptionCallBack(msisdn) async {
     final requestBody = {'msisdn': msisdn};
     return {'': ''};
+  }
+
+  static Future<bool> subscriptionStatus(String msisdn) async {
+    const String baseUrl = IRepository.apiBaseURL;
+    const String endpoint = 'movies/subscriptions';
+    final Map<String, dynamic> requestBody = {'msisdn': msisdn};
+    String status = '';
+    bool outcome = false;
+    try {
+      final response =
+          await http.post(Uri.parse('$baseUrl/$endpoint'), body: requestBody);
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        final mainData = jsonResponse['data'];
+        status = mainData['subscription_status'];
+        outcome = await LocalStorage.updateStoredSubscriber(status);
+      }
+    } catch (e) {
+      outcome = false;
+    }
+    return outcome;
   }
 }

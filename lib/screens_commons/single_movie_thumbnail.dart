@@ -77,7 +77,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
               //   width: 160,
               //   height: 180,
               // ),
-              Container(
+              SizedBox(
                 width: deviceSize.width * 0.4,
                 height: deviceSize.width * 0.4 + 20,
                 child: Card(
