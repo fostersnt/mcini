@@ -90,14 +90,14 @@ class _ProfilePageState extends State<ProfilePage> {
           String? result = await AppColors.showsubscriptionPlanModal(context);
           if (result != null) {
             print('SUBSCRIPTION PLAN: $result');
+            AppColors.showCustomModal(context, subscriptionModalText);
+            setState(() {
+              Future.delayed(const Duration(seconds: 3));
+              closeModalFlag = true;
+              initialSwitchValue = value;
+            });
           }
-          AppColors.showCustomModal(context, subscriptionModalText);
           print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
-          setState(() {
-            Future.delayed(const Duration(seconds: 3));
-            closeModalFlag = true;
-            initialSwitchValue = value;
-          });
         } else {
           print("INITIAL SWITCH VALUE: $value");
           ScaffoldMessenger.of(context).showSnackBar(
