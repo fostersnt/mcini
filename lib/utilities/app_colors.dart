@@ -100,7 +100,7 @@ class AppColors {
         return AlertDialog(
           // title: Text('Modal Title'),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-          backgroundColor: AppColors.whiteColor,
+          backgroundColor: AppColors.greyMain,
           content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             child: Column(
@@ -110,7 +110,8 @@ class AppColors {
                 Text(
                   message,
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.04),
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      color: AppColors.whiteColor),
                 ),
                 const SizedBox(
                   height: 20,
@@ -122,11 +123,21 @@ class AppColors {
             ),
           ),
           actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 1, color: AppColors.blueColor),
+              ),
+              child: TextButton(
+                child: Text(
+                  'Close',
+                  style: TextStyle(
+                    color: AppColors.whiteColor,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
           ],
         );
@@ -139,52 +150,64 @@ class AppColors {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: AppColors.greyMain,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
           ),
-          title: const Text('Subscription Plan'),
+          title: Text(
+            'Choose a Plan',
+            style: TextStyle(color: AppColors.whiteColor),
+          ),
           content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.height * 0.2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop('daily');
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: AppColors.blueColor,
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop('daily');
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: AppColors.blueColor,
+                        ),
+                      ),
+                      child: Text(
+                        "Daily Subscription",
+                        style: TextStyle(color: AppColors.whiteColor),
                       ),
                     ),
-                    child: const Text("Daily Plan"),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop('weekly');
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1,
-                        color: AppColors.blueColor,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop('weekly');
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          color: AppColors.blueColor,
+                        ),
+                      ),
+                      child: Text(
+                        "Weekly Subscription",
+                        style: TextStyle(color: AppColors.whiteColor),
                       ),
                     ),
-                    child: const Text("Weekly Plan"),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           // actions: <Widget>[
