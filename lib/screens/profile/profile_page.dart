@@ -94,12 +94,17 @@ class _ProfilePageState extends State<ProfilePage> {
           }*/
           print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
           setState(() {
-            Future.delayed(Duration(seconds: 3));
+            Future.delayed(const Duration(seconds: 3));
             closeModalFlag = true;
             initialSwitchValue = value;
           });
+        } else {
+          print("INITIAL SWITCH VALUE: $value");
+          ScaffoldMessenger.of(context).showSnackBar(
+            AppColors.customSnackBar(
+                'You have no active subscription', deviceSize, true),
+          );
         }
-        print("INITIAL SWITCH VALUE: $value");
       },
       // activeColor: AppColors.blueColor,
       trackColor: initialSwitchValue
@@ -191,7 +196,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SubscriptionDetailsPage(),
+                              builder: (context) =>
+                                  const SubscriptionDetailsPage(),
                             ),
                           );
                         }),

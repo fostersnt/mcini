@@ -30,7 +30,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
     return Scaffold(
       backgroundColor: AppColors.blackColor,
       appBar: AppBar(
-        title: Text('Video Player'),
+        title: const Text('Video Player'),
         backgroundColor: AppColors.blackColor,
         leading: InkWell(
           onTap: () {
@@ -46,7 +46,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
         children: [
           // Stack(
           //   children: [
-          Container(
+          SizedBox(
             height: deviceSize.width,
             width: deviceSize.width,
             child: WebViewWidget(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/widgets.dart';
 import 'package:mcini/screens/login/login_page.dart';
 
 class HomeSwipper extends StatelessWidget {

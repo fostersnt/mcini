@@ -5,6 +5,7 @@ import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/movie/movie_player_page.dart';
 
 import 'package:mcini/utilities/app_colors.dart';
+import 'package:mcini/utilities/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SingleMovieThumbnail extends StatefulWidget {
@@ -42,17 +43,29 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InkWell(
-          onTap: () {
+          onTap: () async {
             print("VIDEO THUMBNAIL HAS BEEN CLICKED");
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MoviePlayerPage(
-                  // controller: WebViewController(),
-                  movie: widget.movieData,
+            final subscriberData = await LocalStorage.getStoredSubscriber();
+            print('SUB STATUS: $subscriberData');
+            if (subscriberData != null &&
+                subscriberData['subscription_status'] != null &&
+                subscriberData['subscription_status'].toLowerCase() ==
+                    'active') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MoviePlayerPage(
+                    // controller: WebViewController(),
+                    movie: widget.movieData,
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                AppColors.customSnackBar(
+                    'You have no active subscription', deviceSize, true),
+              );
+            }
           },
           child: Stack(
             alignment: Alignment.center,

@@ -97,7 +97,7 @@ class SubscriberModel {
       "mtn_daily": "hjjh",
       "mtn_weekly": "hjjh",
       "at_daily": "hjjh",
-      "at_daily": "hjjh",
+      "at_weekly": "hjjh",
     };
     List<String> mtnPrefixes = ['024', '025', '054', '055'];
     List<String> atPrefixes = ['026', '027', '056', '057'];

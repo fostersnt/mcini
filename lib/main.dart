@@ -4,7 +4,6 @@ import 'package:mcini/data/bloc/movies/movie_bloc.dart';
 import 'package:mcini/data/provider/movie_provider.dart';
 import 'package:mcini/data/repository/movie_repository.dart';
 import 'package:mcini/screens/home/home_swipper.dart';
-import 'package:mcini/screens/login/login_page.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

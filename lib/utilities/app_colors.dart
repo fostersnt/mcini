@@ -33,7 +33,7 @@ class AppColors {
     return SnackBar(
       behavior: SnackBarBehavior.floating,
       backgroundColor: AppColors.whiteColor,
-      margin: EdgeInsets.only(bottom: deviceSize.height - 150),
+      // margin: EdgeInsets.only(bottom: deviceSize.height - 150),
       content: Container(
         child: Center(
           child: Row(
@@ -101,7 +101,7 @@ class AppColors {
           // title: Text('Modal Title'),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
           backgroundColor: AppColors.whiteColor,
-          content: Container(
+          content: SizedBox(
             height: MediaQuery.of(context).size.height * 0.2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,7 +143,7 @@ class AppColors {
             borderRadius: BorderRadius.zero,
           ),
           title: const Text('Subscription Plan'),
-          content: Container(
+          content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.height * 0.2,
             child: Column(
