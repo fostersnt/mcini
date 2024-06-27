@@ -112,32 +112,48 @@ class _ProfilePageState extends State<ProfilePage> {
                 isDismissible: false,
                 isProcessing: true,
               );
-              Future.delayed(const Duration(seconds: 10), () {
-                if (Navigator.of(context).canPop()) {
-                  Navigator.of(context).pop();
-                  AppColors.showCustomModal(
-                    context,
-                    'Confirming subscription...',
-                    isDismissible: false,
-                    isProcessing: true,
-                  );
-                  Future.delayed(Duration(seconds: 5), () {
+              Future.delayed(
+                const Duration(seconds: 10),
+                () {
+                  if (Navigator.of(context).canPop()) {
                     Navigator.of(context).pop();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      AppColors.customSnackBar(
-                          'Waited far too long', deviceSize, true),
+                    AppColors.showCustomModal(
+                      context,
+                      'Confirming subscription...',
+                      isDismissible: false,
+                      isProcessing: true,
                     );
+                  }
+                },
+              );
+              Future.delayed(const Duration(seconds: 40), () async {
+                final subscriptionStatus =
+                    await SubscriberModel.subscriptionStatus(
+                        subscriberData['msisdn']);
+                Navigator.of(context).pop();
+
+                if (subscriptionStatus.toLowerCase() == 'active') {
+                  setState(() {
+                    initialSwitchValue = true;
                   });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    AppColors.customSnackBar(
+                      'Subscription successful',
+                      deviceSize,
+                      false,
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    AppColors.customSnackBar(
+                      'Subscription failed',
+                      deviceSize,
+                      true,
+                    ),
+                  );
                 }
               });
             } else {
-              // ScaffoldMessenger.of(context).showSnackBar(
-              //   AppColors.customSnackBar(
-              //     'Subscription request failed',
-              //     deviceSize,
-              //     true,
-              //   ),
-              // );
               print('FAILED TO CHANGE INITIAL SWITCH VALUE');
               setState(() {
                 initialSwitchValue = false;

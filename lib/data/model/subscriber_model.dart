@@ -209,9 +209,11 @@ class SubscriberModel {
           await http.post(Uri.parse('$baseUrl/$endpoint'), body: requestBody);
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
-        final mainData = jsonResponse['data'];
-        status = mainData['subscription_status'];
-        await LocalStorage.updateStoredSubscriber(status);
+        final Map<String, dynamic> mainData = jsonResponse['data'];
+        if (mainData.isNotEmpty) {
+          status = mainData['subscription_status'];
+          await LocalStorage.updateStoredSubscriber(status);
+        }
         print('SUBSCRIPTION STATUS HAS BEEN UPDATED IN LOCAL STORAGE');
       }
     } catch (e) {
