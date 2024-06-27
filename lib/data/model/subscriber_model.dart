@@ -164,13 +164,8 @@ class SubscriberModel {
         final jsonResponse = jsonDecode(response.body);
         if (jsonResponse['success'] == 'true') {
           final mainData = jsonResponse['data'];
-          if (mainData != null) {
-            finalResult = true;
-            print('SUBSCRIPTION DATA FROM API: $mainData');
-          } else {
-            finalResult = false;
-            print('SUBSCRIPTION RESPONSE BODY: $jsonResponse');
-          }
+          finalResult = true;
+          print('SUBSCRIPTION DATA FROM API: $mainData');
         } else {
           finalResult = false;
           print('SUBSCRIPTION REQUEST FAILED');
@@ -204,12 +199,11 @@ class SubscriberModel {
     return {'': ''};
   }
 
-  static Future<bool> subscriptionStatus(String msisdn) async {
+  static Future<String> subscriptionStatus(String msisdn) async {
     const String baseUrl = IRepository.apiBaseURL;
     const String endpoint = 'movies/subscriptions';
     final Map<String, dynamic> requestBody = {'msisdn': msisdn};
     String status = '';
-    bool outcome = false;
     try {
       final response =
           await http.post(Uri.parse('$baseUrl/$endpoint'), body: requestBody);
@@ -217,11 +211,12 @@ class SubscriberModel {
         final jsonResponse = jsonDecode(response.body);
         final mainData = jsonResponse['data'];
         status = mainData['subscription_status'];
-        outcome = await LocalStorage.updateStoredSubscriber(status);
+        await LocalStorage.updateStoredSubscriber(status);
+        print('SUBSCRIPTION STATUS HAS BEEN UPDATED IN LOCAL STORAGE');
       }
     } catch (e) {
-      outcome = false;
+      print('ATTEMPT TO GET SUBSCRIPTION STATUS === ${e.toString()}');
     }
-    return outcome;
+    return status;
   }
 }

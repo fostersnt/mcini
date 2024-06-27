@@ -94,7 +94,7 @@ class AppColors {
   }
 
   static void showCustomModal(BuildContext context, String message,
-      {bool isDismissible = false}) {
+      {bool isDismissible = false, bool isProcessing = true}) {
     showDialog(
       barrierDismissible: isDismissible,
       context: context,
@@ -118,30 +118,32 @@ class AppColors {
                 const SizedBox(
                   height: 20,
                 ),
-                CircularProgressIndicator(
-                  color: AppColors.blueColor,
-                ),
+                isProcessing
+                    ? CircularProgressIndicator(
+                        color: AppColors.blueColor,
+                      )
+                    : const Text(''),
               ],
             ),
           ),
-          actions: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 1, color: AppColors.blueColor),
-              ),
-              child: TextButton(
-                child: Text(
-                  'Close',
-                  style: TextStyle(
-                    color: AppColors.whiteColor,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-          ],
+          // actions: <Widget>[
+          //   Container(
+          //     decoration: BoxDecoration(
+          //       border: Border.all(width: 1, color: AppColors.blueColor),
+          //     ),
+          //     child: TextButton(
+          //       child: Text(
+          //         'Close',
+          //         style: TextStyle(
+          //           color: AppColors.whiteColor,
+          //         ),
+          //       ),
+          //       onPressed: () {
+          //         Navigator.of(context).pop();
+          //       },
+          //     ),
+          //   ),
+          // ],
         );
       },
     );

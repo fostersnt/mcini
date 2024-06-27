@@ -88,25 +88,61 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = await LocalStorage.getStoredSubscriber();
         if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'inactive') {
-          String? planName =
-              await AppColors.showsubscriptionPlanModal(context);
+          String? planName = await AppColors.showsubscriptionPlanModal(context);
           if (planName != null) {
             print('SUBSCRIPTION PLAN: $planName');
-            AppColors.showCustomModal(context, subscriptionModalText);
-            final subscriptionCall = await SubscriberModel.initiateSubscription(
-                subscriberData['msisdn'], planName);
-            if (subscriptionCall) {
-              //   setState(() {
-              //   Future.delayed(const Duration(seconds: 3));
-              //   closeModalFlag = true;
-              //   initialSwitchValue = value;
-              // });
-              ScaffoldMessenger.of(context).showSnackBar(
-                  AppColors.customSnackBar(
-                      'Subscription request sent successfully',
-                      deviceSize,
-                      false));
-            } else {}
+            AppColors.showCustomModal(
+              context,
+              'Please wait...',
+              isDismissible: false,
+              isProcessing: true,
+            );
+            bool subscriptionCall = await SubscriberModel.initiateSubscription(
+              subscriberData['msisdn'],
+              planName,
+            );
+            //CHECKING IF SUBSCRIPTION REQUEST HAS BEEN SENT SUCCESSFULLY
+            if (subscriptionCall == true) {
+              Navigator.of(context).pop();
+
+              subscriptionCall = false;
+              AppColors.showCustomModal(
+                context,
+                'Approve the momo prompt to continue',
+                isDismissible: false,
+                isProcessing: true,
+              );
+              Future.delayed(const Duration(seconds: 10), () {
+                if (Navigator.of(context).canPop()) {
+                  Navigator.of(context).pop();
+                  AppColors.showCustomModal(
+                    context,
+                    'Confirming subscription...',
+                    isDismissible: false,
+                    isProcessing: true,
+                  );
+                  Future.delayed(Duration(seconds: 5), () {
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      AppColors.customSnackBar(
+                          'Waited far too long', deviceSize, true),
+                    );
+                  });
+                }
+              });
+            } else {
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   AppColors.customSnackBar(
+              //     'Subscription request failed',
+              //     deviceSize,
+              //     true,
+              //   ),
+              // );
+              print('FAILED TO CHANGE INITIAL SWITCH VALUE');
+              setState(() {
+                initialSwitchValue = false;
+              });
+            }
           }
           print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
         } else {
