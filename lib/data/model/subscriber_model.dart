@@ -109,17 +109,10 @@ class SubscriberModel {
     return network;
   }
 
-  static Future<bool> subscriptionPlanId(
+  static Future<bool> initiateSubscription(
       String msisdn, String subscription_plan_name) async {
-    Map<String, dynamic> subscriptionPlans = {
-      "mtn_daily": "hjjh",
-      "mtn_weekly": "hjjh",
-      "at_daily": "hjjh",
-      "at_weekly": "hjjh",
-    };
-
-    String main_subscription_plan_id = '';
     String main_subscription_plan_type = subscription_plan_name.toLowerCase();
+
     bool susbcriptionApiResult = false;
 
     String plan = '';
@@ -127,23 +120,68 @@ class SubscriberModel {
     String network = networkType(msisdn).toLowerCase();
 
     if (network != '') {
-      main_subscription_plan_id =
-          subscriptionPlans['${network}_${main_subscription_plan_type}'];
-      if (network == 'mtn' && main_subscription_plan_type == 'daily') {
-        mtnSubscription(msisdn, true);
-      } else if (network == 'mtn' && main_subscription_plan_type == 'weekly') {
-        mtnSubscription(msisdn, false);
-      } else if (network == 'at' && main_subscription_plan_type == 'daily') {
-        atSubscription(msisdn, true);
-      } else if (network == 'at' && main_subscription_plan_type == 'weekly') {
-        atSubscription(msisdn, false);
-      } else {}
+      if (network == 'mtn' &&
+          (main_subscription_plan_type == 'daily' ||
+              main_subscription_plan_type == 'weekly')) {
+        susbcriptionApiResult =
+            await mtnSubscription(msisdn, isDailyPlan: true);
+      } else if (network == 'at' &&
+          (main_subscription_plan_type == 'daily' ||
+              main_subscription_plan_type == 'weekly')) {
+        susbcriptionApiResult = await atSubscription(msisdn, true);
+      } else {
+        susbcriptionApiResult = false;
+      }
     }
 
     return susbcriptionApiResult;
   }
 
-  static mtnSubscription(String msisdn, bool isDailyPlan) async {
+  static Future<bool> mtnSubscription(String msisdn,
+      {bool isDailyPlan = true}) async {
+    String dailyPlanId = '9915310034';
+    String weeklyPlanId = '9915310035';
+    bool final_result = false;
+
+    String baseURL = IRepository.apiBaseURL;
+    String endpoint = 'mtn/subscription';
+    Map<String, dynamic> requestBody = {
+      'msisdn': msisdn,
+      'network': 'MTN',
+      'plan_id': dailyPlanId,
+    };
+    if (!isDailyPlan) {
+      requestBody = {
+        'msisdn': msisdn,
+        'network': 'MTN',
+        'plan_id': weeklyPlanId,
+      };
+    }
+    try {
+      final response =
+          await http.post(Uri.parse('$baseURL/$endpoint'), body: requestBody);
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        if (jsonResponse['success'] == 'true') {
+          final mainData = jsonResponse['data'];
+          final_result = true;
+          print('SUBSCRIPTION DATA FROM API: $mainData');
+        } else {
+          final_result = false;
+          print('SUBSCRIPTION REQUEST FAILED');
+        }
+      } else {
+        final_result = false;
+        print('FAILED TO REACH SUBSCRIPTION API ==== ${response.statusCode}');
+      }
+    } catch (e) {
+      final_result = false;
+      print('SUBSCRIPTION REQUEST ERROR: ${e.toString()}');
+    }
+    return final_result;
+  }
+
+  static Future<bool> atSubscription(String msisdn, bool isDailyPlan) async {
     String baseURL = IRepository.apiBaseURL;
     String endpoint = '';
     // final data =
@@ -156,16 +194,8 @@ class SubscriberModel {
     return true;
   }
 
-  static atSubscription(String msisdn, bool isDailyPlan) async {
-    String baseURL = IRepository.apiBaseURL;
-    String endpoint = '';
-    // final data =
-    // final requestBody = {
-    //   'msisdn': '',
-    //   'network': '',
-    //   'plan_id': '',
-    // };
-    // final data = await http.get(Uri.parse('$baseURL/$endpoint'));
-    return true;
+  static Future<Map<String, dynamic>> subscriptionCallBack(msisdn) async {
+    final requestBody = {'msisdn': msisdn};
+    return {'': ''};
   }
 }

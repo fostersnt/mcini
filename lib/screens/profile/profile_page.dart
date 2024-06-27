@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:mcini/data/model/subscriber_model.dart';
 import 'package:mcini/screens/login/login_page.dart';
 
 import 'package:mcini/screens/profile/profile_partials.dart';
@@ -87,15 +88,25 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = await LocalStorage.getStoredSubscriber();
         if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'inactive') {
-          String? result = await AppColors.showsubscriptionPlanModal(context);
-          if (result != null) {
-            print('SUBSCRIPTION PLAN: $result');
+          String? plan_name =
+              await AppColors.showsubscriptionPlanModal(context);
+          if (plan_name != null) {
+            print('SUBSCRIPTION PLAN: $plan_name');
             AppColors.showCustomModal(context, subscriptionModalText);
-            setState(() {
-              Future.delayed(const Duration(seconds: 3));
-              closeModalFlag = true;
-              initialSwitchValue = value;
-            });
+            final subscriptionCall = await SubscriberModel.initiateSubscription(
+                subscriberData['msisdn'], plan_name);
+            if (subscriptionCall) {
+              //   setState(() {
+              //   Future.delayed(const Duration(seconds: 3));
+              //   closeModalFlag = true;
+              //   initialSwitchValue = value;
+              // });
+              ScaffoldMessenger.of(context).showSnackBar(
+                  AppColors.customSnackBar(
+                      'Subscription request sent successfully',
+                      deviceSize,
+                      false));
+            } else {}
           }
           print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
         } else {
