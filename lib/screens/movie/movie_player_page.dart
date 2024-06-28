@@ -53,8 +53,8 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: deviceSize.width,
                 width: deviceSize.width,
+                height: deviceSize.width,
                 child: WebViewWidget(
                   controller: _controller,
                 ),
