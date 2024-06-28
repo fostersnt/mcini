@@ -23,25 +23,20 @@ class _ProfilePageState extends State<ProfilePage> {
   bool closeModalFlag = false;
   String subscriptionModalText = 'Please wait...';
   Map<String, dynamic> userData = {};
-
-  // void init() {
-  //   super.initState();
-  //   fetchData();
-  // }
-
-  // fetchData() async {
-  //   final data = await LocalStorage.getStoredSubscriber();
-  //   if (data != null) {
-  //     userData = data;
-  //   }
-  // }
+  late bool initialSwitchValue;
 
   @override
-  Widget build(BuildContext context) {
-    bool initialSwitchValue = widget.subscriberData.isNotEmpty &&
+  void initState() {
+    super.initState();
+    // Initialize initialSwitchValue based on subscriberData
+    initialSwitchValue = widget.subscriberData.isNotEmpty &&
             widget.subscriberData['subscription_status'] == 'active'
         ? true
         : false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
     final double myFontSize = deviceSize.width * 0.05;
     const double iconSize = 25.0;
@@ -94,37 +89,44 @@ class _ProfilePageState extends State<ProfilePage> {
     final switchToggle = Switch(
       value: initialSwitchValue,
       onChanged: (value) async {
-        final subscriberData = await LocalStorage.getStoredSubscriber();
+        final subscriberData = widget.subscriberData;
+        // final subscriberData = await LocalStorage.getStoredSubscriber();
         print('SSSSSSSS ===== $subscriberData');
         if (initialSwitchValue == true) {
           AppColors.showCustomModal(context, 'Unsubscription in progress...');
-          Future.delayed(Duration(seconds: 20), () {
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop();
-            }
-          });
-          final unsubscriptionResult = await SubscriberModel.unsubscription();
+          Future.delayed(
+            const Duration(seconds: 15),
+            () async {
+              final unsubscriptionResult =
+                  await SubscriberModel.unsubscription();
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              }
 
-          if (unsubscriptionResult) {
-            setState(() {
-              initialSwitchValue = false;
-              ScaffoldMessenger.of(context).showSnackBar(
-                AppColors.customSnackBar(
-                  'You have successfully unsubscribed',
-                  deviceSize,
-                  false,
-                ),
-              );
-            });
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              AppColors.customSnackBar(
-                'Sorry, unsubscription failed',
-                deviceSize,
-                true,
-              ),
-            );
-          }
+              if (unsubscriptionResult == true) {
+                setState(
+                  () {
+                    initialSwitchValue = false;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      AppColors.customSnackBar(
+                        'You have successfully unsubscribed',
+                        deviceSize,
+                        false,
+                      ),
+                    );
+                  },
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  AppColors.customSnackBar(
+                    'Sorry, unsubscription failed',
+                    deviceSize,
+                    true,
+                  ),
+                );
+              }
+            },
+          );
         } else if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'inactive' &&
             initialSwitchValue == false) {

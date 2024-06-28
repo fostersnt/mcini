@@ -62,22 +62,26 @@ sealed class LocalStorage {
 
   static String formatDateString(String dateString) {
     // Parse the input date string
-    DateTime dateTime = DateTime.parse(dateString);
+    try {
+      DateTime dateTime = DateTime.parse(dateString);
 
-    // Create a DateFormat instance for the desired output format
-    DateFormat formatter = DateFormat('d MMMM y hh:mma');
+      // Create a DateFormat instance for the desired output format
+      DateFormat formatter = DateFormat('d MMMM y hh:mma');
 
-    // Format the DateTime object using the formatter
-    String formattedDate = formatter.format(dateTime);
+      // Format the DateTime object using the formatter
+      String formattedDate = formatter.format(dateTime);
 
-    // Adjust the ordinal for the day of the month (1st, 2nd, 3rd, etc.)
-    String dayWithOrdinal = _addOrdinalSuffix(dateTime.day);
+      // Adjust the ordinal for the day of the month (1st, 2nd, 3rd, etc.)
+      String dayWithOrdinal = _addOrdinalSuffix(dateTime.day);
 
-    // Replace the day in the formatted string
-    formattedDate =
-        formattedDate.replaceFirstMapped('d', (match) => dayWithOrdinal);
+      // Replace the day in the formatted string
+      formattedDate =
+          formattedDate.replaceFirstMapped('d', (match) => dayWithOrdinal);
 
-    return formattedDate;
+      return formattedDate;
+    } catch (e) {
+      return 'N/A';
+    }
   }
 
 // Function to add ordinal suffix to day (1st, 2nd, 3rd, 4th, etc.)

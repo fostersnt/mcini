@@ -258,9 +258,10 @@ class SubscriberModel {
           await LocalStorage.updateStoredSubscriber(jsonData);
           result = true;
           outcome = '==== SUCCESSFUL ====';
+        } else {
+          outcome = '==== API success returned FALSE ====';
+          print('API RESPONSE DATA: === $jsonData');
         }
-        outcome = '==== API success returned FALSE ====';
-        print('API RESPONSE DATA: === $jsonData');
       } else {
         outcome = '==== FAILED WITH STATUS CODE: ${response.statusCode} ====';
       }
@@ -269,6 +270,7 @@ class SubscriberModel {
       outcome = '==== ERROR: ${e.toString()} ====';
     }
     print(outcome);
+    print('FINAL UNSUBSCRIPTION RESULT: $result');
     return result;
   }
 }
