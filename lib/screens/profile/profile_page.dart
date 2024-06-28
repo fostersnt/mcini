@@ -107,10 +107,34 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = await LocalStorage.getStoredSubscriber();
         print('SSSSSSSS ===== $subscriberData');
         if (initialSwitchValue == true) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            AppColors.customSnackBar(
-                'Do you want to unsubscribe?', deviceSize, false),
-          );
+          AppColors.showCustomModal(context, 'Unsubscription in progress...');
+          Future.delayed(Duration(seconds: 20), () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          });
+          final unsubscriptionResult = await SubscriberModel.unsubscription();
+
+          if (unsubscriptionResult) {
+            setState(() {
+              initialSwitchValue = false;
+              ScaffoldMessenger.of(context).showSnackBar(
+                AppColors.customSnackBar(
+                  'You have successfully unsubscribed',
+                  deviceSize,
+                  false,
+                ),
+              );
+            });
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              AppColors.customSnackBar(
+                'Sorry, unsubscription failed',
+                deviceSize,
+                true,
+              ),
+            );
+          }
         } else if (subscriberData != null &&
             subscriberData['subscription_status'].toLowerCase() == 'inactive' &&
             initialSwitchValue == false) {

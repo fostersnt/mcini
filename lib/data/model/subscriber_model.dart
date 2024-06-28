@@ -222,11 +222,11 @@ class SubscriberModel {
     return status;
   }
 
-  Future<bool> unsubscription() async {
+  static Future<bool> unsubscription() async {
     String baseUrl = IRepository.apiBaseURL;
     String endpoint = '';
     bool result = false;
-    String outcome = 'UNSUBSCRIPTION OUTCOME ==== ';
+    String outcome = '';
     final storageData = await LocalStorage.getStoredSubscriber();
 
     try {
@@ -237,31 +237,38 @@ class SubscriberModel {
       };
 
       if (storageData != null && storageData['network'] == 'MTN') {
-        requestBody['plan_id'] = storageData['plan_id'];
-        requestBody['msisdn'] = storageData['msisdn'];
-        requestBody['network'] = storageData['network'];
+        requestBody['plan_id'] = storageData['plan_id'].toString();
+        requestBody['msisdn'] = storageData['msisdn'].toString();
+        requestBody['network'] = storageData['network'].toString();
         endpoint = 'mtn/unsubscription';
       }
       if (storageData != null && storageData['network'] == 'AT') {
-        requestBody['product_id'] = storageData['product_id'];
-        requestBody['msisdn'] = storageData['msisdn'];
-        requestBody['network'] = storageData['network'];
+        requestBody['product_id'] = storageData['product_id'].toString();
+        requestBody['msisdn'] = storageData['msisdn'].toString();
+        requestBody['network'] = storageData['network'].toString();
         endpoint = 'at/unsubscribe';
       }
-      final response = await http.post(Uri.parse('$baseUrl/$endpoint'));
+      final response = await http.post(
+        Uri.parse('$baseUrl/$endpoint'),
+        body: requestBody,
+      );
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonData = jsonDecode(response.body);
         if (jsonData['success'] == 'true') {
+          await LocalStorage.updateStoredSubscriber('inactive');
           result = true;
-          outcome += 'SUCCESSFUL';
+          outcome = '==== SUCCESSFUL ====';
         }
-        outcome += 'API success returned FALSE';
+        outcome = '==== API success returned FALSE ====';
+        print('API RESPONSE DATA: === $jsonData');
+      } else {
+        outcome = '==== FAILED WITH STATUS CODE: ${response.statusCode} ====';
       }
-      outcome += 'FAILED WITH STATUS CODE: ${response.statusCode}';
     } catch (e) {
-      print('UNSCRIPTION ERROR ==== ${e.toString()}');
-      outcome += '$e.toString()';
+      // print('UNSCRIPTION ERROR ==== ${e.toString()}');
+      outcome = '==== ERROR: ${e.toString()} ====';
     }
+    print(outcome);
     return result;
   }
 }
