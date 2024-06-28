@@ -33,7 +33,7 @@ sealed class LocalStorage {
     }
   }
 
-  static Future<bool> updateStoredSubscriber(String status) async {
+  static Future<bool> updateStoredSubscriber(Map<String, dynamic> data) async {
     bool result = false;
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -41,7 +41,15 @@ sealed class LocalStorage {
       if (subscriberJson != null) {
         Map<String, dynamic> jsonMap = jsonDecode(subscriberJson);
         // return SubscriberModel.fromJson(jsonMap);
-        jsonMap['subscription_status'] = status;
+        jsonMap['subscription_status'] = data[''];
+        jsonMap['plan_id'] = data['plan_id'];
+        jsonMap['network'] = data['network'];
+        jsonMap['created_at'] = data['created_at'];
+        jsonMap['updated_at'] = data['updated_at'];
+        jsonMap['subscription_id'] = data['subscription_id'];
+        jsonMap['plan_type'] = data['plan_type'];
+        jsonMap['next_billing_date'] = data['next_billing_date'];
+        jsonMap['expires_at'] = data['expires_at'];
         result = true;
       } else {
         result = false;

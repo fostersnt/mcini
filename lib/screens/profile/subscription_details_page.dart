@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class SubscriptionDetailsPage extends StatelessWidget {
-  const SubscriptionDetailsPage({super.key});
+  final subscriptionData;
+  const SubscriptionDetailsPage({super.key, required this.subscriptionData});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,9 @@ class SubscriptionDetailsPage extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         color: AppColors.blueColor,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Text(
-          'Active',
+          subscriptionData['subscription_status'] ?? 'N/A',
           style: TextStyle(color: AppColors.whiteColor),
         ),
       ),
@@ -55,7 +56,7 @@ class SubscriptionDetailsPage extends StatelessWidget {
     );
 
     final Text expiryDateRightWidget = Text(
-      '14/08/2024',
+      subscriptionData['expires_at'] ?? 'N/A',
       style: TextStyle(color: AppColors.whiteColor),
     );
 
@@ -117,7 +118,7 @@ class SubscriptionDetailsPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'Daily',
+                                subscriptionData['plan_type'] ?? 'N/A',
                                 style: TextStyle(
                                   color: AppColors.blueColor,
                                   fontSize: defaultFontSize,

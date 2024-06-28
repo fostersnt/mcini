@@ -91,16 +91,6 @@ class _ProfilePageState extends State<ProfilePage> {
       size: iconSize,
     );
 
-    // switchFunction(bool newValue) {
-    //   setState(() {
-    //     initialSwitchValue = !newValue;
-    //   });
-    //   print('THE SWITCH BUTTON HAS BEEN CLICKED: $initialSwitchValue');
-    // }
-    data() async {
-      await LocalStorage.getStoredSubscriber();
-    }
-
     final switchToggle = Switch(
       value: initialSwitchValue,
       onChanged: (value) async {
@@ -308,8 +298,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const SubscriptionDetailsPage(),
+                              builder: (context) => SubscriptionDetailsPage(
+                                subscriptionData: widget.subscriberData,
+                              ),
                             ),
                           );
                         }),

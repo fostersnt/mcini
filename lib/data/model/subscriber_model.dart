@@ -212,7 +212,7 @@ class SubscriberModel {
         final Map<String, dynamic> mainData = jsonResponse['data'];
         if (mainData.isNotEmpty) {
           status = mainData['subscription_status'];
-          await LocalStorage.updateStoredSubscriber(status);
+          await LocalStorage.updateStoredSubscriber(mainData);
         }
         print('SUBSCRIPTION STATUS HAS BEEN UPDATED IN LOCAL STORAGE');
       }
@@ -255,7 +255,7 @@ class SubscriberModel {
       if (response.statusCode == 200) {
         Map<String, dynamic> jsonData = jsonDecode(response.body);
         if (jsonData['success'] == 'true') {
-          await LocalStorage.updateStoredSubscriber('inactive');
+          await LocalStorage.updateStoredSubscriber(jsonData);
           result = true;
           outcome = '==== SUCCESSFUL ====';
         }
