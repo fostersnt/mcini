@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
 import 'package:mcini/data/model/subscriber_model.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,7 +50,6 @@ sealed class LocalStorage {
         jsonMap['subscription_id'] = data['subscription_id'];
         jsonMap['plan_type'] = data['plan_type'];
         jsonMap['next_billing_date'] = data['next_billing_date'];
-        jsonMap['expires_at'] = data['expires_at'];
         result = true;
       } else {
         result = false;
@@ -58,5 +58,42 @@ sealed class LocalStorage {
       result = false;
     }
     return result;
+  }
+
+  static String formatDateString(String dateString) {
+    // Parse the input date string
+    DateTime dateTime = DateTime.parse(dateString);
+
+    // Create a DateFormat instance for the desired output format
+    DateFormat formatter = DateFormat('d MMMM y hh:mma');
+
+    // Format the DateTime object using the formatter
+    String formattedDate = formatter.format(dateTime);
+
+    // Adjust the ordinal for the day of the month (1st, 2nd, 3rd, etc.)
+    String dayWithOrdinal = _addOrdinalSuffix(dateTime.day);
+
+    // Replace the day in the formatted string
+    formattedDate =
+        formattedDate.replaceFirstMapped('d', (match) => dayWithOrdinal);
+
+    return formattedDate;
+  }
+
+// Function to add ordinal suffix to day (1st, 2nd, 3rd, 4th, etc.)
+  static String _addOrdinalSuffix(int day) {
+    if (day >= 11 && day <= 13) {
+      return '${day}th';
+    }
+    switch (day % 10) {
+      case 1:
+        return '${day}st';
+      case 2:
+        return '${day}nd';
+      case 3:
+        return '${day}rd';
+      default:
+        return '${day}th';
+    }
   }
 }

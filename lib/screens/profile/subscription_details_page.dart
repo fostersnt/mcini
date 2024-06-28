@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/utilities/app_colors.dart';
+import 'package:mcini/utilities/shared_preferences.dart';
 
 class SubscriptionDetailsPage extends StatelessWidget {
   final subscriptionData;
@@ -55,8 +56,10 @@ class SubscriptionDetailsPage extends StatelessWidget {
       color: AppColors.whiteColor,
     );
 
+    final dateFormatted = LocalStorage.formatDateString(
+        subscriptionData['next_billing_date'] ?? 'N/A');
     final Text expiryDateRightWidget = Text(
-      subscriptionData['expires_at'] ?? 'N/A',
+      dateFormatted,
       style: TextStyle(color: AppColors.whiteColor),
     );
 
