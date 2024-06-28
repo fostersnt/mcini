@@ -10,9 +10,13 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class SingleMovieThumbnail extends StatefulWidget {
   const SingleMovieThumbnail(
-      {super.key, required this.deviceSize, required this.movieData});
+      {super.key,
+      required this.deviceSize,
+      required this.movieData,
+      required this.movieId});
   final Size deviceSize;
-  final MovieModel movieData;
+  final List<MovieModel> movieData;
+  final int movieId;
 
   @override
   State<SingleMovieThumbnail> createState() => _SingleMovieThumbnailState();
@@ -31,7 +35,9 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
     // Initialize the WebViewController
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(widget.movieData.thumbnail ?? ''));
+      ..loadRequest(
+        Uri.parse(widget.movieData[widget.movieId].thumbnail ?? ''),
+      );
   }
 
   @override
@@ -56,7 +62,8 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
                 MaterialPageRoute(
                   builder: (context) => MoviePlayerPage(
                     // controller: WebViewController(),
-                    movie: widget.movieData,
+                    movie: widget.movieData[widget.movieId],
+                    movies: widget.movieData,
                   ),
                 ),
               );
@@ -127,7 +134,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
           child: SizedBox(
             width: thumbnailWidth,
             child: Text(
-              widget.movieData.title ?? '',
+              widget.movieData[widget.movieId].title ?? '',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

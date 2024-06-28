@@ -56,6 +56,7 @@ class HomeView extends StatelessWidget {
 
             if (movieData.length > 100) {
               latestMovies = movieData.sublist(movieData.length - 20);
+              print('LATEST MOVIES COUNT ==== ${latestMovies.length}');
             }
             final otherMovies = groupBy(movieData, (movie) => movie.title);
 
@@ -84,7 +85,8 @@ class HomeView extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
                           child: SingleMovieThumbnail(
                             deviceSize: screenSize,
-                            movieData: latestMovies[index],
+                            movieData: latestMovies,
+                            movieId: index,
                           ),
                         );
                       },
