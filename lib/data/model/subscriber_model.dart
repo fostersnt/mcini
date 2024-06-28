@@ -221,4 +221,47 @@ class SubscriberModel {
     }
     return status;
   }
+
+  Future<bool> unsubscription() async {
+    String baseUrl = IRepository.apiBaseURL;
+    String endpoint = '';
+    bool result = false;
+    String outcome = 'UNSUBSCRIPTION OUTCOME ==== ';
+    final storageData = await LocalStorage.getStoredSubscriber();
+
+    try {
+      Map<String, dynamic> requestBody = {
+        'plan_id': '',
+        'msisdn': '',
+        'network': '',
+      };
+
+      if (storageData != null && storageData['network'] == 'MTN') {
+        requestBody['plan_id'] = storageData['plan_id'];
+        requestBody['msisdn'] = storageData['msisdn'];
+        requestBody['network'] = storageData['network'];
+        endpoint = 'mtn/unsubscription';
+      }
+      if (storageData != null && storageData['network'] == 'AT') {
+        requestBody['product_id'] = storageData['product_id'];
+        requestBody['msisdn'] = storageData['msisdn'];
+        requestBody['network'] = storageData['network'];
+        endpoint = 'at/unsubscribe';
+      }
+      final response = await http.post(Uri.parse('$baseUrl/$endpoint'));
+      if (response.statusCode == 200) {
+        Map<String, dynamic> jsonData = jsonDecode(response.body);
+        if (jsonData['success'] == 'true') {
+          result = true;
+          outcome += 'SUCCESSFUL';
+        }
+        outcome += 'API success returned FALSE';
+      }
+      outcome += 'FAILED WITH STATUS CODE: ${response.statusCode}';
+    } catch (e) {
+      print('UNSCRIPTION ERROR ==== ${e.toString()}');
+      outcome += '$e.toString()';
+    }
+    return result;
+  }
 }
