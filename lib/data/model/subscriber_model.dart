@@ -222,7 +222,7 @@ class SubscriberModel {
     return status;
   }
 
-  static Future<bool> unsubscription() async {
+  static Future<bool> unSubscription() async {
     String baseUrl = IRepository.apiBaseURL;
     String endpoint = '';
     bool result = false;

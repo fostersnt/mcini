@@ -98,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const Duration(seconds: 15),
             () async {
               final unsubscriptionResult =
-                  await SubscriberModel.unsubscription();
+                  await SubscriberModel.unSubscription();
               if (Navigator.of(context).canPop()) {
                 Navigator.of(context).pop();
               }
