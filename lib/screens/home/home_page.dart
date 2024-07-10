@@ -75,7 +75,7 @@ class HomeView extends StatelessWidget {
                 CustomPadding(
                   screenSize: screenSize,
                   categoryLabel: CategoryNameWidget(
-                    categoryName: 'Latest Movies',
+                    categoryName: 'LATEST MOVIES',
                     movies: latestMovies,
                   ),
                 ),
