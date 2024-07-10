@@ -6,6 +6,7 @@ import 'package:mcini/data/bloc/movies/movie_state.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/home/custom_padding.dart';
 import 'package:mcini/screens/home/hero_section.dart';
+import 'package:mcini/screens/movie/category_name_widget.dart';
 import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:collection/collection.dart';
@@ -72,7 +73,12 @@ class HomeView extends StatelessWidget {
                 ),
                 //Latest Movie category
                 CustomPadding(
-                    screenSize: screenSize, category: 'Latest Movies'),
+                  screenSize: screenSize,
+                  categoryLabel: CategoryNameWidget(
+                    categoryName: 'Latest Movies',
+                    movies: latestMovies,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(

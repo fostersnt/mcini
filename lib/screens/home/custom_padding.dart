@@ -5,11 +5,11 @@ import 'package:mcini/utilities/app_colors.dart';
 
 class CustomPadding extends StatelessWidget {
   final Size screenSize;
-  final String category;
+  final Widget categoryLabel;
   const CustomPadding({
     super.key,
     required this.screenSize,
-    required this.category,
+    required this.categoryLabel,
   });
 
   @override
@@ -18,13 +18,7 @@ class CustomPadding extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-        child: Text(
-          category,
-          style: TextStyle(
-            color: AppColors.blueColor,
-            fontSize: screenSize.width * 0.05,
-          ),
-        ),
+        child: categoryLabel,
       ),
     );
   }

@@ -13,35 +13,37 @@ class CategoryNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            categoryName,
-            style: TextStyle(
-              color: AppColors.blueColor,
-            ),
+    final Size deviceSize = MediaQuery.of(context).size;
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieViewAllPage(myMovies: movies),
           ),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MovieViewAllPage(myMovies: movies),
+        );
+      },
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: Text(
+              categoryName,
+              style: TextStyle(
+                color: AppColors.blueColor,
+                fontSize: deviceSize.width * 0.05,
               ),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
             child: Icon(
-              Icons.forward,
+              Icons.arrow_forward_ios_rounded,
               color: AppColors.blueColor,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
