@@ -135,7 +135,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
             width: thumbnailWidth,
             child: Text(
               widget.movieData[widget.movieIndex].title ?? '',
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   color: AppColors.whiteColor,
