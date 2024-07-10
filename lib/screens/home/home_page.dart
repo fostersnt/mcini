@@ -37,6 +37,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<MovieBloc>().add(AllMoviesEvent());
     final screenSize = MediaQuery.of(context).size;
+    const double customHeight = 220;
     return Scaffold(
       backgroundColor: AppColors.miniBlueColor,
       body: BlocBuilder<MovieBloc, MovieState>(
@@ -82,7 +83,7 @@ class HomeView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(
-                    height: 300,
+                    height: customHeight,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: latestMovies.length,
@@ -119,7 +120,7 @@ class HomeView extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: SizedBox(
-                              height: 300,
+                              height: customHeight,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: moviesInCategory.length,
