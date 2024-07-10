@@ -13,10 +13,10 @@ class SingleMovieThumbnail extends StatefulWidget {
       {super.key,
       required this.deviceSize,
       required this.movieData,
-      required this.movieId});
+      required this.movieIndex});
   final Size deviceSize;
   final List<MovieModel> movieData;
-  final int movieId;
+  final int movieIndex;
 
   @override
   State<SingleMovieThumbnail> createState() => _SingleMovieThumbnailState();
@@ -36,7 +36,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(
-        Uri.parse(widget.movieData[widget.movieId].thumbnail ?? ''),
+        Uri.parse(widget.movieData[widget.movieIndex].thumbnail ?? ''),
       );
   }
 
@@ -62,7 +62,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
                 MaterialPageRoute(
                   builder: (context) => MoviePlayerPage(
                     // controller: WebViewController(),
-                    movie: widget.movieData[widget.movieId],
+                    movie: widget.movieData[widget.movieIndex],
                     movies: widget.movieData,
                   ),
                 ),
@@ -134,7 +134,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
           child: SizedBox(
             width: thumbnailWidth,
             child: Text(
-              widget.movieData[widget.movieId].title ?? '',
+              widget.movieData[widget.movieIndex].title ?? '',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

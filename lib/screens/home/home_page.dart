@@ -38,13 +38,11 @@ class HomeView extends StatelessWidget {
     context.read<MovieBloc>().add(AllMoviesEvent());
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      // appBar: AppBar(),
       backgroundColor: AppColors.miniBlueColor,
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           if (state is MovieLoadingState) {
             return Center(
-              // child: HomePageShimmerEffect(),
               child: CircularProgressIndicator(
                 color: AppColors.blueColor,
               ),
@@ -59,19 +57,21 @@ class HomeView extends StatelessWidget {
               latestMovies = movieData.sublist(movieData.length - 20);
               print('LATEST MOVIES COUNT ==== ${latestMovies.length}');
             }
-            final otherMovies = groupBy(movieData, (movie) => movie.title);
+
+            final Map<String, List<MovieModel>> groupedMovies =
+                groupBy(movieData, (movie) => movie.collectionName ?? 'N/A');
+            final List<MapEntry<String, List<MovieModel>>> groupedMoviesList =
+                groupedMovies.entries.toList();
 
             return ListView(
               padding: const EdgeInsets.all(0),
               children: [
-                //Image and top text
                 Padding(
                   padding: const EdgeInsets.all(0),
                   child: HeroSection(
                     deviceSize: screenSize,
                   ),
                 ),
-                //Latest Movie category
                 CustomPadding(
                   screenSize: screenSize,
                   categoryLabel: CategoryNameWidget(
@@ -92,11 +92,55 @@ class HomeView extends StatelessWidget {
                           child: SingleMovieThumbnail(
                             deviceSize: screenSize,
                             movieData: latestMovies,
-                            movieId: index,
+                            movieIndex: index,
                           ),
                         );
                       },
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: List.generate(groupedMoviesList.length, (index) {
+                      String category = groupedMoviesList[index].key;
+                      List<MovieModel> moviesInCategory =
+                          groupedMoviesList[index].value;
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                            child: Text(
+                              category,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.whiteColor),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 300,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: moviesInCategory.length,
+                              itemBuilder: (context, subIndex) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                                  child: SingleMovieThumbnail(
+                                    deviceSize: screenSize,
+                                    movieData: moviesInCategory,
+                                    movieIndex: subIndex,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
                   ),
                 ),
               ],
