@@ -40,6 +40,7 @@ class CategoryNameWidget extends StatelessWidget {
             child: Icon(
               Icons.arrow_forward_ios_rounded,
               color: AppColors.blueColor,
+              size: 18,
             ),
           ),
         ],
