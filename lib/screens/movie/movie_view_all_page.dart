@@ -15,29 +15,54 @@ class MovieViewAllPage extends StatelessWidget {
     double itemWidth = deviceSize.width * 0.3; // 30% of screen width
     double aspectRatio = 2 / 3; // Width to Height ratio of the item
 
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: myMovies.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // Number of items per row
-        crossAxisSpacing: 8, // Spacing between each item horizontally
-        mainAxisSpacing: 8, // Spacing between each row vertically
-        childAspectRatio: aspectRatio, // Ratio of width to height for each item
-      ),
-      itemBuilder: (context, index) {
-        return Container(
-          color: AppColors.greySub,
-          width: itemWidth,
-          height: itemWidth / aspectRatio,
-          child: Center(
-            child: Text(
-              myMovies[index].title ?? '',
-              style: TextStyle(color: AppColors.whiteColor),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.blackColor,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: AppColors.whiteColor,
+            size: 20,
           ),
-        );
-      },
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: myMovies.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, // Number of items per row
+              crossAxisSpacing: 8, // Spacing between each item horizontally
+              mainAxisSpacing: 8, // Spacing between each row vertically
+              childAspectRatio:
+                  aspectRatio, // Ratio of width to height for each item
+            ),
+            itemBuilder: (context, index) {
+              return Container(
+                color: AppColors.greySub,
+                width: itemWidth,
+                height: itemWidth / aspectRatio,
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    myMovies[index].title ?? '',
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontSize: deviceSize.width * 0.04,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 }
