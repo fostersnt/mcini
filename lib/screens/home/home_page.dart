@@ -110,32 +110,31 @@ class HomeView extends StatelessWidget {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
-                            child: Text(
-                              category,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.whiteColor),
-                            ),
+                          CustomPadding(
+                            screenSize: screenSize,
+                            categoryLabel: CategoryNameWidget(
+                                categoryName: category,
+                                movies: moviesInCategory),
                           ),
-                          SizedBox(
-                            height: 300,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: moviesInCategory.length,
-                              itemBuilder: (context, subIndex) {
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 10),
-                                  child: SingleMovieThumbnail(
-                                    deviceSize: screenSize,
-                                    movieData: moviesInCategory,
-                                    movieIndex: subIndex,
-                                  ),
-                                );
-                              },
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SizedBox(
+                              height: 300,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: moviesInCategory.length,
+                                itemBuilder: (context, subIndex) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                                    child: SingleMovieThumbnail(
+                                      deviceSize: screenSize,
+                                      movieData: moviesInCategory,
+                                      movieIndex: subIndex,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ],
