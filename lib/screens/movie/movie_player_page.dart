@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:mcini/screens/movie/similar_movies.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:mcini/screens/movie/movie_view_all_page.dart';
@@ -104,8 +105,8 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: MovieViewAllPage(myMovies: myMovies),
+                padding: const EdgeInsets.all(0.0),
+                child: SimilarMovies(myMovies: myMovies),
               ),
             ],
           ),
