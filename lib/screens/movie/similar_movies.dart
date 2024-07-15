@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class SimilarMovies extends StatelessWidget {
   final List<MovieModel> myMovies;
+  final int clickedMovieIndex;
 
-  const SimilarMovies({super.key, required this.myMovies});
+  const SimilarMovies(
+      {super.key, required this.myMovies, required this.clickedMovieIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +25,56 @@ class SimilarMovies extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: myMovies.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // Number of items per row
-            crossAxisSpacing: 8, // Spacing between each item horizontally
-            mainAxisSpacing: 8, // Spacing between each row vertically
-            childAspectRatio:
-                aspectRatio, // Ratio of width to height for each item
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Number of items per row
+            crossAxisSpacing: 4, // Spacing between each item horizontally
+            mainAxisSpacing: 4, // Spacing between each row vertically
+            childAspectRatio: 0.7,
+            // aspectRatio, // Ratio of width to height for each item
           ),
           itemBuilder: (context, index) {
-            return Container(
-              color: AppColors.greySub,
-              width: itemWidth,
-              height: itemWidth / aspectRatio,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  myMovies[index].title ?? '',
-                  style: TextStyle(
-                    color: AppColors.whiteColor,
-                    fontSize: deviceSize.width * 0.04,
+            if (index == clickedMovieIndex) {
+              if (myMovies.length - index != 0) {
+                return Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SingleMovieThumbnail(
+                      deviceSize: deviceSize,
+                      movieData: myMovies,
+                      movieIndex: index + 1,
+                    ),
                   ),
+                );
+              } else {
+                return null;
+              }
+            }
+
+            return Container(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SingleMovieThumbnail(
+                  deviceSize: deviceSize,
+                  movieData: myMovies,
+                  movieIndex: index,
                 ),
               ),
             );
+            // return Container(
+            //   // color: AppColors.greySub,
+            //   // width: itemWidth,
+            //   // height: itemWidth / aspectRatio,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(10.0),
+            //     child: index == clickedMovieIndex
+            //         ? null
+            //         : SingleMovieThumbnail(
+            //             deviceSize: deviceSize,
+            //             movieData: myMovies,
+            //             movieIndex: index,
+            //           ),
+            //   ),
+            // );
           },
         ),
       ),

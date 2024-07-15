@@ -6,10 +6,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:mcini/screens/movie/movie_view_all_page.dart';
 
 class MoviePlayerPage extends StatefulWidget {
-  final MovieModel movie;
+  final int movie_index;
   final List<MovieModel> movies;
 
-  const MoviePlayerPage({super.key, required this.movie, required this.movies});
+  const MoviePlayerPage(
+      {super.key, required this.movie_index, required this.movies});
   @override
   _MoviePlayerPageSate createState() => _MoviePlayerPageSate();
 }
@@ -24,14 +25,15 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
     // Initialize the WebViewController
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(widget.movie.videoUrl ?? ''));
+      ..loadRequest(
+          Uri.parse(widget.movies[widget.movie_index].videoUrl ?? ''));
   }
 
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     final myMovies = widget.movies;
-    final singleMovie = widget.movie;
+    final singleMovie = myMovies[widget.movie_index];
     return Scaffold(
       backgroundColor: AppColors.blackColor,
       appBar: AppBar(
@@ -95,7 +97,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
                 child: Text(
                   'Similar Movies',
                   style: TextStyle(
@@ -106,7 +108,10 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: SimilarMovies(myMovies: myMovies),
+                child: SimilarMovies(
+                  myMovies: myMovies,
+                  clickedMovieIndex: widget.movie_index,
+                ),
               ),
             ],
           ),

@@ -62,7 +62,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
                 MaterialPageRoute(
                   builder: (context) => MoviePlayerPage(
                     // controller: WebViewController(),
-                    movie: widget.movieData[widget.movieIndex],
+                    movie_index: widget.movieIndex,
                     movies: widget.movieData,
                   ),
                 ),
