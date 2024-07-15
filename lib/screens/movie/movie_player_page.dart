@@ -105,7 +105,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(10.0),
                 child: SimilarMovies(myMovies: myMovies),
               ),
             ],

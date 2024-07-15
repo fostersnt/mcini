@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
+import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
 class MovieViewAllPage extends StatelessWidget {
@@ -38,6 +39,7 @@ class MovieViewAllPage extends StatelessWidget {
           ),
         ),
       ),
+      backgroundColor: AppColors.blackColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -45,27 +47,31 @@ class MovieViewAllPage extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: myMovies.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, // Number of items per row
-              crossAxisSpacing: 8, // Spacing between each item horizontally
-              mainAxisSpacing: 8, // Spacing between each row vertically
-              childAspectRatio:
-                  aspectRatio, // Ratio of width to height for each item
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Number of items per row
+              crossAxisSpacing: 4, // Spacing between each item horizontally
+              mainAxisSpacing: 4, // Spacing between each row vertically
+              childAspectRatio: 0.8,
+              // aspectRatio, // Ratio of width to height for each item
             ),
             itemBuilder: (context, index) {
               return Container(
-                color: AppColors.greySub,
-                width: itemWidth,
-                height: itemWidth / aspectRatio,
+                // width: itemWidth,
+                // height: itemWidth / aspectRatio,
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    myMovies[index].title ?? '',
-                    style: TextStyle(
-                      color: AppColors.whiteColor,
-                      fontSize: deviceSize.width * 0.04,
-                    ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: SingleMovieThumbnail(
+                    deviceSize: deviceSize,
+                    movieData: myMovies,
+                    movieIndex: index,
                   ),
+                  // child: Text(
+                  //   myMovies[index].title ?? '',
+                  //   style: TextStyle(
+                  //     color: AppColors.whiteColor,
+                  //     fontSize: deviceSize.width * 0.04,
+                  //   ),
+                  // ),
                 ),
               );
             },
