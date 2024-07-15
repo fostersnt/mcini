@@ -18,7 +18,10 @@ class CategoryNameWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MovieViewAllPage(myMovies: movies),
+            builder: (context) => MovieViewAllPage(
+              myMovies: movies,
+              collectionName: categoryName,
+            ),
           ),
         );
       },

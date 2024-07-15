@@ -4,8 +4,10 @@ import 'package:mcini/utilities/app_colors.dart';
 
 class MovieViewAllPage extends StatelessWidget {
   final List<MovieModel> myMovies;
+  final String collectionName;
 
-  const MovieViewAllPage({super.key, required this.myMovies});
+  const MovieViewAllPage(
+      {super.key, required this.myMovies, required this.collectionName});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,13 @@ class MovieViewAllPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          collectionName ?? 'Unknown Category',
+          style: TextStyle(
+            color: AppColors.blueColor,
+          ),
+        ),
         backgroundColor: AppColors.blackColor,
         leading: InkWell(
           onTap: () {
