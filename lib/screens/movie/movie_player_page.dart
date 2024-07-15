@@ -46,7 +46,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
           ),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         height: deviceSize.height,
         child: SingleChildScrollView(
           child: Column(
@@ -60,7 +60,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Text(
                   singleMovie.title ?? 'N/A',
                   style: TextStyle(
@@ -70,7 +70,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   children: [
                     Text(
@@ -84,7 +84,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Text(
                   singleMovie.description ?? 'N/A',
                   style: TextStyle(
@@ -94,7 +94,7 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Text(
                   'Similar Movies',
                   style: TextStyle(

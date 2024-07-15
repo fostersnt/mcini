@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 
-import 'package:mcini/utilities/app_colors.dart';
 
 class CustomPadding extends StatelessWidget {
   final Size screenSize;

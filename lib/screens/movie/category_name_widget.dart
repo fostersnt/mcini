@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/movie/movie_view_all_page.dart';

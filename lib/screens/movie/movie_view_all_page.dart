@@ -5,7 +5,7 @@ import 'package:mcini/utilities/app_colors.dart';
 class MovieViewAllPage extends StatelessWidget {
   final List<MovieModel> myMovies;
 
-  MovieViewAllPage({Key? key, required this.myMovies}) : super(key: key);
+  const MovieViewAllPage({super.key, required this.myMovies});
 
   @override
   Widget build(BuildContext context) {

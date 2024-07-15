@@ -43,7 +43,7 @@ class SubscriptionDetailsPage extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         color: AppColors.blueColor,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Text(
           subscriptionData['subscription_status'] ?? 'N/A',
           style: TextStyle(color: AppColors.whiteColor),

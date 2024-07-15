@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
-import 'package:mcini/data/model/subscriber_model.dart';
-import 'package:mcini/utilities/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 sealed class LocalStorage {

@@ -6,7 +6,6 @@ import 'package:mcini/screens/login/login_page.dart';
 import 'package:mcini/screens/profile/profile_partials.dart';
 import 'package:mcini/screens/profile/subscription_details_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
-import 'package:mcini/utilities/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   final Map<String, dynamic> subscriberData;
@@ -92,6 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
         final subscriberData = widget.subscriberData;
         // final subscriberData = await LocalStorage.getStoredSubscriber();
         print('SSSSSSSS ===== $subscriberData');
+        print('MY INITIAL SWITCH VALUE ===== $initialSwitchValue');
         if (initialSwitchValue == true) {
           AppColors.showCustomModal(context, 'Unsubscription in progress...');
           Future.delayed(
@@ -127,12 +127,11 @@ class _ProfilePageState extends State<ProfilePage> {
               }
             },
           );
-        } else if (subscriberData != null &&
-            subscriberData['subscription_status'].toLowerCase() == 'inactive' &&
+        } else if (subscriberData['subscription_status'].toLowerCase() ==
+                'inactive' &&
             initialSwitchValue == false) {
           String? planName = await AppColors.showsubscriptionPlanModal(context);
           if (planName != null) {
-            print('SUBSCRIPTION PLAN: $planName');
             AppColors.showCustomModal(
               context,
               'Please wait...',
@@ -144,6 +143,9 @@ class _ProfilePageState extends State<ProfilePage> {
               planName,
             );
             //CHECKING IF SUBSCRIPTION REQUEST HAS BEEN SENT SUCCESSFULLY
+            print('SUBSCRIPTION PLAN: $planName');
+            print('SUBSCRIPTION CALL: $subscriptionCall');
+            print('INITIAL SWITCH: $initialSwitchValue');
             if (subscriptionCall == true) {
               Navigator.of(context).pop();
 
@@ -168,33 +170,36 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                 },
               );
-              Future.delayed(const Duration(seconds: 40), () async {
-                final subscriptionStatus =
-                    await SubscriberModel.subscriptionStatus(
-                        subscriberData['msisdn']);
-                Navigator.of(context).pop();
+              Future.delayed(
+                const Duration(seconds: 40),
+                () async {
+                  final subscriptionStatus =
+                      await SubscriberModel.subscriptionStatus(
+                          subscriberData['msisdn']);
+                  Navigator.of(context).pop();
 
-                if (subscriptionStatus.toLowerCase() == 'inactive') {
-                  setState(() {
-                    initialSwitchValue = true;
-                  });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    AppColors.customSnackBar(
-                      'Subscription successful',
-                      deviceSize,
-                      false,
-                    ),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    AppColors.customSnackBar(
-                      'Subscription failed',
-                      deviceSize,
-                      true,
-                    ),
-                  );
-                }
-              });
+                  if (subscriptionStatus.toLowerCase() == 'active') {
+                    setState(() {
+                      initialSwitchValue = true;
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      AppColors.customSnackBar(
+                        'Subscription successful',
+                        deviceSize,
+                        false,
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      AppColors.customSnackBar(
+                        'Subscription failed',
+                        deviceSize,
+                        true,
+                      ),
+                    );
+                  }
+                },
+              );
             } else {
               print('FAILED TO CHANGE INITIAL SWITCH VALUE');
               setState(() {
