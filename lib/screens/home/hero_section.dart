@@ -25,10 +25,10 @@ class HeroSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                child: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.whiteColor,
-                  size: deviceSize.width * 0.05,
+                child: Image.asset(
+                  'lib/assets/images/mcini_logo.png',
+                  // width: 20,
+                  // height: 20,
                 ),
                 onTap: () {
                   print("Mcini logo is clicked");

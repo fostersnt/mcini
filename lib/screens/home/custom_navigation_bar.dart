@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/screens/home/home_page.dart';
+import 'package:mcini/screens/home/search_page.dart';
 import 'package:mcini/screens/profile/profile_page.dart';
 import 'package:mcini/screens/shimmer_effect/home_page_shimmer.dart';
 import 'package:mcini/utilities/app_colors.dart';
@@ -23,7 +24,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       // Center(child: Text('Home')),
       const Center(child: Text('Favorites')),
       // const Center(child: Text('Search')),
-      const HomePageShimmerEffect(),
+      // const HomePageShimmerEffect(),
+      SearchPage(),
       ProfilePage(subscriberData: widget.subscriberModel),
     ];
 
