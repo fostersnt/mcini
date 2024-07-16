@@ -32,8 +32,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
-  flutter_localization: ^0.2.0
-  intl: ^0.18.1
+  # flutter_localization: ^0.2.0
+  # intl: ^0.18.1
   grouped_list: ^5.1.2
   http: ^1.2.1
   # video_player: ^2.8.6
