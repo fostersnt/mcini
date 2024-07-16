@@ -169,7 +169,14 @@ class _SearchPageState extends State<SearchPage> {
                         },
                       ),
                     )
-                  : const Center(child: Text('No results found')),
+                  : Center(
+                      child: Text(
+                        'No results found',
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                    ),
     );
   }
 }
