@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:mcini/data/provider/movie_provider.dart';
+import 'package:mcini/utilities/app_colors.dart';
+import 'package:mcini/utilities/shared_preferences.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -13,45 +15,40 @@ class _SearchPageState extends State<SearchPage> {
   TextEditingController _searchController = TextEditingController();
   List<dynamic> _results = [];
   bool _isLoading = false;
+  bool _isDefault = true;
+  List<String> searchHistory = [];
 
-  // Future<void> _search() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
+  @override
+  void initState() {
+    super.initState();
+    _fetchSearchHistory(); // Fetch data on page load
+  }
 
-  //   String query = _searchController.text;
-  //   if (query.isEmpty) {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //     return;
-  //   }
+  Future<void> _fetchSearchHistory() async {
+    final data = await LocalStorage.getSearchHistory();
+    if (data != null) {
+      setState(() async {
+        searchHistory = data;
+      });
+    }
+  }
 
-  //   // Replace with your API URL
-  //   final response =
-  //       await http.get(Uri.parse('https://api.example.com/search?q=$query'));
-
-  //   if (response.statusCode == 200) {
-  //     setState(() {
-  //       _results = json.decode(response.body);
-  //       _isLoading = false;
-  //     });
-  //   } else {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //     throw Exception('Failed to load data');
-  //   }
-  // }
+  void _removeItem(int index) {
+    setState(() {
+      searchHistory.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: TextField(
+          autofocus: true,
           controller: _searchController,
           decoration: const InputDecoration(
-            hintText: 'Search...',
+            hintText: 'Search by movie title...',
             border: InputBorder.none,
           ),
         ),
@@ -59,24 +56,43 @@ class _SearchPageState extends State<SearchPage> {
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () async {
+              setState(() {
+                _isLoading = true;
+              });
+              final check = searchHistory.where(
+                (element) =>
+                    element.toLowerCase() ==
+                    _searchController.text.toLowerCase(),
+              );
+              if (check.length < 1) {
+                setState(() {
+                  searchHistory.add(_searchController.text);
+                });
+              }
               final provider = MovieProvider();
-              final moviedata = await provider.getAllData();
-              if (moviedata.isNotEmpty) {
+              _results = await provider.getAllData();
+              if (_results.isNotEmpty) {
                 print('MOVIE DATA FOR SEARCHING IS NOT EMPTY');
                 print(
-                    'FIRST MOVIE COLLECTION IS: ${moviedata[0].collectionName}');
+                    'FIRST MOVIE COLLECTION IS: ${_results[0].collectionName}');
               } else {
                 print('MOVIE DATA FOR SEARCHING IS EMPTY');
               }
+              setState(() {
+                _isLoading = false;
+              });
             },
           ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _results.isEmpty
-              ? const Center(child: Text('No results found'))
-              : ListView.builder(
+          ? Center(
+              child: CircularProgressIndicator(
+                color: AppColors.blueColor,
+              ),
+            )
+          : _results.isNotEmpty
+              ? ListView.builder(
                   itemCount: _results.length,
                   itemBuilder: (context, index) {
                     return ListTile(
@@ -84,7 +100,27 @@ class _SearchPageState extends State<SearchPage> {
                       subtitle: Text(_results[index]['description']),
                     );
                   },
-                ),
+                )
+              : _isDefault
+                  ? Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: ListView.builder(
+                        itemCount: _results.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(searchHistory[index]),
+                            subtitle: Text(searchHistory[index]),
+                            trailing: IconButton(
+                              icon: Icon(Icons.close),
+                              onPressed: () {
+                                _removeItem(index);
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  : const Center(child: Text('No results found')),
     );
   }
 }

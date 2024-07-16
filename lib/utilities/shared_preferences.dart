@@ -98,4 +98,16 @@ sealed class LocalStorage {
         return '${day}th';
     }
   }
+
+// Function to store a list of strings
+  static Future<void> storeSearchHistroy(List<String> strings) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('historyData', strings);
+  }
+
+  // Function to retrieve the list of strings
+  static Future<List<String>?> getSearchHistory() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('historyData');
+  }
 }
