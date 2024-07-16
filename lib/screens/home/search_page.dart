@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mcini/data/model/movie_model.dart';
 import 'dart:convert';
-
 import 'package:mcini/data/provider/movie_provider.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:mcini/utilities/shared_preferences.dart';
@@ -13,7 +13,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   TextEditingController _searchController = TextEditingController();
-  List<dynamic> _results = [];
+  List<MovieModel> _results = [];
   bool _isLoading = false;
   bool _isDefault = true;
   List<String> searchHistory = [];
@@ -27,7 +27,7 @@ class _SearchPageState extends State<SearchPage> {
   Future<void> _fetchSearchHistory() async {
     final data = await LocalStorage.getSearchHistory();
     if (data != null) {
-      setState(() async {
+      setState(() {
         searchHistory = data;
       });
     }
@@ -59,18 +59,22 @@ class _SearchPageState extends State<SearchPage> {
               setState(() {
                 _isLoading = true;
               });
-              final check = searchHistory.where(
-                (element) =>
-                    element.toLowerCase() ==
-                    _searchController.text.toLowerCase(),
-              );
-              if (check.length < 1) {
+
+              final query = _searchController.text;
+              if (query.isNotEmpty && !searchHistory.contains(query)) {
                 setState(() {
-                  searchHistory.add(_searchController.text);
+                  searchHistory.add(query);
                 });
+                await LocalStorage.storeSearchHistroy(searchHistory);
               }
+
               final provider = MovieProvider();
               _results = await provider.getAllData();
+              setState(() {
+                _isLoading = false;
+                _isDefault = false;
+              });
+
               if (_results.isNotEmpty) {
                 print('MOVIE DATA FOR SEARCHING IS NOT EMPTY');
                 print(
@@ -78,9 +82,6 @@ class _SearchPageState extends State<SearchPage> {
               } else {
                 print('MOVIE DATA FOR SEARCHING IS EMPTY');
               }
-              setState(() {
-                _isLoading = false;
-              });
             },
           ),
         ],
@@ -96,8 +97,8 @@ class _SearchPageState extends State<SearchPage> {
                   itemCount: _results.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(_results[index]['title']),
-                      subtitle: Text(_results[index]['description']),
+                      title: Text(_results[index].title ?? 'N/A'),
+                      subtitle: Text(_results[index].collectionName ?? 'N/AAA'),
                     );
                   },
                 )
@@ -105,15 +106,15 @@ class _SearchPageState extends State<SearchPage> {
                   ? Padding(
                       padding: EdgeInsets.all(10.0),
                       child: ListView.builder(
-                        itemCount: _results.length,
+                        itemCount: searchHistory.length,
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(searchHistory[index]),
-                            subtitle: Text(searchHistory[index]),
                             trailing: IconButton(
                               icon: Icon(Icons.close),
                               onPressed: () {
                                 _removeItem(index);
+                                LocalStorage.storeSearchHistroy(searchHistory);
                               },
                             ),
                           );
