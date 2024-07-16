@@ -87,7 +87,7 @@ class SubscriberModel {
       print('ERROR RESPONSE DATA: ${e.toString()}');
       return {
         'response_status': 'failed',
-        'response_message': e.toString(),
+        'response_message': 'Unable to reach mcini.tv',
       };
     }
   }
