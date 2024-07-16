@@ -130,82 +130,81 @@ class _ProfilePageState extends State<ProfilePage> {
         } else if (subscriberData['subscription_status'].toLowerCase() ==
                 'inactive' &&
             initialSwitchValue == false) {
-          String? planName = await AppColors.showsubscriptionPlanModal(context);
-          if (planName != null) {
+          String planName =
+              await AppColors.showsubscriptionPlanModal(context) ?? 'N/A';
+          AppColors.showCustomModal(
+            context,
+            'Please wait...',
+            isDismissible: false,
+            isProcessing: true,
+          );
+          bool subscriptionCall = await SubscriberModel.initiateSubscription(
+            subscriberData['msisdn'],
+            planName,
+          );
+          //CHECKING IF SUBSCRIPTION REQUEST HAS BEEN SENT SUCCESSFULLY
+          print('SUBSCRIPTION PLAN: $planName');
+          print('SUBSCRIPTION CALL: $subscriptionCall');
+          print('INITIAL SWITCH: $initialSwitchValue');
+          if (subscriptionCall == true) {
+            Navigator.of(context).pop();
+
+            subscriptionCall = false;
             AppColors.showCustomModal(
               context,
-              'Please wait...',
+              'Approve the momo prompt to continue',
               isDismissible: false,
               isProcessing: true,
             );
-            bool subscriptionCall = await SubscriberModel.initiateSubscription(
-              subscriberData['msisdn'],
-              planName,
-            );
-            //CHECKING IF SUBSCRIPTION REQUEST HAS BEEN SENT SUCCESSFULLY
-            print('SUBSCRIPTION PLAN: $planName');
-            print('SUBSCRIPTION CALL: $subscriptionCall');
-            print('INITIAL SWITCH: $initialSwitchValue');
-            if (subscriptionCall == true) {
-              Navigator.of(context).pop();
-
-              subscriptionCall = false;
-              AppColors.showCustomModal(
-                context,
-                'Approve the momo prompt to continue',
-                isDismissible: false,
-                isProcessing: true,
-              );
-              Future.delayed(
-                const Duration(seconds: 10),
-                () {
-                  if (Navigator.of(context).canPop()) {
-                    Navigator.of(context).pop();
-                    AppColors.showCustomModal(
-                      context,
-                      'Confirming subscription...',
-                      isDismissible: false,
-                      isProcessing: true,
-                    );
-                  }
-                },
-              );
-              Future.delayed(
-                const Duration(seconds: 40),
-                () async {
-                  final subscriptionStatus =
-                      await SubscriberModel.subscriptionStatus(
-                          subscriberData['msisdn']);
+            Future.delayed(
+              const Duration(seconds: 10),
+              () {
+                if (Navigator.of(context).canPop()) {
                   Navigator.of(context).pop();
+                  AppColors.showCustomModal(
+                    context,
+                    'Confirming subscription...',
+                    isDismissible: false,
+                    isProcessing: true,
+                  );
+                }
+              },
+            );
+            Future.delayed(
+              const Duration(seconds: 40),
+              () async {
+                final subscriptionStatus =
+                    await SubscriberModel.subscriptionStatus(
+                        subscriberData['msisdn']);
+                Navigator.of(context).pop();
 
-                  if (subscriptionStatus.toLowerCase() == 'active') {
-                    setState(() {
-                      initialSwitchValue = true;
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      AppColors.customSnackBar(
-                        'Subscription successful',
-                        deviceSize,
-                        false,
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      AppColors.customSnackBar(
-                        'Subscription failed',
-                        deviceSize,
-                        true,
-                      ),
-                    );
-                  }
-                },
-              );
-            } else {
-              print('FAILED TO CHANGE INITIAL SWITCH VALUE');
-              setState(() {
-                initialSwitchValue = false;
-              });
-            }
+                if (subscriptionStatus.toLowerCase() == 'active') {
+                  setState(() {
+                    initialSwitchValue = true;
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    AppColors.customSnackBar(
+                      'Subscription successful',
+                      deviceSize,
+                      false,
+                    ),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    AppColors.customSnackBar(
+                      'Subscription failed',
+                      deviceSize,
+                      true,
+                    ),
+                  );
+                }
+              },
+            );
+          } else {
+            print('FAILED TO CHANGE INITIAL SWITCH VALUE');
+            setState(() {
+              initialSwitchValue = false;
+            });
           }
           print('NETWORK PREFIX: ${subscriberData['msisdn'].substring(3, 5)}');
         } else {
