@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:mcini/data/model/movie_model.dart';
 import 'dart:convert';
 import 'package:mcini/data/provider/movie_provider.dart';
+import 'package:mcini/screens/movie/movie_player_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:mcini/utilities/shared_preferences.dart';
 
@@ -17,6 +18,7 @@ class _SearchPageState extends State<SearchPage> {
   bool _isLoading = false;
   bool _isDefault = true;
   List<String> searchHistory = [];
+  List<MovieModel> _filteredMovies = [];
 
   @override
   void initState() {
@@ -42,19 +44,27 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.blackColor,
       appBar: AppBar(
+        backgroundColor: AppColors.blackColor,
         automaticallyImplyLeading: false,
         title: TextField(
           autofocus: true,
           controller: _searchController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'Search by movie title...',
             border: InputBorder.none,
+            fillColor: AppColors.whiteColor,
+            filled: true,
           ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(
+              Icons.search,
+              size: 30,
+              color: AppColors.whiteColor,
+            ),
             onPressed: () async {
               setState(() {
                 _isLoading = true;
@@ -69,14 +79,22 @@ class _SearchPageState extends State<SearchPage> {
               }
 
               final provider = MovieProvider();
-              _results = await provider.getAllData();
+              final movieResult = await provider.getAllData();
               setState(() {
+                _results = movieResult;
                 _isLoading = false;
                 _isDefault = false;
               });
 
               if (_results.isNotEmpty) {
                 print('MOVIE DATA FOR SEARCHING IS NOT EMPTY');
+                setState(() {
+                  _filteredMovies = _results.where((movie) {
+                    return movie.title!
+                        .toLowerCase()
+                        .contains(_searchController.text.toLowerCase());
+                  }).toList();
+                });
                 print(
                     'FIRST MOVIE COLLECTION IS: ${_results[0].collectionName}');
               } else {
@@ -92,13 +110,35 @@ class _SearchPageState extends State<SearchPage> {
                 color: AppColors.blueColor,
               ),
             )
-          : _results.isNotEmpty
+          : _filteredMovies.isNotEmpty
               ? ListView.builder(
-                  itemCount: _results.length,
+                  itemCount: _filteredMovies.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(_results[index].title ?? 'N/A'),
-                      subtitle: Text(_results[index].collectionName ?? 'N/AAA'),
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return MoviePlayerPage(
+                              movie_index: index,
+                              movies: _filteredMovies,
+                            );
+                          },
+                        ));
+                      },
+                      child: ListTile(
+                        title: Text(
+                          _filteredMovies[index].title ?? 'N/A',
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
+                        subtitle: Text(
+                          _filteredMovies[index].collectionName ?? 'N/AAA',
+                          style: TextStyle(
+                            color: AppColors.whiteColor,
+                          ),
+                        ),
+                      ),
                     );
                   },
                 )
@@ -109,9 +149,17 @@ class _SearchPageState extends State<SearchPage> {
                         itemCount: searchHistory.length,
                         itemBuilder: (context, index) {
                           return ListTile(
-                            title: Text(searchHistory[index]),
+                            title: Text(
+                              searchHistory[index],
+                              style: TextStyle(
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
                             trailing: IconButton(
-                              icon: Icon(Icons.close),
+                              icon: Icon(
+                                Icons.close,
+                                color: AppColors.whiteColor,
+                              ),
                               onPressed: () {
                                 _removeItem(index);
                                 LocalStorage.storeSearchHistroy(searchHistory);
