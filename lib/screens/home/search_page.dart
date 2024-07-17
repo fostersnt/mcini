@@ -45,9 +45,9 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.blackColor,
+      backgroundColor: AppColors.greySub,
       appBar: AppBar(
-        backgroundColor: AppColors.blackColor,
+        backgroundColor: AppColors.greyMain,
         automaticallyImplyLeading: false,
         title: TextField(
           autofocus: true,

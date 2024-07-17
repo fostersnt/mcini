@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mcini/screens/home/favorite_movies_page.dart';
 import 'package:mcini/screens/home/home_page.dart';
 import 'package:mcini/screens/home/search_page.dart';
 import 'package:mcini/screens/profile/profile_page.dart';
@@ -22,7 +23,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       // const HomePage(),
       const HomeView(),
       // Center(child: Text('Home')),
-      const Center(child: Text('Favorites')),
+      FavoriteMoviesPage(),
       // const Center(child: Text('Search')),
       // const HomePageShimmerEffect(),
       SearchPage(),
@@ -128,7 +129,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                         size: iconSize,
                       ),
                       Text(
-                        'Favorite',
+                        'Favorites',
                         style: TextStyle(
                           color: selectedIndex == 1
                               ? AppColors.blueColor

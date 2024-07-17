@@ -23,6 +23,8 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
   void initState() {
     super.initState();
     // Initialize the WebViewController
+    print('MOVIE INDEX: ${widget.movie_index}');
+    print('MOVIES: ${widget.movies[widget.movie_index].thumbnail}');
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(

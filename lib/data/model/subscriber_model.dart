@@ -115,7 +115,7 @@ class SubscriberModel {
 
     bool susbcriptionApiResult = false;
 
-    String plan = '';
+    // String plan = '';
 
     String network = networkType(msisdn).toLowerCase();
 
@@ -182,8 +182,8 @@ class SubscriberModel {
   }
 
   static Future<bool> atSubscription(String msisdn, bool isDailyPlan) async {
-    String baseURL = IRepository.apiBaseURL;
-    String endpoint = '';
+    // String baseURL = IRepository.apiBaseURL;
+    // String endpoint = '';
     // final data =
     // final requestBody = {
     //   'msisdn': '',
@@ -195,7 +195,7 @@ class SubscriberModel {
   }
 
   static Future<Map<String, dynamic>> subscriptionCallBack(msisdn) async {
-    final requestBody = {'msisdn': msisdn};
+    // final requestBody = {'msisdn': msisdn};
     return {'': ''};
   }
 
