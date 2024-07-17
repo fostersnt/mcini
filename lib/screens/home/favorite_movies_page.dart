@@ -102,7 +102,7 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
           ),
         ),
       ),
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.blackColor,
       body: movies.length > 0
           ? SingleChildScrollView(
               child: Padding(
