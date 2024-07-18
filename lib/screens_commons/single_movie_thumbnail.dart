@@ -9,7 +9,7 @@ import 'package:mcini/utilities/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SingleMovieThumbnail extends StatefulWidget {
-  const SingleMovieThumbnail({
+  SingleMovieThumbnail({
     super.key,
     required this.deviceSize,
     required this.movieData,
@@ -18,7 +18,7 @@ class SingleMovieThumbnail extends StatefulWidget {
   });
   final Size deviceSize;
   final List<MovieModel> movieData;
-  final int movieIndex;
+  int movieIndex;
   final Widget childWidget;
 
   @override
@@ -36,6 +36,11 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
   void initState() {
     super.initState();
     // Initialize the WebViewController
+    print('MOVIE INDEX INDEX 1 === ${widget.movieIndex}');
+    if (widget.movieData.length == widget.movieIndex) {
+      widget.movieIndex = widget.movieData.length - 1;
+    }
+
     if (widget.movieData[widget.movieIndex].thumbnail != null) {
       _controller = WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
