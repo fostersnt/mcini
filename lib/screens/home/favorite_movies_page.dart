@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mcini/data/interface/i_repository.dart';
 import 'package:mcini/data/model/movie_model.dart';
@@ -9,9 +8,10 @@ import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:http/http.dart' as http;
 import 'package:mcini/utilities/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class FavoriteMoviesPage extends StatefulWidget {
+  const FavoriteMoviesPage({super.key});
+
   @override
   State<FavoriteMoviesPage> createState() => _FavoriteMoviesPageState();
 }
@@ -40,7 +40,7 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
           await http.post(Uri.parse(url), body: {'msisdn': '233244931075'});
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
-        print('JSON DATA: ${jsonData}');
+        print('JSON DATA: $jsonData');
         if (jsonData['success'].toString().toLowerCase() == 'true') {
           final videos = jsonData['data'];
           if (videos.isNotEmpty) {
@@ -105,7 +105,7 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
         ),
       ),
       backgroundColor: AppColors.blackColor,
-      body: movies.length > 0
+      body: movies.isNotEmpty
           ? SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),

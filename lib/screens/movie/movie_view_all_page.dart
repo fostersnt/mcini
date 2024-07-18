@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens_commons/single_movie_thumbnail.dart';

@@ -111,7 +111,7 @@ class MovieModel {
       final response = await http.post(Uri.parse(url), body: requestBody);
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
-        print('MOVIE LIKING/UNLIKING RESPONSE === ${jsonData}');
+        print('MOVIE LIKING/UNLIKING RESPONSE === $jsonData');
         if (jsonData['success'].toString().toLowerCase() == 'true') {
           result = true;
         }

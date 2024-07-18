@@ -58,7 +58,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
     final thumbnailWidth = widget.deviceSize.width * 0.4;
-    final thumbnailHeight = widget.deviceSize.width * 0.5;
+    // final thumbnailHeight = widget.deviceSize.width * 0.5;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

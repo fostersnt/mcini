@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:mcini/data/model/movie_model.dart';
-import 'dart:convert';
 import 'package:mcini/data/provider/movie_provider.dart';
 import 'package:mcini/screens/movie/movie_player_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:mcini/utilities/shared_preferences.dart';
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<MovieModel> _results = [];
   bool _isLoading = false;
   bool _isDefault = true;
@@ -145,7 +145,7 @@ class _SearchPageState extends State<SearchPage> {
                 )
               : _isDefault
                   ? Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: ListView.builder(
                         itemCount: searchHistory.length,
                         itemBuilder: (context, index) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mcini/screens/home/search_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
-import 'package:mcini/screens/home/search_page.dart';
 
 class HeroSection extends StatelessWidget {
   final Size deviceSize;
@@ -44,13 +43,13 @@ class HeroSection extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SearchPage(),
+                      builder: (context) => const SearchPage(),
                     ),
                   );
                   print("Search icon is clicked");
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SearchPage()),
+                    MaterialPageRoute(builder: (context) => const SearchPage()),
                   );
                 },
               ),

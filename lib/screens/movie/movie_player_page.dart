@@ -3,7 +3,6 @@ import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens/movie/similar_movies.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:mcini/screens/movie/movie_view_all_page.dart';
 
 class MoviePlayerPage extends StatefulWidget {
   final int movie_index;
