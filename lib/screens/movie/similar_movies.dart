@@ -55,8 +55,6 @@ class SimilarMovies extends StatelessWidget {
                     ),
                   ),
                 );
-              } else {
-                return null;
               }
             }
 
