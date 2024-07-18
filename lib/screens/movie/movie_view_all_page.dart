@@ -64,6 +64,16 @@ class MovieViewAllPage extends StatelessWidget {
                     deviceSize: deviceSize,
                     movieData: myMovies,
                     movieIndex: index,
+                    childWidget: Text(
+                      myMovies[index].title ?? '',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: AppColors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: deviceSize.width * 0.03,
+                      ),
+                    ),
                   ),
                   // child: Text(
                   //   myMovies[index].title ?? '',

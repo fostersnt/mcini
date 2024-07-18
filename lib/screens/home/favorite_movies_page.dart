@@ -8,6 +8,7 @@ import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 import 'package:http/http.dart' as http;
 import 'package:mcini/utilities/shared_preferences.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class FavoriteMoviesPage extends StatefulWidget {
   @override
@@ -128,6 +129,34 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
                           deviceSize: deviceSize,
                           movieData: movies,
                           movieIndex: index,
+                          childWidget: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                movies[index].title ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: AppColors.whiteColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: deviceSize.width * 0.03,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: InkWell(
+                                  onTap: () {
+                                    print(
+                                        'FAVOURITE MOVIE ID === ${movies[index].id}');
+                                  },
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: AppColors.blueColor,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );

@@ -94,6 +94,16 @@ class HomeView extends StatelessWidget {
                             deviceSize: screenSize,
                             movieData: latestMovies,
                             movieIndex: index,
+                            childWidget: Text(
+                              movieData[index].title ?? '',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: AppColors.whiteColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenSize.width * 0.03,
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -132,6 +142,16 @@ class HomeView extends StatelessWidget {
                                       deviceSize: screenSize,
                                       movieData: moviesInCategory,
                                       movieIndex: subIndex,
+                                      childWidget: Text(
+                                        movieData[index].title ?? '',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: AppColors.whiteColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: screenSize.width * 0.03,
+                                        ),
+                                      ),
                                     ),
                                   );
                                 },

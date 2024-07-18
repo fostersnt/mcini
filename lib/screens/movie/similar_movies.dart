@@ -42,6 +42,16 @@ class SimilarMovies extends StatelessWidget {
                       deviceSize: deviceSize,
                       movieData: myMovies,
                       movieIndex: index + 1,
+                      childWidget: Text(
+                        myMovies[index].title ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: deviceSize.width * 0.03,
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -57,6 +67,16 @@ class SimilarMovies extends StatelessWidget {
                   deviceSize: deviceSize,
                   movieData: myMovies,
                   movieIndex: index,
+                  childWidget: Text(
+                    myMovies[index].title ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: AppColors.whiteColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: deviceSize.width * 0.03,
+                    ),
+                  ),
                 ),
               ),
             );

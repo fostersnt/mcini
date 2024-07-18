@@ -9,14 +9,17 @@ import 'package:mcini/utilities/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SingleMovieThumbnail extends StatefulWidget {
-  const SingleMovieThumbnail(
-      {super.key,
-      required this.deviceSize,
-      required this.movieData,
-      required this.movieIndex});
+  const SingleMovieThumbnail({
+    super.key,
+    required this.deviceSize,
+    required this.movieData,
+    required this.movieIndex,
+    required this.childWidget,
+  });
   final Size deviceSize;
   final List<MovieModel> movieData;
   final int movieIndex;
+  final Widget childWidget;
 
   @override
   State<SingleMovieThumbnail> createState() => _SingleMovieThumbnailState();
@@ -139,15 +142,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
           padding: const EdgeInsets.fromLTRB(3, 5, 0, 0),
           child: SizedBox(
             width: thumbnailWidth,
-            child: Text(
-              widget.movieData[widget.movieIndex].title ?? '',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: AppColors.whiteColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: widget.deviceSize.width * 0.03),
-            ),
+            child: widget.childWidget,
           ),
         ),
       ],
