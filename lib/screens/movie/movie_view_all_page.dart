@@ -4,13 +4,19 @@ import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
 import 'package:mcini/utilities/app_colors.dart';
 
-class MovieViewAllPage extends StatelessWidget {
+class MovieViewAllPage extends StatefulWidget {
   final List<MovieModel> myMovies;
   final String collectionName;
 
   const MovieViewAllPage(
       {super.key, required this.myMovies, required this.collectionName});
 
+  @override
+  State<MovieViewAllPage> createState() => _MovieViewAllPageState();
+}
+
+class _MovieViewAllPageState extends State<MovieViewAllPage> {
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
@@ -23,7 +29,7 @@ class MovieViewAllPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          collectionName ?? 'Unknown Category',
+          widget.collectionName ?? 'Unknown Category',
           style: TextStyle(
             color: AppColors.blueColor,
           ),
@@ -47,7 +53,7 @@ class MovieViewAllPage extends StatelessWidget {
           child: GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: myMovies.length,
+            itemCount: widget.myMovies.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, // Number of items per row
               crossAxisSpacing: 4, // Spacing between each item horizontally
@@ -63,14 +69,14 @@ class MovieViewAllPage extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: SingleMovieThumbnail(
                     deviceSize: deviceSize,
-                    movieData: myMovies,
+                    movieData: widget.myMovies,
                     movieIndex: index,
                     childWidget: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Text(
-                            myMovies[index].title ?? '',
+                            widget.myMovies[index].title ?? '',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -83,13 +89,21 @@ class MovieViewAllPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                           child: InkWell(
-                            onTap: () {
+                            onTap: () async {
+                              bool result =
+                                  await MovieModel.like_Or_Unlike_Movie(
+                                      '1', widget.myMovies[index].id);
+                              setState(() {
+                                isFavorite = result;
+                              });
                               print(
-                                  'FAVOURITE MOVIE ID === ${myMovies[index].id}');
+                                  'FAVOURITE MOVIE ID === ${widget.myMovies[index].id}');
                             },
                             child: Icon(
                               Icons.favorite,
-                              color: AppColors.whiteColor,
+                              color: isFavorite
+                                  ? AppColors.blueColor
+                                  : AppColors.whiteColor,
                             ),
                           ),
                         )
