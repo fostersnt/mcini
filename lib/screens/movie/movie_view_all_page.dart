@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/movie_model.dart';
 import 'package:mcini/screens_commons/single_movie_thumbnail.dart';
@@ -64,15 +65,35 @@ class MovieViewAllPage extends StatelessWidget {
                     deviceSize: deviceSize,
                     movieData: myMovies,
                     movieIndex: index,
-                    childWidget: Text(
-                      myMovies[index].title ?? '',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: AppColors.whiteColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: deviceSize.width * 0.03,
-                      ),
+                    childWidget: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            myMovies[index].title ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: AppColors.whiteColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: deviceSize.width * 0.03,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: InkWell(
+                            onTap: () {
+                              print(
+                                  'FAVOURITE MOVIE ID === ${myMovies[index].id}');
+                            },
+                            child: Icon(
+                              Icons.favorite,
+                              color: AppColors.blueColor,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   // child: Text(

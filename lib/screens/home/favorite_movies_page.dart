@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mcini/data/interface/i_repository.dart';
 import 'package:mcini/data/model/movie_model.dart';
@@ -132,14 +133,16 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
                           childWidget: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                movies[index].title ?? '',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: AppColors.whiteColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: deviceSize.width * 0.03,
+                              Expanded(
+                                child: Text(
+                                  movies[index].title ?? '',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: AppColors.whiteColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: deviceSize.width * 0.03,
+                                  ),
                                 ),
                               ),
                               Padding(
