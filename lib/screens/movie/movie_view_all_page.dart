@@ -89,7 +89,7 @@ class MovieViewAllPage extends StatelessWidget {
                             },
                             child: Icon(
                               Icons.favorite,
-                              color: AppColors.blueColor,
+                              color: AppColors.whiteColor,
                             ),
                           ),
                         )
