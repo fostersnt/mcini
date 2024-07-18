@@ -168,10 +168,11 @@ class HomeView extends StatelessWidget {
           } else if (state is MovieErrorState) {
             final error = state.errorMessage;
             return Scaffold(
+              backgroundColor: AppColors.blackColor,
               body: Center(
                 child: Text(
                   error,
-                  style: const TextStyle(fontSize: 30),
+                  style: TextStyle(fontSize: 30, color: AppColors.whiteColor),
                 ),
               ),
             );
