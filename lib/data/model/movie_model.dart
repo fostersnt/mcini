@@ -91,7 +91,7 @@ class MovieModel {
   }
 
   static Future<bool> like_Or_Unlike_Movie(
-      String isFavourite, int movieId) async {
+      String isFavourite, String movieId) async {
     String baseURL = IRepository.apiBaseURL;
     String endpoint = 'movies/favorites';
     String url = '$baseURL/$endpoint';

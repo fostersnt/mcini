@@ -16,7 +16,15 @@ class MovieViewAllPage extends StatefulWidget {
 }
 
 class _MovieViewAllPageState extends State<MovieViewAllPage> {
-  bool isFavorite = false;
+  List<bool> isFavoriteList = []; // List to store favorite state for each movie
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the isFavoriteList with false for each movie
+    isFavoriteList = List.generate(widget.myMovies.length, (index) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size deviceSize = MediaQuery.of(context).size;
@@ -59,12 +67,9 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
               crossAxisSpacing: 4, // Spacing between each item horizontally
               mainAxisSpacing: 4, // Spacing between each row vertically
               childAspectRatio: 0.8,
-              // aspectRatio, // Ratio of width to height for each item
             ),
             itemBuilder: (context, index) {
               return Container(
-                // width: itemWidth,
-                // height: itemWidth / aspectRatio,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: SingleMovieThumbnail(
@@ -92,16 +97,17 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
                             onTap: () async {
                               bool result =
                                   await MovieModel.like_Or_Unlike_Movie(
-                                      '1', widget.myMovies[index].id);
+                                      '1', '${widget.myMovies[index].id}');
                               setState(() {
-                                isFavorite = result;
+                                isFavoriteList[index] =
+                                    result; // Update favorite state for this movie
                               });
                               print(
                                   'FAVOURITE MOVIE ID === ${widget.myMovies[index].id}');
                             },
                             child: Icon(
                               Icons.favorite,
-                              color: isFavorite
+                              color: isFavoriteList[index]
                                   ? AppColors.blueColor
                                   : AppColors.whiteColor,
                             ),
@@ -110,13 +116,6 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
                       ],
                     ),
                   ),
-                  // child: Text(
-                  //   myMovies[index].title ?? '',
-                  //   style: TextStyle(
-                  //     color: AppColors.whiteColor,
-                  //     fontSize: deviceSize.width * 0.04,
-                  //   ),
-                  // ),
                 ),
               );
             },
