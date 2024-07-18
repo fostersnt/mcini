@@ -36,7 +36,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
   void initState() {
     super.initState();
     // Initialize the WebViewController
-    print('MOVIE INDEX INDEX 1 === ${widget.movieIndex}');
+    // print('MOVIE INDEX INDEX 1 === ${widget.movieIndex}');
     if (widget.movieData.length == widget.movieIndex) {
       widget.movieIndex = widget.movieData.length - 1;
     }

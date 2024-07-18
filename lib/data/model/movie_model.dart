@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+import 'package:mcini/data/interface/i_repository.dart';
+import 'package:mcini/utilities/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
 class MovieModel {
   final String allMoviesEndpoint = '/movies';
 
@@ -82,5 +88,37 @@ class MovieModel {
       'default_thumbnail_filename': thumbnail,
       'video_url': videoUrl,
     };
+  }
+
+  static Future<bool> like_Or_Unlike_Movie(
+      String isFavourite, String movieId) async {
+    String baseURL = IRepository.apiBaseURL;
+    String endpoint = 'movies/favorites';
+    String url = '$baseURL/$endpoint';
+    bool result = false;
+    String msisdn = '';
+    try {
+      Map<String, dynamic>? subscriber =
+          await LocalStorage.getStoredSubscriber();
+      if (subscriber != null) {
+        msisdn = subscriber['msisdn'];
+      }
+      Map<String, dynamic> requestBody = {
+        'msisdn': msisdn,
+        'movieId': movieId,
+        'isFavorite': isFavourite,
+      };
+      final response = await http.post(Uri.parse(url), body: requestBody);
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        print('MOVIE LIKING/UNLIKING RESPONSE === ${jsonData}');
+        if (jsonData['success'].toString().toLowerCase() == 'true') {
+          result = true;
+        }
+      }
+    } catch (e) {
+      print('MOVIE LIKING/UNLIKING ERROR === ${e.toString()}');
+    }
+    return result;
   }
 }
