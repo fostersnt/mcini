@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:mcini/data/model/subscriber_model.dart';
+import 'package:mcini/screens/home/watch_history_page.dart';
 import 'package:mcini/screens/login/login_page.dart';
 
 import 'package:mcini/screens/profile/profile_partials.dart';
@@ -316,12 +317,15 @@ class _ProfilePageState extends State<ProfilePage> {
                             unSubscriptionIcon,
                             switchToggle,
                             () => null),
-                        ProfilePartials.subscriptionWidget(
-                            deviceSize,
-                            'Watch History',
-                            watchHistoryIcon,
-                            caretIcon,
-                            () => null),
+                        ProfilePartials.subscriptionWidget(deviceSize,
+                            'Watch History', watchHistoryIcon, caretIcon, () {
+                          print('WATCH HISTORY HAS BEEN CLICKED');
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const WatchHistoryPage();
+                            },
+                          ));
+                        }),
                       ],
                     ),
                   ),
