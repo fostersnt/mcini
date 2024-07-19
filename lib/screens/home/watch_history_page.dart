@@ -154,7 +154,7 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                                   },
                                   child: Icon(
                                     Icons.favorite,
-                                    color: AppColors.blueColor,
+                                    color: AppColors.whiteColor,
                                   ),
                                 ),
                               )
