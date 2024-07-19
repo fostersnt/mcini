@@ -19,11 +19,14 @@ class WatchHistoryPage extends StatefulWidget {
 class _WatchHistoryPageState extends State<WatchHistoryPage> {
   List<MovieModel> movies = [];
   final String collectionName = 'Watch History';
+  List<bool> isFavoriteList = [];
+  bool result = false;
 
   @override
   void initState() {
     super.initState();
     _fetchWatchHistoryMovies();
+    isFavoriteList = List.generate(movies.length, (index) => false);
   }
 
   Future<bool> _fetchWatchHistoryMovies() async {
@@ -37,13 +40,13 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
       String phoneNumber =
           subscriber != null ? subscriber['msisdn'] : 'unknown';
       final response =
-          await http.post(Uri.parse(url), body: {'msisdn': '233244931075'});
+          await http.post(Uri.parse(url), body: {'msisdn': phoneNumber});
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         print('JSON DATA: $jsonData');
         if (jsonData['success'].toString().toLowerCase() == 'true') {
           final videos = jsonData['data'];
-          if (videos.isNotEmpty) {
+          if (videos != null && videos.isNotEmpty) {
             // for (var video in videos) {
             //   data.add(MovieModel.fromJson(video));
             // }
@@ -148,12 +151,23 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                                 child: InkWell(
-                                  onTap: () {
+                                  onTap: () async {
+                                    bool result =
+                                        await MovieModel.like_Or_Unlike_Movie(
+                                            '1', '${movies[index].id}');
+                                    setState(() {
+                                      isFavoriteList[index] =
+                                          result; // Update favorite state for this movie
+                                    });
                                     print(
-                                        'FAVOURITE MOVIE ID === ${movies[index].id}');
+                                        'WATCH HISTORY MOVIE ID === ${movies[index].id}');
                                   },
                                   child: Icon(
                                     Icons.favorite,
+                                    // color: isFavoriteList.isNotEmpty &&
+                                    //         isFavoriteList[index]
+                                    //     ? AppColors.blueColor
+                                    //     : AppColors.whiteColor,
                                     color: AppColors.whiteColor,
                                   ),
                                 ),
@@ -167,8 +181,14 @@ class _WatchHistoryPageState extends State<WatchHistoryPage> {
                 ),
               ),
             )
-          : const Center(
-              child: Text('No Watch History movies'),
+          : Center(
+              child: Text(
+                'No Watch History movies',
+                style: TextStyle(
+                  color: AppColors.whiteColor,
+                  fontSize: deviceSize.width * 0.05,
+                ),
+              ),
             ),
     );
   }
