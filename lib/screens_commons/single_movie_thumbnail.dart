@@ -70,7 +70,7 @@ class _SingleMovieThumbnailState extends State<SingleMovieThumbnail> {
             if (subscriberData != null &&
                 subscriberData['subscription_status'] != null &&
                 subscriberData['subscription_status'].toLowerCase() ==
-                    'inactive') {
+                    'active') {
               Navigator.push(
                 context,
                 MaterialPageRoute(
