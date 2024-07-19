@@ -11,10 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const MyApp(), // Wrap your app
-    ),
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) => const MyApp(), // Wrap your app
+    // ),
+    const MyApp(), // Wrap your app
   );
 }
 
@@ -38,8 +39,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           // routes: getRoutes(),
           //Device preview settings
-          locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
+          // locale: DevicePreview.locale(context),
+          // builder: DevicePreview.appBuilder,
           title: 'Mcini Mobile',
           theme: ThemeData(
             fontFamily: 'Poppins',
