@@ -38,7 +38,13 @@ class _MoviePlayerPageSate extends State<MoviePlayerPage> {
     return Scaffold(
       backgroundColor: AppColors.blackColor,
       appBar: AppBar(
-        title: const Text('Video Player'),
+        // title: Text(
+        //   widget.movies[widget.movie_index].title ?? 'Player',
+        //   style: TextStyle(
+        //     color: AppColors.blueColor,
+        //   ),
+        // ),
+        centerTitle: true,
         backgroundColor: AppColors.blackColor,
         leading: InkWell(
           onTap: () {

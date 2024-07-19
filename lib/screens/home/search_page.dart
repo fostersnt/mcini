@@ -43,6 +43,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.greySub,
@@ -130,6 +131,11 @@ class _SearchPageState extends State<SearchPage> {
                         ));
                       },
                       child: ListTile(
+                        leading: Icon(
+                          Icons.play_arrow_rounded,
+                          color: AppColors.whiteColor,
+                          size: 30,
+                        ),
                         title: Text(
                           _filteredMovies[index].title ?? 'N/A',
                           style: TextStyle(
@@ -152,23 +158,40 @@ class _SearchPageState extends State<SearchPage> {
                       child: ListView.builder(
                         itemCount: searchHistory.length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(
-                              searchHistory[index],
-                              style: TextStyle(
+                          return Column(
+                            children: [
+                              Divider(
                                 color: AppColors.whiteColor,
                               ),
-                            ),
-                            trailing: IconButton(
-                              icon: Icon(
-                                Icons.close,
+                              ListTile(
+                                leading: Icon(
+                                  Icons.search,
+                                  color: AppColors.whiteColor,
+                                  size: 30,
+                                ),
+                                title: Text(
+                                  searchHistory[index],
+                                  style: TextStyle(
+                                    color: AppColors.whiteColor,
+                                    fontSize: deviceSize.width * 0.05,
+                                  ),
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(
+                                    Icons.close,
+                                    color: AppColors.whiteColor,
+                                  ),
+                                  onPressed: () {
+                                    _removeItem(index);
+                                    LocalStorage.storeSearchHistroy(
+                                        searchHistory);
+                                  },
+                                ),
+                              ),
+                              Divider(
                                 color: AppColors.whiteColor,
                               ),
-                              onPressed: () {
-                                _removeItem(index);
-                                LocalStorage.storeSearchHistroy(searchHistory);
-                              },
-                            ),
+                            ],
                           );
                         },
                       ),
