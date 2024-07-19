@@ -113,54 +113,58 @@ class HomeView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
-                    children: List.generate(groupedMoviesList.length, (index) {
-                      String category = groupedMoviesList[index].key;
-                      List<MovieModel> moviesInCategory =
-                          groupedMoviesList[index].value;
+                    children: List.generate(
+                      groupedMoviesList.length,
+                      (index) {
+                        String category = groupedMoviesList[index].key;
+                        List<MovieModel> moviesInCategory =
+                            groupedMoviesList[index].value;
 
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomPadding(
-                            screenSize: screenSize,
-                            categoryLabel: CategoryNameWidget(
-                                categoryName: category,
-                                movies: moviesInCategory),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: SizedBox(
-                              height: customHeight,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: moviesInCategory.length,
-                                itemBuilder: (context, subIndex) {
-                                  return Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 10, 10),
-                                    child: SingleMovieThumbnail(
-                                      deviceSize: screenSize,
-                                      movieData: moviesInCategory,
-                                      movieIndex: subIndex,
-                                      childWidget: Text(
-                                        movieData[index].title ?? '',
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          color: AppColors.whiteColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: screenSize.width * 0.03,
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomPadding(
+                              screenSize: screenSize,
+                              categoryLabel: CategoryNameWidget(
+                                  categoryName: category,
+                                  movies: moviesInCategory),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SizedBox(
+                                height: customHeight,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: moviesInCategory.length,
+                                  itemBuilder: (context, subIndex) {
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 0, 10, 10),
+                                      child: SingleMovieThumbnail(
+                                        deviceSize: screenSize,
+                                        movieData: moviesInCategory,
+                                        movieIndex: subIndex,
+                                        childWidget: Text(
+                                          moviesInCategory[subIndex].title ??
+                                              '',
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: AppColors.whiteColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: screenSize.width * 0.03,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    }),
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
