@@ -28,7 +28,7 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
 
   Future<bool> _fetchFavoriteMovies() async {
     String baseURL = IRepository.apiBaseURL;
-    String endpoint = 'movies/watch/list';
+    String endpoint = 'movies/favorites/list';
     String url = '$baseURL/$endpoint';
     List<MovieModel> data = [];
     bool result = false;
@@ -167,8 +167,14 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
                 ),
               ),
             )
-          : const Center(
-              child: Text('No favorites movies'),
+          : Center(
+              child: Text(
+                'No favorites movies found',
+                style: TextStyle(
+                  color: AppColors.whiteColor,
+                  fontSize: deviceSize.width * 0.04,
+                ),
+              ),
             ),
     );
   }
