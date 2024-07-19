@@ -22,11 +22,9 @@ sealed class LocalStorage {
       String? subscriberJson = prefs.getString('subscriberData');
       if (subscriberJson != null) {
         Map<String, dynamic> jsonMap = jsonDecode(subscriberJson);
-        // return SubscriberModel.fromJson(jsonMap);
         return jsonMap;
-      } else {
-        return null;
       }
+      // return SubscriberModel.fromJson(jsonMap);
     } catch (e) {
       return null;
     }
@@ -49,8 +47,6 @@ sealed class LocalStorage {
         jsonMap['plan_type'] = data['plan_type'];
         jsonMap['next_billing_date'] = data['next_billing_date'];
         result = true;
-      } else {
-        result = false;
       }
     } catch (e) {
       result = false;
