@@ -49,14 +49,17 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         backgroundColor: AppColors.greyMain,
         automaticallyImplyLeading: false,
-        title: TextField(
-          autofocus: true,
-          controller: _searchController,
-          decoration: InputDecoration(
-            hintText: 'Search by movie title...',
-            border: InputBorder.none,
-            fillColor: AppColors.whiteColor,
-            filled: true,
+        title: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: TextField(
+            autofocus: true,
+            controller: _searchController,
+            decoration: InputDecoration(
+              hintText: 'Search by movie title...',
+              border: InputBorder.none,
+              fillColor: AppColors.whiteColor,
+              filled: true,
+            ),
           ),
         ),
         actions: [
