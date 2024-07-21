@@ -37,7 +37,7 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
       String phoneNumber =
           subscriber != null ? subscriber['msisdn'] : 'unknown';
       final response =
-          await http.post(Uri.parse(url), body: {'msisdn': '233244931075'});
+          await http.post(Uri.parse(url), body: {'msisdn': phoneNumber});
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         print('JSON DATA: $jsonData');
@@ -47,17 +47,18 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
             // for (var video in videos) {
             //   data.add(MovieModel.fromJson(video));
             // }
-            print('VIDEOS VIDEOS === ${videos[0]['video']['title']}');
+            print('VIDEOS VIDEOS === ${videos[0]['title']}');
             for (var i = 0; i < videos.length; i++) {
               data.add(MovieModel(
-                id: videos[i]['video']['id'],
-                collectionName: videos[i]['video']['video_url'],
-                thumbnail: videos[i]['video']['default_thumbnail_filename'],
-                description: videos[i]['video']['description'],
-                title: videos[i]['video']['title'],
-                videoUrl: videos[i]['video']['video_url'],
+                id: videos[i]['id'],
+                collectionName: videos[i]['video_url'],
+                thumbnail: videos[i]['default_thumbnail_filename'],
+                description: videos[i]['description'],
+                title: videos[i]['title'],
+                videoUrl: videos[i]['video_url'],
               ));
-              print('VIDEO NAME ==== ${videos[i]['video']['title']}');
+              print(
+                  'FAVORITE VIDEO NAME AND ID ==== ${videos[i]['title']} ::: ${videos[i]['id']}');
             }
             setState(() {
               movies = data;
@@ -149,14 +150,21 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
                                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                                 child: InkWell(
                                   onTap: () async {
+                                    print(
+                                        'FAVOURITE MOVIE ID === ${movies[index].id}');
                                     final bool result =
                                         await MovieModel.like_Or_Unlike_Movie(
                                             '0', '${movies[index].id}');
                                     if (result) {
-                                      movies.removeAt(index);
+                                      setState(() {
+                                        movies.removeAt(index);
+                                      });
                                     }
-                                    print(
-                                        'FAVOURITE MOVIE ID === ${movies[index].id}');
+                                    if (movies.isEmpty) {
+                                      setState(() {
+                                        movies = [];
+                                      });
+                                    }
                                   },
                                   child: Icon(
                                     Icons.favorite,
