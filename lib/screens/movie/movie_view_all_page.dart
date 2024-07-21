@@ -16,12 +16,24 @@ class MovieViewAllPage extends StatefulWidget {
 
 class _MovieViewAllPageState extends State<MovieViewAllPage> {
   List<bool> isFavoriteList = []; // List to store favorite state for each movie
-
+  List<int> favoriteMovieIds = [];
   @override
   void initState() {
     super.initState();
     // Initialize the isFavoriteList with false for each movie
     isFavoriteList = List.generate(widget.myMovies.length, (index) => false);
+    _fetchFavoriteMovies();
+  }
+
+  Future<void> _fetchFavoriteMovies() async {
+    final List<MovieModel> data = await MovieModel.fetchFavoriteMovies();
+    if (data.isNotEmpty) {
+      for (var i = 0; i < data.length; i++) {
+        setState(() {
+          favoriteMovieIds.add(data[i].id);
+        });
+      }
+    }
   }
 
   @override
@@ -94,13 +106,36 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                           child: InkWell(
                             onTap: () async {
-                              bool result =
-                                  await MovieModel.like_Or_Unlike_Movie(
-                                      '1', '${widget.myMovies[index].id}');
-                              if (result) {
+                              bool check = favoriteMovieIds
+                                  .contains(widget.myMovies[index].id);
+                              bool result = false;
+                              if (check) {
+                                result = await MovieModel.like_Or_Unlike_Movie(
+                                    '0', '${widget.myMovies[index].id}');
+                              }
+                              if (!check) {
+                                result = await MovieModel.like_Or_Unlike_Movie(
+                                    '1', '${widget.myMovies[index].id}');
+                              }
+
+                              if (result && check) {
                                 setState(() {
-                                  isFavoriteList[index] =
-                                      result; // Update favorite state for this movie
+                                  favoriteMovieIds.remove(widget.myMovies[index]
+                                      .id); // Update favorite state for this movie
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  AppColors.customSnackBar(
+                                    'Movie removed favorites',
+                                    deviceSize,
+                                    false,
+                                  ),
+                                );
+                                print(
+                                    'FAVOURITE MOVIE ID === ${widget.myMovies[index].id}');
+                              } else if (result && !check) {
+                                setState(() {
+                                  favoriteMovieIds.add(widget.myMovies[index]
+                                      .id); // Update favorite state for this movie
                                 });
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   AppColors.customSnackBar(
@@ -109,21 +144,12 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
                                     false,
                                   ),
                                 );
-                                print(
-                                    'FAVOURITE MOVIE ID === ${widget.myMovies[index].id}');
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  AppColors.customSnackBar(
-                                    'Failed to added to favorites',
-                                    deviceSize,
-                                    true,
-                                  ),
-                                );
                               }
                             },
                             child: Icon(
                               Icons.favorite,
-                              color: isFavoriteList[index]
+                              color: favoriteMovieIds
+                                      .contains(widget.myMovies[index].id)
                                   ? AppColors.blueColor
                                   : AppColors.whiteColor,
                             ),
