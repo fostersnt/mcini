@@ -7,6 +7,7 @@ import 'package:mcini/screens/login/login_page.dart';
 import 'package:mcini/screens/profile/profile_partials.dart';
 import 'package:mcini/screens/profile/subscription_details_page.dart';
 import 'package:mcini/utilities/app_colors.dart';
+import 'package:mcini/utilities/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   final Map<String, dynamic> subscriberData;
@@ -301,13 +302,16 @@ class _ProfilePageState extends State<ProfilePage> {
                             deviceSize,
                             'Subscription status',
                             subscriptionIcon,
-                            caretIcon, () {
+                            caretIcon, () async {
+                          final data = await LocalStorage.getStoredSubscriber();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SubscriptionDetailsPage(
-                                subscriptionData: widget.subscriberData,
-                              ),
+                              builder: (context) {
+                                return SubscriptionDetailsPage(
+                                  subscriptionData: data,
+                                );
+                              },
                             ),
                           );
                         }),

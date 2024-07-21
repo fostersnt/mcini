@@ -148,7 +148,13 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                                 child: InkWell(
-                                  onTap: () {
+                                  onTap: () async {
+                                    final bool result =
+                                        await MovieModel.like_Or_Unlike_Movie(
+                                            '0', '${movies[index].id}');
+                                    if (result) {
+                                      movies.removeAt(index);
+                                    }
                                     print(
                                         'FAVOURITE MOVIE ID === ${movies[index].id}');
                                   },
