@@ -125,7 +125,7 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
                                 });
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   AppColors.customSnackBar(
-                                    'Movie removed favorites',
+                                    'Movie removed from favorites',
                                     deviceSize,
                                     false,
                                   ),
