@@ -15,7 +15,7 @@ class AppColors {
   static Color miniBlueColor = const Color(0xff031115);
   static Color shimmerColor = const Color(0xfff1f3f4);
 
-  static customSnackBar(String errorMessage, Size deviceSize, bool isError) {
+  static customSnackBar(String message, Size deviceSize, bool isError) {
     //SUCCESS ICON
     final Icon successIcon = Icon(
       Icons.check_circle,
@@ -43,7 +43,7 @@ class AppColors {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    errorMessage,
+                    message,
                     style: TextStyle(
                       color: isError ? redColor : blueColor,
                       fontWeight: FontWeight.bold,

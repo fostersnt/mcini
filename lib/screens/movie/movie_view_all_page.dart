@@ -97,12 +97,25 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
                               bool result =
                                   await MovieModel.like_Or_Unlike_Movie(
                                       '1', '${widget.myMovies[index].id}');
-                              setState(() {
-                                isFavoriteList[index] =
-                                    result; // Update favorite state for this movie
-                              });
-                              print(
-                                  'FAVOURITE MOVIE ID === ${widget.myMovies[index].id}');
+                              if (result) {
+                                setState(() {
+                                  isFavoriteList[index] =
+                                      result; // Update favorite state for this movie
+                                });
+                                AppColors.customSnackBar(
+                                  'Movie added to favorites',
+                                  deviceSize,
+                                  false,
+                                );
+                                print(
+                                    'FAVOURITE MOVIE ID === ${widget.myMovies[index].id}');
+                              } else {
+                                AppColors.customSnackBar(
+                                  'Failed to added to favorites',
+                                  deviceSize,
+                                  true,
+                                );
+                              }
                             },
                             child: Icon(
                               Icons.favorite,
