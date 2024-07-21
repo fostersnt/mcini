@@ -159,10 +159,13 @@ class _FavoriteMoviesPageState extends State<FavoriteMoviesPage> {
                                       setState(() {
                                         movies.removeAt(index);
                                       });
-                                      AppColors.customSnackBar(
-                                          'Movie removed from favorites',
-                                          deviceSize,
-                                          false);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        AppColors.customSnackBar(
+                                            'Movie removed from favorites',
+                                            deviceSize,
+                                            false),
+                                      );
                                     }
                                     if (movies.isEmpty) {
                                       setState(() {

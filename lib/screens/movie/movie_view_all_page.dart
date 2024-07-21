@@ -102,18 +102,22 @@ class _MovieViewAllPageState extends State<MovieViewAllPage> {
                                   isFavoriteList[index] =
                                       result; // Update favorite state for this movie
                                 });
-                                AppColors.customSnackBar(
-                                  'Movie added to favorites',
-                                  deviceSize,
-                                  false,
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  AppColors.customSnackBar(
+                                    'Movie added to favorites',
+                                    deviceSize,
+                                    false,
+                                  ),
                                 );
                                 print(
                                     'FAVOURITE MOVIE ID === ${widget.myMovies[index].id}');
                               } else {
-                                AppColors.customSnackBar(
-                                  'Failed to added to favorites',
-                                  deviceSize,
-                                  true,
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  AppColors.customSnackBar(
+                                    'Failed to added to favorites',
+                                    deviceSize,
+                                    true,
+                                  ),
                                 );
                               }
                             },
